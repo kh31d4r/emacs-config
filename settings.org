@@ -90,6 +90,15 @@
    #+BEGIN_SRC emacs-lisp
      (setq nxml-child-indent 4)
    #+END_SRC
+** Enable multiple cursors
+   Useful for editing both opening and closing tag at the same time.
+   #+BEGIN_SRC emacs-lisp
+     (use-package multiple-cursors
+       :ensure t
+       :init
+       (require 'cl)
+       (add-hook 'nxml-mode-hook (lambda() (local-set-key (kbd "M-n") 'mc/mark-next-like-this-word))))
+   #+END_SRC
 * Org mode
 ** Ask for note when closing TODO's
    #+BEGIN_SRC emacs-lisp
