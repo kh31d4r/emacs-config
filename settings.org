@@ -1,1 +1,53 @@
 #+STARTUP: overview
+
+* Global
+** Keybindings
+*** Smarter autocomplete in minibuffers
+    #+BEGIN_SRC emacs-lisp
+      (ido-mode 1)
+      (setq ido-everywhere t)
+    #+END_SRC
+*** Tab and whitespace cleanup
+    #+BEGIN_SRC emacs-lisp
+      (defun cleanup-tabs-whitespace ()
+        "Remove trailing whitespace and change tabs to spaces"
+        (interactive)
+        (whitespace-cleanup)
+        (untabify (point-min) (point-max))
+        (indent-region (point-min) (point-max) nil))
+
+      (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
+    #+END_SRC
+** Display and formatting
+*** Don't show startup screen
+    #+BEGIN_SRC emacs-lisp
+      (custom-set-variables '(inhibit-startup-screen t))
+    #+END_SRC
+*** Show columns
+    #+BEGIN_SRC emacs-lisp
+      (column-number-mode 1)
+    #+END_SRC
+*** Syntax Highlighting
+    #+BEGIN_SRC emacs-lisp
+      (custom-set-faces)
+    #+END_SRC
+*** Highlight tabs and trailing whitespace
+    #+BEGIN_SRC emacs-lisp
+      (use-package highlight-chars
+        :ensure t
+        :init
+        (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+        (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
+    #+END_SRC
+*** Don't use tabs
+    #+BEGIN_SRC emacs-lisp
+      (setq indent-tabs-mode nil)
+      (setq-default indent-tabs-mode nil)
+      (setq default-tab-width 4)
+    #+END_SRC
+
+** Other
+*** Don't ask before opening large files
+    #+BEGIN_SRC emacs-lisp
+      (setq large-file-warning-threshold 200000000)
+    #+END_SRC
