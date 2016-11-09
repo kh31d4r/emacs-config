@@ -51,3 +51,40 @@
     #+BEGIN_SRC emacs-lisp
       (setq large-file-warning-threshold 200000000)
     #+END_SRC
+* Python
+** Auto Completion
+   Needs virtenv installed on the system to work.
+   #+BEGIN_SRC emacs-lisp
+     (use-package jedi
+       :ensure t
+       :init
+       (add-hook 'python-mode-hook 'jedi:setup))
+   #+END_SRC
+** Syntax and style checking
+   Needs pylint installed on the system to work.
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :ensure t
+       :init
+       (add-hook 'python-mode-hook (lambda ()
+                                     (flycheck-mode 1)
+                                     (semantic-mode 1)
+                                     (setq flycheck-checker 'python-pylint
+                                           flycheck-checker-error-threshold 900))))
+   #+END_SRC
+* C
+** Don't use GNU style indendataion
+   #+BEGIN_SRC emacs-lisp
+     (setq c-default-style "bsd"
+           c-basic-offset 4)
+   #+END_SRC
+* XML
+** Set indentation size to 4
+   #+BEGIN_SRC emacs-lisp
+     (setq nxml-child-indent 4)
+   #+END_SRC
+* Org mode
+** Ask for note when closing TODO's
+   #+BEGIN_SRC emacs-lisp
+     (setq org-log-done 'note)
+   #+END_SRC
