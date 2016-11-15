@@ -18,6 +18,13 @@
 
       (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
     #+END_SRC
+*** Show possible keys
+    #+BEGIN_SRC emacs-lisp
+      (use-package which-key
+        :ensure t
+        :init
+        (which-key-mode))
+    #+END_SRC
 ** Display and formatting
 *** Don't show startup screen
     #+BEGIN_SRC emacs-lisp
