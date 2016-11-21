@@ -216,6 +216,17 @@
                                      (setq flycheck-checker 'python-pylint
                                            flycheck-checker-error-threshold 900))))
    #+END_SRC
+** Snippets
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :ensure t
+       :init
+       (add-hook 'python-mode-hook (lambda ()
+                                     (setq yas-snippet-dir
+                                           (expand-file-name "snippets/python" user-emacs-directory))
+                                     (yas-minor-mode)
+                                     (yas-reload-all))))
+   #+END_SRC
 * C
 ** Don't use GNU style indendataion
    #+BEGIN_SRC emacs-lisp
