@@ -25,6 +25,12 @@
         :init
         (which-key-mode))
     #+END_SRC
+** Navigation
+   #+BEGIN_SRC emacs-lisp
+     (use-package ace-jump-mode
+       :ensure t
+       :bind ("M-s" . ace-jump-mode))
+   #+END_SRC
 ** Display and formatting
 *** Don't show startup screen
     #+BEGIN_SRC emacs-lisp
