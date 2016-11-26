@@ -2,6 +2,10 @@
 
 * Global
 ** Keybindings
+*** Change "yes or no" to "y or n"
+    #+BEGIN_SRC emacs-lisp
+      (fset 'yes-or-no-p 'y-or-n-p)
+    #+END_SRC
 *** Tab and whitespace cleanup
     #+BEGIN_SRC emacs-lisp
       (defun cleanup-tabs-whitespace ()
