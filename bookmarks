@@ -1,0 +1,20 @@
+;;;; Emacs Bookmark Format Version 1 ;;;;
+;;; This format is meant to be slightly human-readable;
+;;; nevertheless, you probably don't want to edit it.
+;;; -*- End Of Bookmark File Format Version Stamp -*-
+(("mavencfg"
+ (filename . "~/.m2/settings.xml")
+ (front-context-string . "<settings>\n	<plu")
+ (rear-context-string)
+ (position . 1))
+("gitcfg"
+ (filename . "~/.gitconfig")
+ (front-context-string . "[user]\n	name = D")
+ (rear-context-string)
+ (position . 1))
+("emacs-settings"
+ (filename . "~/.emacs.d/settings.org")
+ (front-context-string . "#+STARTUP: overv")
+ (rear-context-string)
+ (position . 1))
+)
