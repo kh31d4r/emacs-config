@@ -2,11 +2,6 @@
 
 * Global
 ** Keybindings
-*** Smarter autocomplete in minibuffers
-    #+BEGIN_SRC emacs-lisp
-      (ido-mode 1)
-      (setq ido-everywhere t)
-    #+END_SRC
 *** Tab and whitespace cleanup
     #+BEGIN_SRC emacs-lisp
       (defun cleanup-tabs-whitespace ()
@@ -24,6 +19,16 @@
         :ensure t
         :init
         (which-key-mode))
+    #+END_SRC
+*** Helm
+    #+BEGIN_SRC emacs-lisp
+      (use-package helm
+        :ensure t
+        :bind (("C-x b" . helm-buffers-list)
+               ("C-x C-f" . helm-find-files)
+               ("M-x" . helm-M-x)
+               ("M-y" . helm-show-kill-ring)
+               ("C-x r b" . helm-bookmarks)))
     #+END_SRC
 ** Navigation
    #+BEGIN_SRC emacs-lisp
