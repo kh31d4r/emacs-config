@@ -21,7 +21,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package which-key
         :ensure t
-        :init
+        :config
         (which-key-mode))
     #+END_SRC
 *** Helm
@@ -53,7 +53,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package nlinum
         :ensure t
-        :init
+        :config
         (global-nlinum-mode))
     #+END_SRC
 *** Syntax Highlighting
@@ -64,7 +64,7 @@
     #+BEGIN_SRC emacs-lisp
       (use-package highlight-chars
         :ensure t
-        :init
+        :config
         (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
         (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
     #+END_SRC
@@ -92,9 +92,8 @@
    #+BEGIN_SRC emacs-lisp
      (use-package multiple-cursors
        :ensure t
-       :init
-       (require 'cl)
-       (global-set-key (kbd "M-n") 'mc/mark-next-like-this-word))
+       :bind
+       ("M-n" . mc/mark-next-like-this-word))
    #+END_SRC
 ** Files
 *** Don't ask before opening large files
@@ -111,7 +110,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package jedi
        :ensure t
-       :init
+       :config
        (add-hook 'python-mode-hook 'jedi:setup))
    #+END_SRC
 ** Syntax and style checking
@@ -119,7 +118,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
        :ensure t
-       :init
+       :config
        (add-hook 'python-mode-hook (lambda ()
                                      (flycheck-mode 1)
                                      (semantic-mode 1)
