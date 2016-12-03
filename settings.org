@@ -51,6 +51,12 @@
     #+BEGIN_SRC emacs-lisp
       (custom-set-variables '(inhibit-startup-screen t))
     #+END_SRC
+*** Don't show menus and scrollbars
+    #+BEGIN_SRC emacs-lisp
+      (menu-bar-mode 0)
+      (scroll-bar-mode 0)
+      (tool-bar-mode 0)
+    #+END_SRC
 *** Show columns
     #+BEGIN_SRC emacs-lisp
       (column-number-mode 1)
