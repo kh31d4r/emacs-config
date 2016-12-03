@@ -2,6 +2,12 @@
 
 * Global
 ** Keybindings
+*** Expand region
+    #+BEGIN_SRC emacs-lisp
+      (use-package expand-region
+        :ensure t
+        :bind ("M-e" . er/expand-region))
+    #+END_SRC
 *** Change "yes or no" to "y or n"
     #+BEGIN_SRC emacs-lisp
       (fset 'yes-or-no-p 'y-or-n-p)
