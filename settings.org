@@ -8,6 +8,11 @@
         :ensure t
         :bind ("M-e" . er/expand-region))
     #+END_SRC
+*** Enable upper and lowercase region
+    #+BEGIN_SRC emacs-lisp
+      (put 'downcase-region 'disabled nil)
+      (put 'upcase-region 'disabled nil)
+    #+END_SRC
 *** Change "yes or no" to "y or n"
     #+BEGIN_SRC emacs-lisp
       (fset 'yes-or-no-p 'y-or-n-p)
