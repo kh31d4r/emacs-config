@@ -46,6 +46,13 @@
                ("C-x r b" . helm-bookmarks)))
     #+END_SRC
 ** Navigation
+*** Windows
+    #+BEGIN_SRC emacs-lisp
+      (use-package winner
+        :ensure t
+        :config
+        (winner-mode 1))
+    #+END_SRC
 *** Easier jumping
     #+BEGIN_SRC emacs-lisp
       (use-package ace-jump-mode
