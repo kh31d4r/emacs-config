@@ -122,13 +122,18 @@
       (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
     #+END_SRC
 * Python
-** Auto Completion
+** Jedi
+   Autocompletion, goto definition and show documentation.
    Needs virtenv installed on the system to work.
    #+BEGIN_SRC emacs-lisp
      (use-package jedi
        :ensure t
        :config
-       (add-hook 'python-mode-hook 'jedi:setup))
+       (add-hook 'python-mode-hook 'jedi:setup)
+       :bind
+       ("C-c j d" . jedi:goto-definition)
+       ("C-c j p" . jedi:goto-definition-pop-marker)
+       ("C-c j h" . jedi:show-doc))
    #+END_SRC
 ** Syntax and style checking
    Needs pylint installed on the system to work.
