@@ -47,11 +47,19 @@
     #+END_SRC
 ** Navigation
 *** Windows
+    Enable undoing window changes.
     #+BEGIN_SRC emacs-lisp
       (use-package winner
         :ensure t
         :config
         (winner-mode 1))
+    #+END_SRC
+    Enable easier jumping between windows
+    #+BEGIN_SRC emacs-lisp
+      (use-package ace-window
+        :ensure t
+        :bind
+        ("C-x o" . ace-window))
     #+END_SRC
 *** Easier jumping
     #+BEGIN_SRC emacs-lisp
