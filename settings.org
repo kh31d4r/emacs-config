@@ -175,6 +175,30 @@
      (setq c-default-style "bsd"
            c-basic-offset 4)
    #+END_SRC
+* Web
+** Use web mode
+   #+BEGIN_SRC emacs-lisp
+     (defun close-and-indent ()
+       "Close current tag and indent the line"
+       (interactive)
+       (web-mode-element-close)
+       (indent-for-tab-command))
+
+     (defun web-mode-keybindings ()
+       "Override keys to use for web-mode"
+       (local-set-key (kbd "C-c C-f") 'close-and-indent))
+
+     (use-package web-mode
+       :ensure t
+       :mode
+       (("\\.html\\'" . web-mode)
+        ("\\.css\\'" . web-mode))
+       :config
+       (add-hook 'web-mode-hook 'web-mode-keybindings)
+       (setq web-mode-enable-auto-quoting t)
+       (setq web-mode-enable-auto-pairing t)
+       (setq web-mode-enable-auto-closing t))
+   #+END_SRC
 * XML
 ** Set indentation size to 4
    #+BEGIN_SRC emacs-lisp
