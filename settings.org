@@ -68,6 +68,12 @@
         :bind ("M-s" . ace-jump-mode))
     #+END_SRC
 ** Display and formatting
+*** Theme
+    #+BEGIN_SRC emacs-lisp
+      (use-package zenburn-theme
+        :ensure t
+        :config (load-theme 'zenburn t))
+    #+END_SRC
 *** Don't show startup screen
     #+BEGIN_SRC emacs-lisp
       (custom-set-variables '(inhibit-startup-screen t))
