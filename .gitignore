@@ -6,4 +6,5 @@ elpa
 .python-environments
 settings.el
 semanticdb
+tramp
 *~
