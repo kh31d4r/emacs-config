@@ -28,6 +28,10 @@
 
       (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
     #+END_SRC
+*** Bind compare windows
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-c w") 'compare-windows)
+    #+END_SRC
 *** Show possible keys
     #+BEGIN_SRC emacs-lisp
       (use-package which-key
