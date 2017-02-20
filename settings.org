@@ -82,6 +82,10 @@
         :bind ("M-s" . ace-jump-mode))
     #+END_SRC
 ** Display and formatting
+*** Increase font size
+    #+BEGIN_SRC emacs-lisp
+      (set-face-attribute 'default nil :height 150)
+    #+END_SRC
 *** Theme
     #+BEGIN_SRC emacs-lisp
       (use-package zenburn-theme
