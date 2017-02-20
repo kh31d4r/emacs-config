@@ -86,12 +86,6 @@
     #+BEGIN_SRC emacs-lisp
       (set-face-attribute 'default nil :height 150)
     #+END_SRC
-*** Theme
-    #+BEGIN_SRC emacs-lisp
-      (use-package zenburn-theme
-        :ensure t
-        :config (load-theme 'zenburn t))
-    #+END_SRC
 *** Don't show startup screen
     #+BEGIN_SRC emacs-lisp
       (custom-set-variables '(inhibit-startup-screen t))
