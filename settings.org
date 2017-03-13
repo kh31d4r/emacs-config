@@ -228,6 +228,12 @@
      (add-hook 'org-mode-hook (lambda ()
                                 (local-set-key (kbd "C-c a") 'org-agenda)))
    #+END_SRC
+** Customize TODO states
+   #+BEGIN_SRC emacs-lisp
+     (setq org-todo-keywords
+           '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "|" "DONE(d)")
+             (sequence "|" "CANCELLED(c)")))
+   #+END_SRC
 ** Ask for note when closing TODO's
    #+BEGIN_SRC emacs-lisp
      (setq org-log-done 'note)
