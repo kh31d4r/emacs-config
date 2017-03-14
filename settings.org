@@ -223,6 +223,10 @@
      (setq nxml-child-indent 4)
    #+END_SRC
 * Org mode
+** Agenda files
+   #+BEGIN_SRC emacs-lisp
+     (setq org-agenda-files (quote ("~/org")))
+   #+END_SRC
 ** Keybindings
    #+BEGIN_SRC emacs-lisp
      (add-hook 'org-mode-hook (lambda ()
