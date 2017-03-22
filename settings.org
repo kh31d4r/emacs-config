@@ -228,6 +228,11 @@
      (add-hook 'org-mode-hook (lambda ()
                                 (local-set-key (kbd "C-c a") 'org-agenda)))
    #+END_SRC
+** Tags
+*** Align tags to 90 characters to allow longer headings
+    #+BEGIN_SRC emacs-lisp
+      (setq org-tags-column 90)
+    #+END_SRC
 ** Customize TODO states
    #+BEGIN_SRC emacs-lisp
      (setq org-todo-keywords
