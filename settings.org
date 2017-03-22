@@ -229,6 +229,23 @@
                                 (local-set-key (kbd "C-c a") 'org-agenda)))
    #+END_SRC
 ** Tags
+*** Define global list of tags
+    #+BEGIN_SRC emacs-lisp
+      (setq org-tag-persistent-alist
+            '(("work" . ?w)
+              ("cleanup" . ?c)
+              ("bug" . ?b)
+              ("idea" . ?i)
+              ("improvement" . ?m)
+              ("tool" . ?t)
+              ("feature" . ?f)
+              ("life" . ?l)
+              ("projects" . ?p)
+              ("electrics" . ?x)
+              ("emacs" . ?e)
+              ("development" . ?d)
+              ("game" . ?g)))
+    #+END_SRC
 *** Align tags to 90 characters to allow longer headings
     #+BEGIN_SRC emacs-lisp
       (setq org-tags-column 90)
