@@ -256,9 +256,20 @@
     #+END_SRC
 ** TODOs
 *** Customize TODO states
+    Set up custom list of states
     #+BEGIN_SRC emacs-lisp
       (setq org-todo-keywords
             '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+    #+END_SRC
+
+    Customize state colors
+    #+BEGIN_SRC emacs-lisp
+      (setq org-todo-keyword-faces
+            '(("TODO" . (:foreground "light coral" :weight bold))
+              ("WAITING" . (:foreground "red" :weight bold))
+              ("ONGOING" . (:foreground "deep sky blue" :weight bold))
+              ("DONE" . (:foreground "spring green" :weight bold))
+              ("CANCELLED" . (:foreground "dim gray" :weight bold))))
     #+END_SRC
 *** Ask for note when closing TODO's
     #+BEGIN_SRC emacs-lisp
