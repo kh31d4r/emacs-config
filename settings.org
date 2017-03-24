@@ -258,8 +258,7 @@
 *** Customize TODO states
     #+BEGIN_SRC emacs-lisp
       (setq org-todo-keywords
-            '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "|" "DONE(d)")
-              (sequence "|" "CANCELLED(c)")))
+            '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
     #+END_SRC
 *** Ask for note when closing TODO's
     #+BEGIN_SRC emacs-lisp
