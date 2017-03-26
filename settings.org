@@ -236,14 +236,12 @@
 *** Define global list of tags
     #+BEGIN_SRC emacs-lisp
       (setq org-tag-persistent-alist
-            '(("work" . ?w)
-              ("cleanup" . ?c)
+            '(("cleanup" . ?c)
               ("bug" . ?b)
               ("idea" . ?i)
               ("improvement" . ?m)
               ("tool" . ?t)
               ("feature" . ?f)
-              ("life" . ?l)
               ("projects" . ?p)
               ("electrics" . ?x)
               ("emacs" . ?e)
