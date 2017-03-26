@@ -38,6 +38,16 @@
         (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
       (global-set-key (kbd "M-+") 'increment-number-at-point)
     #+END_SRC
+*** Reload buffer
+    Reload the current buffer from disk, and only prompt if the file
+    has changed.
+    #+BEGIN_SRC emacs-lisp
+      (defun revert-buffer-noprompt ()
+          "Reload the current buffer, only prompt if the buffer is modified"
+          (interactive)
+          (revert-buffer t (not (buffer-modified-p)) t))
+      (global-set-key (kbd "C-v") 'revert-buffer-noprompt)
+    #+END_SRC
 *** Bind compare windows
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "C-c w") 'compare-windows)
