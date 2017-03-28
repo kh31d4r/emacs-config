@@ -124,6 +124,10 @@
     #+BEGIN_SRC emacs-lisp
       (global-set-key (kbd "C-c l") 'nlinum-mode)
     #+END_SRC
+*** Fancy symbols
+    #+BEGIN_SRC emacs-lisp
+      (global-prettify-symbols-mode t)
+    #+END_SRC
 *** Syntax Highlighting
     #+BEGIN_SRC emacs-lisp
       (custom-set-faces)
