@@ -1,3 +1,4 @@
+#+TITLE: Emacs configuration
 #+STARTUP: overview
 
 * Global
