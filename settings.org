@@ -71,6 +71,10 @@
                ("C-x r b" . helm-bookmarks)))
     #+END_SRC
 ** Navigation
+*** Treat CamelCase as different words
+    #+BEGIN_SRC emacs-lisp
+      (global-subword-mode 1)
+    #+END_SRC
 *** Windows
     Enable undoing window changes.
     #+BEGIN_SRC emacs-lisp
