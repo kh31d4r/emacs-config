@@ -248,8 +248,7 @@
    #+END_SRC
 ** Keybindings
    #+BEGIN_SRC emacs-lisp
-     (add-hook 'org-mode-hook (lambda ()
-                                (local-set-key (kbd "C-c a") 'org-agenda)))
+     (global-set-key (kbd "C-c a") 'org-agenda)
    #+END_SRC
 ** Tags
 *** Define global list of tags
