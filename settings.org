@@ -2,6 +2,11 @@
 #+STARTUP: overview
 
 * Global
+** Localization
+   Weeks start on monday
+   #+BEGIN_SRC emacs-lisp
+     (setq calendar-week-start-day 1)
+   #+END_SRC
 ** Keybindings
 *** Expand region
     #+BEGIN_SRC emacs-lisp
