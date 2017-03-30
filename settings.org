@@ -328,3 +328,15 @@
              ("b" "Book" entry (file+headline "~/org/life.org" "Books")
               "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")))
    #+END_SRC
+** Export
+*** Add more export engines
+    Twitter bootstrap
+    #+BEGIN_SRC emacs-lisp
+      (use-package ox-twbs
+        :ensure t)
+    #+END_SRC
+    MediaWiki
+    #+BEGIN_SRC emacs-lisp
+      (use-package ox-mediawiki
+        :ensure t)
+    #+END_SRC
