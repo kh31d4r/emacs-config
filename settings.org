@@ -298,3 +298,9 @@
     #+BEGIN_SRC emacs-lisp
       (setq org-log-into-drawer "NOTES")
     #+END_SRC
+    Log rescheduled tasks in the drawer too. Moving a deadline
+    requires a note, moving a scheduled task only logs the time.
+    #+BEGIN_SRC emacs-lisp
+      (setq org-log-reschedule "time")
+      (setq org-log-redeadline "note")
+    #+END_SRC
