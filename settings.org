@@ -292,3 +292,9 @@
     #+BEGIN_SRC emacs-lisp
       (setq org-log-done 'note)
     #+END_SRC
+** Notes
+*** Logging
+    Log notes in a drawer
+    #+BEGIN_SRC emacs-lisp
+      (setq org-log-into-drawer "NOTES")
+    #+END_SRC
