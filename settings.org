@@ -247,6 +247,8 @@
      (setq org-agenda-files (quote ("~/org")))
    #+END_SRC
 ** Keybindings
+   Bind org-agenda globally, so the agenda can be pulled up from
+   anywhere.
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c a") 'org-agenda)
    #+END_SRC
