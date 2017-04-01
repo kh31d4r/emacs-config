@@ -257,6 +257,11 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c a") 'org-agenda)
    #+END_SRC
+   Bind org-capture globally, since we are probably not doing org
+   related things when thinking up new stuff...
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-c c") 'org-capture)
+   #+END_SRC
 ** Tags
 *** Define global list of tags
     #+BEGIN_SRC emacs-lisp
@@ -311,3 +316,13 @@
       (setq org-log-reschedule "time")
       (setq org-log-redeadline "note")
     #+END_SRC
+** Capture templates
+   #+BEGIN_SRC emacs-lisp
+     (setq org-capture-templates
+           '(("t" "Todo" entry (file "~/org/life.org")
+              "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
+             ("w" "Work Item" entry (file "~/org/work.org")
+              "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
+             ("i" "Work List Item" entry (file "~/org/work.org")
+              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")))
+   #+END_SRC
