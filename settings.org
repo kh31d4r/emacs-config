@@ -324,5 +324,7 @@
              ("w" "Work Item" entry (file "~/org/work.org")
               "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
              ("i" "Work List Item" entry (file "~/org/work.org")
-              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")))
+              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")
+             ("b" "Book" entry (file+headline "~/org/life.org" "Books")
+              "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")))
    #+END_SRC
