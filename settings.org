@@ -319,14 +319,16 @@
 ** Capture templates
    #+BEGIN_SRC emacs-lisp
      (setq org-capture-templates
-           '(("t" "Todo" entry (file "~/org/life.org")
+           '(("l" "life")
+             ("lt" "Todo" entry (file "~/org/life.org")
               "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
-             ("w" "Work Item" entry (file "~/org/work.org")
+             ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
+              "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")
+             ("w" "work")
+             ("wt" "Todo" entry (file "~/org/work.org")
               "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
-             ("i" "Work List Item" entry (file "~/org/work.org")
-              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")
-             ("b" "Book" entry (file+headline "~/org/life.org" "Books")
-              "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")))
+             ("wi" "Todo with list" entry (file "~/org/work.org")
+              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")))
    #+END_SRC
 ** Export
 *** Add more export engines
