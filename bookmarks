@@ -2,7 +2,12 @@
 ;;; This format is meant to be slightly human-readable;
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("mavencfg"
+(("org-capture-last-stored"
+ (filename . "~/org/life.org")
+ (front-context-string . "* TODO asd\n  :NO")
+ (rear-context-string . "ie.com/][here]]\n")
+ (position . 11015))
+("mavencfg"
  (filename . "~/.m2/settings.xml")
  (front-context-string . "<settings>\n	<plu")
  (rear-context-string)

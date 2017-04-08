@@ -321,16 +321,16 @@
      (setq org-capture-templates
            '(("l" "life")
              ("lt" "Todo" entry (file "~/org/life.org")
-              "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
+              "* TODO %^{Task}\n  :NOTES:\n  - Created: %t\n  :END:\n  %?\n")
              ("li" "Todo with list" entry (file "~/org/life.org")
-              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")
+              "* TODO %^{Task} [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %?\n")
              ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
               "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")
              ("w" "work")
              ("wt" "Todo" entry (file "~/org/work.org")
-              "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
+              "* TODO %^{Task}\n  :NOTES:\n  - Created: %t\n  :END:\n  %?\n")
              ("wi" "Todo with list" entry (file "~/org/work.org")
-              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")))
+              "* TODO %^{Task} [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %?\n")))
    #+END_SRC
 ** Export
 *** Add more export engines
