@@ -322,6 +322,8 @@
            '(("l" "life")
              ("lt" "Todo" entry (file "~/org/life.org")
               "* TODO %?\n  :NOTES:\n  - Created: %t\n  :END:\n  %i\n")
+             ("li" "Todo with list" entry (file "~/org/life.org")
+              "* TODO %? [/]\n  :NOTES:\n  - Created: %t\n  :END:\n  - [ ] %i\n")
              ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
               "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")
              ("w" "work")
