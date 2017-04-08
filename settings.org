@@ -73,7 +73,8 @@
                ("C-x C-f" . helm-find-files)
                ("M-x" . helm-M-x)
                ("M-y" . helm-show-kill-ring)
-               ("C-x r b" . helm-bookmarks)))
+               ("C-x r b" . helm-bookmarks))
+        :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
     #+END_SRC
 ** Navigation
 *** Treat CamelCase as different words
