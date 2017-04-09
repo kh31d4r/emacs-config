@@ -150,6 +150,10 @@
         (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
         (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
     #+END_SRC
+*** Show matching parenthesis
+    #+BEGIN_SRC emacs-lisp
+      (show-paren-mode 1)
+    #+END_SRC
 *** Don't use tabs
     #+BEGIN_SRC emacs-lisp
       (setq indent-tabs-mode nil)
