@@ -273,11 +273,7 @@
               ("improvement" . ?m)
               ("tool" . ?t)
               ("feature" . ?f)
-              ("projects" . ?p)
-              ("electrics" . ?x)
-              ("emacs" . ?e)
-              ("development" . ?d)
-              ("game" . ?g)))
+              ("project" . ?p)))
     #+END_SRC
 *** Align tags to 90 characters to allow longer headings
     #+BEGIN_SRC emacs-lisp
