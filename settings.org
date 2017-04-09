@@ -340,6 +340,8 @@
               "* TODO %^{Task}\n  :NOTES:\n  - Created: %t\n  :END:\n  %?\n")
              ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
               "* TODO %^{Title}%^{AUTHOR}p%^{PUBLISHER}p%^{ISBN}p%^{PAGES}p")
+             ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
+              "* TODO %^{Item}\n  :NOTES:\n  - Created: %t\n  :END:\n  %?\n")
              ("w" "work")
              ("wt" "Todo" entry (file "~/org/work.org")
               "* TODO %^{Task}\n  :NOTES:\n  - Created: %t\n  :END:\n  %?\n")
