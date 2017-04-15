@@ -286,6 +286,11 @@
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c c") 'org-capture)
    #+END_SRC
+   Make C-a and C-e ignore leading stars and trailing tags. Hitting
+   the key again will get the old behavior.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-special-ctrl-a/e 'first)
+   #+END_SRC
 ** Tags
 *** Define global list of tags
     #+BEGIN_SRC emacs-lisp
