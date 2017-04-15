@@ -262,6 +262,14 @@
    #+BEGIN_SRC emacs-lisp
      (setq nxml-child-indent 4)
    #+END_SRC
+* Lisp
+** Use paredit
+   #+BEGIN_SRC emacs-lisp
+     (use-package paredit
+       :ensure t
+       :config
+       (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+   #+END_SRC
 * Org mode
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
