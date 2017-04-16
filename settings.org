@@ -199,8 +199,8 @@
     #+END_SRC
 * Python
 ** Jedi
-   Autocompletion, goto definition and show documentation.
-   Needs virtenv installed on the system to work.
+   Autocompletion engine for company, hotkeys for goto definition and
+   show documentation.  Needs virtenv installed on the system to work.
    #+BEGIN_SRC emacs-lisp
      (use-package jedi
        :ensure t
@@ -210,6 +210,12 @@
        ("C-c j d" . jedi:goto-definition)
        ("C-c j p" . jedi:goto-definition-pop-marker)
        ("C-c j h" . jedi:show-doc))
+
+     (use-package company-jedi
+       :ensure t
+       :config
+       (add-hook 'python-mode-hook (lambda ()
+                                     (add-to-list 'company-backends 'company-jedi))))
    #+END_SRC
 ** Syntax and style checking
    Needs pylint installed on the system to work.
