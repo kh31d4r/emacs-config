@@ -76,6 +76,13 @@
                ("C-x r b" . helm-bookmarks))
         :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
     #+END_SRC
+** Auto completion
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+       :ensure t
+       :config (global-company-mode)
+       :bind ("M-a" . company-complete))
+   #+END_SRC
 ** Navigation
 *** Treat CamelCase as different words
     #+BEGIN_SRC emacs-lisp
