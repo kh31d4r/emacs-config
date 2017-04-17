@@ -297,6 +297,10 @@
    #+BEGIN_SRC emacs-lisp
      (setq org-src-fontify-natively t)
    #+END_SRC
+   Make tab indent work in code snippets
+   #+BEGIN_SRC emacs-lisp
+     (setq org-src-tab-acts-natively t)
+   #+END_SRC
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
      (setq org-agenda-files (quote ("~/org")))
