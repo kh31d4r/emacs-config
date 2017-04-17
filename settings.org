@@ -292,6 +292,11 @@
        (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
    #+END_SRC
 * Org mode
+** Display settings
+   Show syntax highlighting in code snippets
+   #+BEGIN_SRC emacs-lisp
+     (setq org-src-fontify-natively t)
+   #+END_SRC
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
      (setq org-agenda-files (quote ("~/org")))
