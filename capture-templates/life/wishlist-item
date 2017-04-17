@@ -1,0 +1,5 @@
+* TODO %^{Item}
+  :NOTES:
+  - Created: %t
+  :END:
+  %i%?
