@@ -392,9 +392,9 @@
      (setq org-capture-templates
            '(("l" "life")
              ("lt" "Todo" entry (file "~/org/life.org")
-              (file "~/.emacs.d/capture-templates/life/todo"))
+              (file "~/.emacs.d/capture-templates/todo"))
              ("lc" "Todo with checklist" entry (file "~/org/life.org")
-              (file "~/.emacs.d/capture-templates/life/todo-checklist"))
+              (file "~/.emacs.d/capture-templates/todo-checklist"))
              ("lo" "Org-mode Todo" entry (file+headline "~/org/life.org" "Org-mode things")
               (file "~/.emacs.d/capture-templates/life/todo-org"))
              ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
@@ -403,9 +403,9 @@
               (file "~/.emacs.d/capture-templates/life/wishlist-item"))
              ("w" "work")
              ("wt" "Todo" entry (file "~/org/work.org")
-              (file "~/.emacs.d/capture-templates/work/todo"))
+              (file "~/.emacs.d/capture-templates/todo"))
              ("wc" "Todo with checklist" entry (file "~/org/work.org")
-              (file "~/.emacs.d/capture-templates/work/checklist"))))
+              (file "~/.emacs.d/capture-templates/todo-checklist"))))
    #+END_SRC
 ** Export
 *** Add more export engines
