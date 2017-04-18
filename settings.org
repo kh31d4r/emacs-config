@@ -76,6 +76,22 @@
                ("C-x r b" . helm-bookmarks))
         :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
     #+END_SRC
+*** Eval and replace
+    Convenience method to be able to write lisp expressions and
+    replace them in the edited text.
+    #+BEGIN_SRC emacs-lisp
+      (defun eval-and-replace ()
+        "Replace the preceding sexp with its value."
+        (interactive)
+        (backward-kill-sexp)
+        (condition-case nil
+            (prin1 (eval (read (current-kill 0)))
+                   (current-buffer))
+          (error (message "Invalid expression")
+                 (insert (current-kill 0)))))
+
+      (global-set-key (kbd "C-x e") 'eval-and-replace)
+    #+END_SRC
 ** Auto completion
    #+BEGIN_SRC emacs-lisp
      (use-package company
