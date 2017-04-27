@@ -359,7 +359,6 @@
               ("bug" . ?b)
               ("idea" . ?i)
               ("improvement" . ?m)
-              ("tool" . ?t)
               ("feature" . ?f)
               ("project" . ?p)))
     #+END_SRC
