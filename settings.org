@@ -296,6 +296,7 @@
   #+BEGIN_SRC emacs-lisp
     (use-package docker
       :ensure t
+      :diminish docker-mode
       :config
       (add-hook 'prog-mode-hook (lambda ()
                                   (docker-global-mode))))
