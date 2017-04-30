@@ -48,11 +48,9 @@
     Reload the current buffer from disk, and only prompt if the file
     has changed.
     #+BEGIN_SRC emacs-lisp
-      (defun revert-buffer-noprompt ()
-          "Reload the current buffer, only prompt if the buffer is modified"
-          (interactive)
-          (revert-buffer t (not (buffer-modified-p)) t))
-      (global-set-key (kbd "C-v") 'revert-buffer-noprompt)
+      (global-set-key (kbd "C-v") (lambda ()
+                                    (interactive)
+                                    (revert-buffer t (not (buffer-modified-p)) t)))
     #+END_SRC
 *** Bind compare windows
     #+BEGIN_SRC emacs-lisp
