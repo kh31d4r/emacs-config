@@ -331,6 +331,15 @@
    #+BEGIN_SRC emacs-lisp
      (setq org-src-tab-acts-natively t)
    #+END_SRC
+   Show nice bullets when not using terminal-emacs
+   #+BEGIN_SRC emacs-lisp
+     (when window-system
+       (use-package org-bullets
+         :ensure t
+         :config
+         (add-hook 'org-mode-hook (lambda ()
+                                    (org-bullets-mode)))))
+   #+END_SRC
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
      (setq org-agenda-files (quote ("~/org")))
