@@ -345,7 +345,7 @@
    #+END_SRC
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
-     (setq org-agenda-files (quote ("~/org")))
+     (setq org-agenda-files '("~/org"))
    #+END_SRC
 ** Keybindings
    Bind org-agenda globally, so the agenda can be pulled up from
