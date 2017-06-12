@@ -326,11 +326,11 @@
    #+END_SRC
 * Org mode
 ** Display settings
-   Show syntax highlighting in code snippets
+   Show syntax highlighting in code blocks
    #+BEGIN_SRC emacs-lisp
      (setq org-src-fontify-natively t)
    #+END_SRC
-   Make tab indent work in code snippets
+   Make tab indent work in code blocks
    #+BEGIN_SRC emacs-lisp
      (setq org-src-tab-acts-natively t)
    #+END_SRC
