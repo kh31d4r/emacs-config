@@ -193,6 +193,16 @@
     #+BEGIN_SRC emacs-lisp
       (global-git-commit-mode 1)
     #+END_SRC
+    Magit uses text-mode as major mode by default, so enable snippets
+    for it.
+    #+BEGIN_SRC emacs-lisp
+      (use-package yasnippet
+        :ensure t
+        :init
+        (add-hook 'text-mode-hook (lambda ()
+                                    (yas-minor-mode)
+                                    (yas-reload-all))))
+    #+END_SRC
 *** Use git-messenger for fast blame
     #+BEGIN_SRC emacs-lisp
       (use-package git-messenger
