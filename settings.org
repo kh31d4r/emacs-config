@@ -99,8 +99,14 @@
    #+END_SRC
 ** Navigation
 *** Treat CamelCase as different words
+    Enable subword-mode everywhere.
     #+BEGIN_SRC emacs-lisp
       (global-subword-mode 1)
+    #+END_SRC
+    And silence the comma on the modeline.
+    #+BEGIN_SRC emacs-lisp
+      (let ((entry (assq 'subword-mode minor-mode-alist)))
+        (when entry (setcdr entry '(nil))))
     #+END_SRC
 *** Windows
     Enable undoing window changes.
