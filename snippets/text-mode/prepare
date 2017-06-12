@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: prepare for next
+# key: prep
+# --
+Prepare $1 for next development iteration
