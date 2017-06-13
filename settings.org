@@ -179,8 +179,8 @@
       (use-package highlight-chars
         :ensure t
         :config
-        (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
-        (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
+        (hc-highlight-tabs)
+        (hc-highlight-trailing-whitespace))
     #+END_SRC
 *** Show matching parenthesis
     #+BEGIN_SRC emacs-lisp
@@ -290,6 +290,12 @@
    #+BEGIN_SRC emacs-lisp
      (setq c-default-style "bsd"
            c-basic-offset 4)
+   #+END_SRC
+** Don't highlight tabs when writing Makefiles
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'makefile-mode (lambda ()
+                                (when hc-highlight-tabs-p
+                                  (hc-toggle-highlight-tabs))))
    #+END_SRC
 * Web
 ** Use web mode
