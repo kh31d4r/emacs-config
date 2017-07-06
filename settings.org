@@ -34,7 +34,8 @@
 
       (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
     #+END_SRC
-*** Increment Number
+*** Number manipulation
+    Bind =M-+= to increment the number currently at the cursor.
     #+BEGIN_SRC emacs-lisp
       (defun increment-number-at-point ()
         (interactive)
@@ -43,6 +44,16 @@
             (error "No number at point"))
         (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
       (global-set-key (kbd "M-+") 'increment-number-at-point)
+    #+END_SRC
+    Bind =M--= to decrement the number currently at the cursor.
+    #+BEGIN_SRC emacs-lisp
+      (defun decrement-number-at-point ()
+        (interactive)
+        (skip-chars-backward "0-9")
+        (or (looking-at "[0-9]+")
+            (error "No number at point"))
+        (replace-match (number-to-string (1- (string-to-number (match-string 0))))))
+      (global-set-key (kbd "M--") 'decrement-number-at-point)
     #+END_SRC
 *** Reload buffer
     Reload the current buffer from disk, and only prompt if the file
