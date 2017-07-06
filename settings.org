@@ -35,24 +35,29 @@
       (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
     #+END_SRC
 *** Number manipulation
-    Bind =M-+= to increment the number currently at the cursor.
+    Common function to apply a function to the number currently at the
+    cursor.
     #+BEGIN_SRC emacs-lisp
-      (defun increment-number-at-point ()
+      (defun manipulate-number-at-point (manipulation-func)
         (interactive)
         (skip-chars-backward "0-9")
         (or (looking-at "[0-9]+")
             (error "No number at point"))
-        (replace-match (number-to-string (1+ (string-to-number (match-string 0))))))
+        (replace-match (number-to-string
+                        (funcall manipulation-func (string-to-number (match-string 0))))))
+    #+END_SRC
+    Bind =M-+= to increment the number currently at the cursor.
+    #+BEGIN_SRC emacs-lisp
+      (defun increment-number-at-point ()
+        (interactive)
+        (manipulate-number-at-point #'1+))
       (global-set-key (kbd "M-+") 'increment-number-at-point)
     #+END_SRC
     Bind =M--= to decrement the number currently at the cursor.
     #+BEGIN_SRC emacs-lisp
       (defun decrement-number-at-point ()
         (interactive)
-        (skip-chars-backward "0-9")
-        (or (looking-at "[0-9]+")
-            (error "No number at point"))
-        (replace-match (number-to-string (1- (string-to-number (match-string 0))))))
+        (manipulate-number-at-point #'1-))
       (global-set-key (kbd "M--") 'decrement-number-at-point)
     #+END_SRC
 *** Reload buffer
