@@ -334,6 +334,13 @@
        (setq web-mode-enable-auto-pairing t)
        (setq web-mode-enable-auto-closing t))
    #+END_SRC
+** Use emmet mode
+   #+BEGIN_SRC emacs-lisp
+     (use-package emmet-mode
+       :ensure t
+       :config
+       (add-hook 'web-mode-hook 'emmet-mode))
+   #+END_SRC
 ** Use Impatient mode
    Use impatient mode in web mode, and make it use port 8085.
    #+BEGIN_SRC emacs-lisp
