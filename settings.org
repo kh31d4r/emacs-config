@@ -316,20 +316,20 @@
 * Web
 ** Use web mode
    #+BEGIN_SRC emacs-lisp
-     (defun close-and-indent ()
-       "Close current tag and indent the line"
-       (interactive)
-       (web-mode-element-close)
-       (indent-for-tab-command))
-
      (use-package web-mode
        :ensure t
        :mode
        (("\\.html\\'" . web-mode)
         ("\\.css\\'" . web-mode))
        :config
-       (add-hook 'web-mode-hook (lambda ()
-                                  (local-set-key (kbd "C-c C-f") 'close-and-indent)))
+       (add-hook 'web-mode-hook
+                 (lambda ()
+                   (local-set-key
+                    (kbd "C-c C-f")
+                    (lambda ()
+                      (interactive)
+                      (web-mode-element-close)
+                      (indent-for-tab-command)))))
        (setq web-mode-enable-auto-quoting t)
        (setq web-mode-enable-auto-pairing t)
        (setq web-mode-enable-auto-closing t))
