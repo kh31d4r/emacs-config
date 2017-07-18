@@ -264,6 +264,11 @@
        (interactive)
        (/ (float (apply '+ numbers)) (length numbers)))
    #+END_SRC
+** System
+*** Display current time in modeline
+    #+BEGIN_SRC emacs-lisp
+      (display-time-mode 1)
+    #+END_SRC
 * Python
 ** Jedi
    Autocompletion engine for company, hotkeys for goto definition and
