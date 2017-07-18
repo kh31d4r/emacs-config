@@ -253,6 +253,10 @@
     #+BEGIN_SRC emacs-lisp
       (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
     #+END_SRC
+*** Ensure newline at the end of each file
+    #+BEGIN_SRC emacs-lisp
+      (setq require-final-newline t)
+    #+END_SRC
 ** Utilities
    Calculate the average value of a list of numbers
    #+BEGIN_SRC emacs-lisp
