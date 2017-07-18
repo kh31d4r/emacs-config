@@ -188,6 +188,11 @@
     #+END_SRC
 *** Modeline
     #+BEGIN_SRC emacs-lisp
+      (use-package powerline
+        :ensure t
+        :config (powerline-default-theme))
+    #+END_SRC
+    #+BEGIN_SRC emacs-lisp
       (use-package smart-mode-line
         :ensure t
         :config
