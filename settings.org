@@ -115,6 +115,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package company
        :ensure t
+       :diminish "com"
        :config (global-company-mode)
        :bind ("M-a" . company-complete))
    #+END_SRC
@@ -407,6 +408,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package paredit
        :ensure t
+       :diminish "par"
        :config
        (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
    #+END_SRC
