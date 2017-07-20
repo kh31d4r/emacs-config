@@ -214,8 +214,10 @@
         (sml/setup))
     #+END_SRC
 *** Syntax Highlighting
+    Ensure syntax highlighting is always enabled
     #+BEGIN_SRC emacs-lisp
-      (custom-set-faces)
+      (global-font-lock-mode t)
+      (setq font-lock-maximum-decoration t)
     #+END_SRC
 *** Highlight tabs and trailing whitespace
     #+BEGIN_SRC emacs-lisp
