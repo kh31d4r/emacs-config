@@ -410,6 +410,12 @@
                                   (docker-global-mode))))
   #+END_SRC
 * Lisp
+** Documentation
+   Turn on =eldoc= when editing elisp
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+   #+END_SRC
 ** Rainbow paranthesises
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-delimiters
