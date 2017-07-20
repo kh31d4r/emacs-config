@@ -389,6 +389,12 @@
                                         (httpd-start)))
        (add-hook 'web-mode-hook 'impatient-mode))
    #+END_SRC
+** Documentation
+   Utility functions for looking up things in the HTTP protocol
+   #+BEGIN_SRC emacs-lisp
+     (use-package know-your-http-well
+       :ensure t)
+   #+END_SRC
 * XML
 ** Set indentation size to 4
    #+BEGIN_SRC emacs-lisp
