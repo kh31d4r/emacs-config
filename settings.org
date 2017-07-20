@@ -428,14 +428,6 @@
    #+END_SRC
 * Org mode
 ** Display settings
-   Show syntax highlighting in code blocks
-   #+BEGIN_SRC emacs-lisp
-     (setq org-src-fontify-natively t)
-   #+END_SRC
-   Make tab indent work in code blocks
-   #+BEGIN_SRC emacs-lisp
-     (setq org-src-tab-acts-natively t)
-   #+END_SRC
    Show nice bullets when not using terminal-emacs
    #+BEGIN_SRC emacs-lisp
      (when window-system
@@ -444,6 +436,15 @@
          :config
          (add-hook 'org-mode-hook (lambda ()
                                     (org-bullets-mode)))))
+   #+END_SRC
+** Code blocks
+   Show syntax highlighting in code blocks
+   #+BEGIN_SRC emacs-lisp
+     (setq org-src-fontify-natively t)
+   #+END_SRC
+   Make tab indent work in code blocks
+   #+BEGIN_SRC emacs-lisp
+     (setq org-src-tab-acts-natively t)
    #+END_SRC
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
