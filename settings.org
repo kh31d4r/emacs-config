@@ -152,6 +152,13 @@
         :bind ("M-s" . ace-jump-mode))
     #+END_SRC
 ** Display and formatting
+*** Encoding
+    Use =UTF-8= everywhere
+    #+BEGIN_SRC emacs-lisp
+      (set-terminal-coding-system 'utf-8)
+      (set-keyboard-coding-system 'utf-8)
+      (prefer-coding-system 'utf-8)
+    #+END_SRC
 *** Theme
     #+BEGIN_SRC emacs-lisp
       (use-package dracula-theme
