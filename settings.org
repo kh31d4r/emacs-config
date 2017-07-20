@@ -446,6 +446,12 @@
    #+BEGIN_SRC emacs-lisp
      (setq org-src-tab-acts-natively t)
    #+END_SRC
+   Always allow running lisp blocks
+   #+BEGIN_SRC emacs-lisp
+     (org-babel-do-load-languages
+      'org-babel-load-languages
+       '((emacs-lisp . t)))
+   #+END_SRC
 ** Agenda files
    #+BEGIN_SRC emacs-lisp
      (setq org-agenda-files '("~/org"))
