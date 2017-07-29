@@ -287,13 +287,6 @@
     #+BEGIN_SRC emacs-lisp
       (setq require-final-newline t)
     #+END_SRC
-** Utilities
-   Calculate the average value of a list of numbers
-   #+BEGIN_SRC emacs-lisp
-     (defun avg (numbers)
-       (interactive)
-       (/ (float (apply '+ numbers)) (length numbers)))
-   #+END_SRC
 ** System
 *** Display current time in modeline
     #+BEGIN_SRC emacs-lisp
