@@ -1,42 +1,185 @@
 #+TITLE: Emacs configuration
+#+AUTHOR: Daniel Persson
+
 #+STARTUP: overview
 
 * Global
-** Localization
-   Weeks start on monday
+** Display
+   Don't show the startup screen.
    #+BEGIN_SRC emacs-lisp
-     (setq calendar-week-start-day 1)
+     (custom-set-variables '(inhibit-startup-screen t))
    #+END_SRC
-** Keybindings
-*** Expand region
-    #+BEGIN_SRC emacs-lisp
-      (use-package expand-region
-        :ensure t
-        :bind ("M-e" . er/expand-region))
-    #+END_SRC
-*** Enable upper and lowercase region
-    #+BEGIN_SRC emacs-lisp
-      (put 'downcase-region 'disabled nil)
-      (put 'upcase-region 'disabled nil)
-    #+END_SRC
-*** Change "yes or no" to "y or n"
-    #+BEGIN_SRC emacs-lisp
-      (fset 'yes-or-no-p 'y-or-n-p)
-    #+END_SRC
-*** Tab and whitespace cleanup
-    #+BEGIN_SRC emacs-lisp
-      (defun cleanup-tabs-whitespace ()
-        "Remove trailing whitespace and change tabs to spaces"
-        (interactive)
-        (whitespace-cleanup)
-        (untabify (point-min) (point-max))
-        (indent-region (point-min) (point-max) nil))
 
-      (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
+   Use =dracula-theme= which looks very nice in graphical mode, and
+   looks okay in most terminals.
+   #+BEGIN_SRC emacs-lisp
+     (use-package dracula-theme
+       :ensure t
+       :config (enable-theme 'dracula))
+   #+END_SRC
+
+   Start the first emacs frame maximized.
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'initial-frame-alist '(fullscreen . maximized))
+   #+END_SRC
+
+   Hide menus and scrollbars.
+   #+BEGIN_SRC emacs-lisp
+     (menu-bar-mode 0)
+     (scroll-bar-mode 0)
+     (tool-bar-mode 0)
+   #+END_SRC
+*** Interface
+    Use =powerline= and =smart-mode-line= to make the modeline look nicer.
+    #+BEGIN_SRC emacs-lisp
+      (use-package powerline
+        :ensure t
+        :config (powerline-default-theme))
+      (use-package smart-mode-line
+        :ensure t
+        :config
+        (setq sml/no-confirm-load-theme t)
+        (sml/setup))
     #+END_SRC
+
+    Display current time in the modeline.
+    #+BEGIN_SRC emacs-lisp
+      (display-time-mode 1)
+    #+END_SRC
+
+    Display current column in the modeline.
+    #+BEGIN_SRC emacs-lisp
+      (column-number-mode 1)
+    #+END_SRC
+
+    Show line numbers, and separate from the buffer with a space.
+    #+BEGIN_SRC emacs-lisp
+      (use-package nlinum
+        :ensure t
+        :config
+        (global-nlinum-mode)
+        (setq nlinum-format "%d "))
+    #+END_SRC
+
+    Toggle line numbers with =C-c l=.
+    #+BEGIN_SRC emacs-lisp
+      (global-set-key (kbd "C-c l") 'nlinum-mode)
+    #+END_SRC
+
+    Show possible next key combinations.
+    #+BEGIN_SRC emacs-lisp
+      (use-package which-key
+        :ensure t
+        :diminish which-key-mode
+        :config (which-key-mode))
+    #+END_SRC
+*** Text
+    Increase the default font size in graphical mode.
+    #+BEGIN_SRC emacs-lisp
+      (set-face-attribute 'default nil :height 150)
+    #+END_SRC
+
+    Replace lambdas with fancy symbols.
+    #+BEGIN_SRC emacs-lisp
+      (global-prettify-symbols-mode t)
+    #+END_SRC
+
+    Ensure syntax highlighting is always enabled and turned up to max.
+    #+BEGIN_SRC emacs-lisp
+      (global-font-lock-mode t)
+      (setq font-lock-maximum-decoration t)
+    #+END_SRC
+
+    Highlight matching parenthesis.
+    #+BEGIN_SRC emacs-lisp
+      (show-paren-mode 1)
+    #+END_SRC
+
+    Highlight tabs and trailing whitespace.
+    #+BEGIN_SRC emacs-lisp
+      (use-package highlight-chars
+        :ensure t
+        :config
+        (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+        (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
+    #+END_SRC
+** Editing
+   Indent with 4 spaces instead of tabs.
+   #+BEGIN_SRC emacs-lisp
+     (setq indent-tabs-mode nil)
+     (setq-default indent-tabs-mode nil)
+     (setq default-tab-width 4)
+   #+END_SRC
+
+   Enable auto completion with =company=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package company
+       :ensure t
+       :diminish "com"
+       :config (global-company-mode)
+       :bind ("M-a" . company-complete))
+   #+END_SRC
+
+   Enable =expand-region=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package expand-region
+       :ensure t
+       :bind ("M-e" . er/expand-region))
+   #+END_SRC
+
+   Enable =multiple-cursors=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package multiple-cursors
+       :ensure t
+       :bind ("M-n" . mc/mark-next-like-this-word))
+   #+END_SRC
+
+   Don't disable upper and lowercase region.
+   #+BEGIN_SRC emacs-lisp
+     (put 'downcase-region 'disabled nil)
+     (put 'upcase-region 'disabled nil)
+   #+END_SRC
+
+   Bind =C-c i= tospellcheck.
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-c i") 'ispell-word)
+   #+END_SRC
+
+   Bind =C-c C-c= to =cleanup-tabs-whitespace=, that removes trailing
+   whitespace and change tabs to spaces.
+   #+BEGIN_SRC emacs-lisp
+     (defun cleanup-tabs-whitespace ()
+          (interactive)
+       (whitespace-cleanup)
+       (untabify (point-min) (point-max))
+       (indent-region (point-min) (point-max) nil))
+
+     (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
+   #+END_SRC
+
+   Reload the current buffer from disk with =C-v=. Only prompt for
+   confimation if the buffer was modified.
+   #+BEGIN_SRC emacs-lisp
+     (global-set-key (kbd "C-v") (lambda ()
+                                   (interactive)
+                                   (revert-buffer t (not (buffer-modified-p)) t)))
+   #+END_SRC
+
+   Bind =C-x e= to =eval-and-replace=, which evaluates the current
+   S-expression and replaces it with the output.
+   #+BEGIN_SRC emacs-lisp
+     (defun eval-and-replace ()
+       (interactive)
+       (backward-kill-sexp)
+       (condition-case nil
+           (prin1 (eval (read (current-kill 0)))
+                  (current-buffer))
+         (error (message "Invalid expression")
+                (insert (current-kill 0)))))
+      (global-set-key (kbd "C-x e") 'eval-and-replace)
+   #+END_SRC
 *** Number manipulation
-    Common function to apply a function to the number currently at the
-    cursor.
+    Bind =M-+= and =M--= to incrementing or decrementing the number at point.
     #+BEGIN_SRC emacs-lisp
       (defun manipulate-number-at-point (manipulation-func)
         (interactive)
@@ -45,357 +188,236 @@
             (error "No number at point"))
         (replace-match (number-to-string
                         (funcall manipulation-func (string-to-number (match-string 0))))))
-    #+END_SRC
-    Bind =M-+= to increment the number currently at the cursor.
-    #+BEGIN_SRC emacs-lisp
-      (defun increment-number-at-point ()
-        (interactive)
-        (manipulate-number-at-point #'1+))
-      (global-set-key (kbd "M-+") 'increment-number-at-point)
-    #+END_SRC
-    Bind =M--= to decrement the number currently at the cursor.
-    #+BEGIN_SRC emacs-lisp
-      (defun decrement-number-at-point ()
-        (interactive)
-        (manipulate-number-at-point #'1-))
-      (global-set-key (kbd "M--") 'decrement-number-at-point)
-    #+END_SRC
-*** Reload buffer
-    Reload the current buffer from disk, and only prompt if the file
-    has changed.
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-v") (lambda ()
-                                    (interactive)
-                                    (revert-buffer t (not (buffer-modified-p)) t)))
-    #+END_SRC
-*** Show possible keys
-    #+BEGIN_SRC emacs-lisp
-      (use-package which-key
-        :ensure t
-        :diminish which-key-mode
-        :config
-        (which-key-mode))
-    #+END_SRC
-*** Helm
-    #+BEGIN_SRC emacs-lisp
-      (use-package helm
-        :ensure t
-        :bind (("C-x b" . helm-buffers-list)
-               ("C-x C-f" . helm-find-files)
-               ("M-x" . helm-M-x)
-               ("M-y" . helm-show-kill-ring)
-               ("C-x r b" . helm-bookmarks))
-        :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
-    #+END_SRC
-*** Eval and replace
-    Convenience method to be able to write lisp expressions and
-    replace them in the edited text.
-    #+BEGIN_SRC emacs-lisp
-      (defun eval-and-replace ()
-        "Replace the preceding sexp with its value."
-        (interactive)
-        (backward-kill-sexp)
-        (condition-case nil
-            (prin1 (eval (read (current-kill 0)))
-                   (current-buffer))
-          (error (message "Invalid expression")
-                 (insert (current-kill 0)))))
 
-      (global-set-key (kbd "C-x e") 'eval-and-replace)
+      (global-set-key (kbd "M-+") (lambda ()
+                                    (interactive)
+                                    (manipulate-number-at-point #'1+)))
+      (global-set-key (kbd "M--") (lambda ()
+                                    (interactive)
+                                    (manipulate-number-at-point #'1-)))
     #+END_SRC
-*** Spellchecking
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-c i") 'ispell-word)
-    #+END_SRC
-** Auto completion
-   #+BEGIN_SRC emacs-lisp
-     (use-package company
-       :ensure t
-       :diminish "com"
-       :config (global-company-mode)
-       :bind ("M-a" . company-complete))
-   #+END_SRC
 ** Navigation
-*** Treat CamelCase as different words
-    Enable subword-mode everywhere.
-    #+BEGIN_SRC emacs-lisp
-      (global-subword-mode 1)
-    #+END_SRC
-    And silence the comma on the modeline.
-    #+BEGIN_SRC emacs-lisp
-      (let ((entry (assq 'subword-mode minor-mode-alist)))
-        (when entry (setcdr entry '(nil))))
-    #+END_SRC
-*** Windows
-    Enable undoing window changes.
-    #+BEGIN_SRC emacs-lisp
-      (use-package winner
-        :ensure t
-        :config
-        (winner-mode 1))
-    #+END_SRC
-    Enable easier jumping between windows
-    #+BEGIN_SRC emacs-lisp
-      (use-package ace-window
-        :ensure t
-        :bind
-        ("C-x o" . ace-window))
-    #+END_SRC
-*** Easier jumping
-    #+BEGIN_SRC emacs-lisp
-      (use-package ace-jump-mode
-        :ensure t
-        :bind ("M-s" . ace-jump-mode))
-    #+END_SRC
-** Display and formatting
-*** Encoding
-    Use =UTF-8= everywhere
-    #+BEGIN_SRC emacs-lisp
-      (set-terminal-coding-system 'utf-8)
-      (set-keyboard-coding-system 'utf-8)
-      (prefer-coding-system 'utf-8)
-    #+END_SRC
-*** Theme
-    #+BEGIN_SRC emacs-lisp
-      (use-package dracula-theme
-        :ensure t
-        :config (enable-theme 'dracula))
-    #+END_SRC
-*** Increase font size
-    #+BEGIN_SRC emacs-lisp
-      (set-face-attribute 'default nil :height 150)
-    #+END_SRC
-*** Don't show startup screen
-    #+BEGIN_SRC emacs-lisp
-      (custom-set-variables '(inhibit-startup-screen t))
-    #+END_SRC
-*** Don't show menus and scrollbars
-    #+BEGIN_SRC emacs-lisp
-      (menu-bar-mode 0)
-      (scroll-bar-mode 0)
-      (tool-bar-mode 0)
-    #+END_SRC
-*** Show columns
-    #+BEGIN_SRC emacs-lisp
-      (column-number-mode 1)
-    #+END_SRC
-*** Line numbers
-    Show line numbers with space between the numbers and the buffer
-    #+BEGIN_SRC emacs-lisp
-      (use-package nlinum
-        :ensure t
-        :config
-        (global-nlinum-mode)
-        (setq nlinum-format "%d "))
-    #+END_SRC
-    Toggle line numbers with ~C-c l~
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-c l") 'nlinum-mode)
-    #+END_SRC
-*** Fancy symbols
-    #+BEGIN_SRC emacs-lisp
-      (global-prettify-symbols-mode t)
-    #+END_SRC
-*** Modeline
-    #+BEGIN_SRC emacs-lisp
-      (use-package powerline
-        :ensure t
-        :config (powerline-default-theme))
-    #+END_SRC
-    #+BEGIN_SRC emacs-lisp
-      (use-package smart-mode-line
-        :ensure t
-        :config
-        (setq sml/no-confirm-load-theme t)
-        (sml/setup))
-    #+END_SRC
-*** Syntax Highlighting
-    Ensure syntax highlighting is always enabled
-    #+BEGIN_SRC emacs-lisp
-      (global-font-lock-mode t)
-      (setq font-lock-maximum-decoration t)
-    #+END_SRC
-*** Highlight tabs and trailing whitespace
-    #+BEGIN_SRC emacs-lisp
-      (use-package highlight-chars
-        :ensure t
-        :config
-        (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
-        (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
-    #+END_SRC
-*** Show matching parenthesis
-    #+BEGIN_SRC emacs-lisp
-      (show-paren-mode 1)
-    #+END_SRC
-*** Don't use tabs
-    #+BEGIN_SRC emacs-lisp
-      (setq indent-tabs-mode nil)
-      (setq-default indent-tabs-mode nil)
-      (setq default-tab-width 4)
-    #+END_SRC
+   Treat CamelCase as different words by enabling =subword-mode=
+   everywhere, and silence the comma on the modeline.
+   #+begin_SRC emacs-lisp
+     (global-subword-mode 1)
+     (let ((entry (assq 'subword-mode minor-mode-alist)))
+       (when entry (setcdr entry '(nil))))
+   #+END_SRC
+
+   Bind =C-c <left>= and =C-C <right>= to undoing and redoing changes
+   to the window layout.
+   #+BEGIN_SRC emacs-lisp
+     (use-package winner
+       :ensure t
+       :config (winner-mode 1))
+   #+END_SRC
+
+   Enable fast jumping between windows when using more than 2 windows.
+   #+BEGIN_SRC emacs-lisp
+     (use-package ace-window
+       :ensure t
+       :bind ("C-x o" . ace-window))
+   #+END_SRC
+
+   Enable fast and exact jumping across the screen by binding =M-s= to =ace-jump-mode=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package ace-jump-mode
+       :ensure t
+       :bind ("M-s" . ace-jump-mode))
+   #+END_SRC
+** System
+   Use =helm= for emacs commands that involves filtering and selecting
+   from a list.
+   #+BEGIN_SRC emacs-lisp
+     (use-package helm
+       :ensure t
+       :bind (("C-x b" . helm-buffers-list)
+              ("C-x C-f" . helm-find-files)
+              ("M-x" . helm-M-x)
+              ("M-y" . helm-show-kill-ring)
+              ("C-x r b" . helm-bookmarks))
+       :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
+   #+END_SRC
+
+   Change "yes or no" to "y or n".
+   #+BEGIN_SRC emacs-lisp
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+
+   Don't ask before opening large files.
+   #+BEGIN_SRC emacs-lisp
+     (setq large-file-warning-threshold 200000000)
+   #+END_SRC
+
+   Add newlines at the end of files that don't have them.
+   #+BEGIN_SRC emacs-lisp
+     (setq require-final-newline t)
+   #+END_SRC
+
+   Don't save backups in current working directory.
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+   #+END_SRC
+
+   Use version numbers for the backups.
+   #+BEGIN_SRC emacs-lisp
+     (setq version-control t)
+   #+END_SRC
+
+   Weeks start on monday.
+   #+BEGIN_SRC emacs-lisp
+     (setq calendar-week-start-day 1)
+   #+END_SRC
+
+   Use =UTF-8= everywhere.
+   #+BEGIN_SRC emacs-lisp
+     (set-terminal-coding-system 'utf-8)
+     (set-keyboard-coding-system 'utf-8)
+     (prefer-coding-system 'utf-8)
+   #+END_SRC
 ** Version Control
-*** Use magit as git inteface
+   Use =magit= as git interface.
    #+BEGIN_SRC emacs-lisp
      (use-package magit
        :ensure t
        :bind (("C-c g" . magit-status)))
    #+END_SRC
-*** Commit messages
-    Use git-commit-mode for writing commit messages in git.
-    #+BEGIN_SRC emacs-lisp
-      (global-git-commit-mode 1)
-    #+END_SRC
-    Magit uses text-mode as major mode by default, so enable snippets
-    for it.
-    #+BEGIN_SRC emacs-lisp
-      (use-package yasnippet
-        :ensure t
-        :init
-        (add-hook 'text-mode-hook (lambda ()
-                                    (yas-minor-mode)
-                                    (yas-reload-all))))
-    #+END_SRC
-*** Use git-messenger for fast blame
-    #+BEGIN_SRC emacs-lisp
-      (use-package git-messenger
-        :ensure t
-        :bind ("C-c b" . git-messenger:popup-message))
-    #+END_SRC
-** Enable multiple cursors
-   Useful for editing both opening and closing tag at the same time.
-   #+BEGIN_SRC emacs-lisp
-     (use-package multiple-cursors
-       :ensure t
-       :bind
-       ("M-n" . mc/mark-next-like-this-word))
-   #+END_SRC
-** Files
-*** Don't ask before opening large files
-    #+BEGIN_SRC emacs-lisp
-      (setq large-file-warning-threshold 200000000)
-    #+END_SRC
-*** Backups
-    Don't save backups in current working directory
-    #+BEGIN_SRC emacs-lisp
-      (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-    #+END_SRC
-    Use version numbers for the backups
-    #+BEGIN_SRC emacs-lisp
-      (setq version-control t)
-    #+END_SRC
-*** Ensure newline at the end of each file
-    #+BEGIN_SRC emacs-lisp
-      (setq require-final-newline t)
-    #+END_SRC
-** System
-*** Display current time in modeline
-    #+BEGIN_SRC emacs-lisp
-      (display-time-mode 1)
-    #+END_SRC
-* Python
-** Jedi
-   Autocompletion engine for company, hotkeys for goto definition and
-   show documentation.  Needs virtenv installed on the system to work.
-   #+BEGIN_SRC emacs-lisp
-     (use-package jedi
-       :ensure t
-       :config
-       (add-hook 'python-mode-hook 'jedi:setup)
-       :bind
-       ("C-c j d" . jedi:goto-definition)
-       ("C-c j p" . jedi:goto-definition-pop-marker)
-       ("C-c j h" . jedi:show-doc))
 
-     (use-package company-jedi
-       :ensure t
-       :config
-       (add-hook 'python-mode-hook (lambda ()
-                                     (add-to-list 'company-backends 'company-jedi))))
-   #+END_SRC
-** Syntax and style checking
-   Needs pylint installed on the system to work.
+   Use =git-commit-mode= for writing commit messages in git.
    #+BEGIN_SRC emacs-lisp
-     (use-package flycheck
-       :ensure t
-       :config
-       (add-hook 'python-mode-hook (lambda ()
-                                     (flycheck-mode 1)
-                                     (semantic-mode 1)
-                                     (setq flycheck-checker 'python-pylint
-                                           flycheck-checker-error-threshold 900))))
+     (global-git-commit-mode 1)
    #+END_SRC
-** Snippets
+
+   Magit uses =text-mode= as major mode for writing commit messages by
+   default, so enable snippets for it.
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
        :ensure t
        :init
-       (add-hook 'python-mode-hook (lambda ()
-                                     (yas-minor-mode)
-                                     (yas-reload-all))))
+       (add-hook 'text-mode-hook (lambda ()
+                                   (yas-minor-mode)
+                                   (yas-reload-all))))
    #+END_SRC
+
+   Use =git-messenger= for fast inline blame.
+   #+BEGIN_SRC emacs-lisp
+     (use-package git-messenger
+       :ensure t
+       :bind ("C-c b" . git-messenger:popup-message))
+   #+END_SRC
+* Python
+  Use =jedi= as autocompletion engine for company, and bind hotkeys
+  for goto definition and show documentation.
+
+  Needs virtenv installed on the system to work.
+  #+BEGIN_SRC emacs-lisp
+    (use-package jedi
+      :ensure t
+      :config (add-hook 'python-mode-hook 'jedi:setup)
+      :bind
+      ("C-c j d" . jedi:goto-definition)
+      ("C-c j p" . jedi:goto-definition-pop-marker)
+      ("C-c j h" . jedi:show-doc))
+
+    (use-package company-jedi
+      :ensure t
+      :config
+      (add-hook 'python-mode-hook (lambda ()
+                                    (add-to-list 'company-backends 'company-jedi))))
+  #+END_SRC
+
+  Use =flycheck= for syntax and style checking. Needs pylint
+  installed on the system to work.
+  #+BEGIN_SRC emacs-lisp
+    (use-package flycheck
+      :ensure t
+      :config
+      (add-hook 'python-mode-hook (lambda ()
+                                    (flycheck-mode 1)
+                                    (semantic-mode 1)
+                                    (setq flycheck-checker 'python-pylint
+                                          flycheck-checker-error-threshold 900))))
+  #+END_SRC
+
+  Enable snippets for python.
+  #+BEGIN_SRC emacs-lisp
+    (use-package yasnippet
+      :ensure t
+      :init
+      (add-hook 'python-mode-hook (lambda ()
+                                    (yas-minor-mode)
+                                    (yas-reload-all))))
+  #+END_SRC
 * C
-** Don't use GNU style indendataion
-   #+BEGIN_SRC emacs-lisp
-     (setq c-default-style "bsd"
-           c-basic-offset 4)
-   #+END_SRC
+  Don't use GNU style indendataion.
+  #+BEGIN_SRC emacs-lisp
+    (setq c-default-style "bsd"
+          c-basic-offset 4)
+  #+END_SRC
 * Web
-** Use web mode
-   #+BEGIN_SRC emacs-lisp
-     (use-package web-mode
-       :ensure t
-       :mode
-       (("\\.html\\'" . web-mode)
-        ("\\.css\\'" . web-mode))
-       :config
-       (add-hook 'web-mode-hook
-                 (lambda ()
-                   (local-set-key
-                    (kbd "C-c C-f")
-                    (lambda ()
-                      (interactive)
-                      (web-mode-element-close)
-                      (indent-for-tab-command)))))
-       (setq web-mode-enable-auto-quoting t)
-       (setq web-mode-enable-auto-pairing t)
-       (setq web-mode-enable-auto-closing t))
+  Use web mode for =html= and =css=, and make closing tags feel more
+  like =nxml-mode=.
+  #+BEGIN_SRC emacs-lisp
+    (use-package web-mode
+      :ensure t
+      :mode
+      (("\\.html\\'" . web-mode)
+       ("\\.css\\'" . web-mode))
+      :config
+      (add-hook 'web-mode-hook
+                (lambda ()
+                  (local-set-key
+                   (kbd "C-c C-f")
+                   (lambda ()
+                     (interactive)
+                     (web-mode-element-close)
+                     (indent-for-tab-command)))))
+      (setq web-mode-enable-auto-quoting t)
+      (setq web-mode-enable-auto-pairing t)
+      (setq web-mode-enable-auto-closing t))
    #+END_SRC
-** Use emmet mode
-   #+BEGIN_SRC emacs-lisp
-     (use-package emmet-mode
-       :ensure t
-       :config
-       (add-hook 'web-mode-hook 'emmet-mode))
-   #+END_SRC
-** Use Impatient mode
-   Use impatient mode in web mode, and make it use port 8085.
-   #+BEGIN_SRC emacs-lisp
-     (use-package impatient-mode
-       :ensure t
-       :config
-       (add-hook 'impatient-mode-hook (lambda ()
-                                        (setq httpd-port 8085)
-                                        (httpd-start)))
-       (add-hook 'web-mode-hook 'impatient-mode))
-   #+END_SRC
-** Documentation
-   Utility functions for looking up things in the HTTP protocol
-   #+BEGIN_SRC emacs-lisp
-     (use-package know-your-http-well
-       :ensure t)
-   #+END_SRC
+
+  Enable emmet mode when in =web-mode= to quickly create elements.
+  #+BEGIN_SRC emacs-lisp
+    (use-package emmet-mode
+      :ensure t
+      :config (add-hook 'web-mode-hook 'emmet-mode))
+  #+END_SRC
+
+  Start =httpd= when in =web-mode= on port 8085, and enable
+  =impatient-mode=. Point browser to =http://localhost:8085/imp= to
+  see the preview.
+  #+BEGIN_SRC emacs-lisp
+    (use-package impatient-mode
+      :ensure t
+      :config
+      (add-hook 'impatient-mode-hook (lambda ()
+                                       (setq httpd-port 8085)
+                                       (httpd-start)))
+      (add-hook 'web-mode-hook 'impatient-mode))
+  #+END_SRC
+
+  Enable utility functions for quickly looking things up in the HTTP
+  protocol.
+  #+BEGIN_SRC emacs-lisp
+    (use-package know-your-http-well
+      :ensure t)
+  #+END_SRC
 * XML
-** Set indentation size to 4
-   #+BEGIN_SRC emacs-lisp
-     (setq nxml-child-indent 4)
-   #+END_SRC
+  Set indentation size to 4.
+  #+BEGIN_SRC emacs-lisp
+    (setq nxml-child-indent 4)
+  #+END_SRC
 * Docker
-  Syntax highlighting when writing Dockerfiles.
+  Enable syntax highlighting when writing Dockerfiles.
   #+BEGIN_SRC emacs-lisp
     (use-package dockerfile-mode
       :ensure t)
   #+END_SRC
-  When in programming modes, activate docker minor mode
+
+  When in programming modes, activate docker minor mode for
+  controlling docker containers.
   #+BEGIN_SRC emacs-lisp
     (use-package docker
       :ensure t
@@ -405,31 +427,73 @@
                                   (docker-global-mode))))
   #+END_SRC
 * Lisp
-** Documentation
-   Turn on =eldoc= when editing elisp
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-   #+END_SRC
-** Rainbow paranthesises
-   #+BEGIN_SRC emacs-lisp
-     (use-package rainbow-delimiters
-       :ensure t
-       :config
-       (add-hook 'emacs-lisp-mode-hook (lambda ()
-                                         (rainbow-delimiters-mode))))
-   #+END_SRC
-** Use paredit
-   #+BEGIN_SRC emacs-lisp
-     (use-package paredit
-       :ensure t
-       :diminish "par"
-       :config
-       (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
-   #+END_SRC
+  Use paredit for editing elisp.
+  #+BEGIN_SRC emacs-lisp
+    (use-package paredit
+      :ensure t
+      :diminish "par"
+      :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+  #+END_SRC
+
+  Turn on =eldoc= to get fast access to function signatures.
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+  #+END_SRC
+
+  Show parentheses in different colors to easier pair them together.
+  #+BEGIN_SRC emacs-lisp
+    (use-package rainbow-delimiters
+      :ensure t
+      :config
+      (add-hook 'emacs-lisp-mode-hook (lambda ()
+                                        (rainbow-delimiters-mode))))
+  #+END_SRC
 * Org mode
-** Display settings
-   Show nice bullets when not using terminal-emacs
+  Keep agenda files in =~/org/=.
+  #+BEGIN_SRC emacs-lisp
+    (setq org-agenda-files '("~/org"))
+  #+END_SRC
+
+  Define custom list of default TODO states.
+  #+BEGIN_SRC emacs-lisp
+    (setq org-todo-keywords
+      '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
+  #+END_SRC
+
+  Define global list of tags.
+  #+BEGIN_SRC emacs-lisp
+    (setq org-tag-persistent-alist
+          '(("cleanup" . ?c)
+            ("bug" . ?b)
+            ("idea" . ?i)
+            ("improvement" . ?m)
+            ("feature" . ?f)
+            ("project" . ?p)))
+  #+END_SRC
+
+  Define custom capture templates.
+  #+BEGIN_SRC emacs-lisp
+    (setq org-capture-templates
+          '(("l" "life")
+            ("lt" "Todo" entry (file "~/org/life.org")
+             (file "~/.emacs.d/capture-templates/todo"))
+            ("lc" "Todo with checklist" entry (file "~/org/life.org")
+             (file "~/.emacs.d/capture-templates/todo-checklist"))
+            ("lo" "Org-mode Todo" entry (file+headline "~/org/life.org" "Org-mode things")
+             (file "~/.emacs.d/capture-templates/life/todo-org"))
+            ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
+             (file "~/.emacs.d/capture-templates/life/books"))
+            ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
+             (file "~/.emacs.d/capture-templates/life/wishlist-item"))
+            ("w" "work")
+            ("wt" "Todo" entry (file "~/org/work.org")
+             (file "~/.emacs.d/capture-templates/todo"))
+            ("wc" "Todo with checklist" entry (file "~/org/work.org")
+             (file "~/.emacs.d/capture-templates/todo-checklist"))))
+  #+END_SRC
+** Display
+   Show nice bullets when not using terminal emacs.
    #+BEGIN_SRC emacs-lisp
      (when window-system
        (use-package org-bullets
@@ -438,124 +502,88 @@
          (add-hook 'org-mode-hook (lambda ()
                                     (org-bullets-mode)))))
    #+END_SRC
+
+   Align tags to 90 characters to allow longer headings.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-tags-column 90)
+   #+END_SRC
+
+   Customize state colors.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-todo-keyword-faces
+           '(("TODO" . (:foreground "light coral" :weight bold))
+             ("WAITING" . (:foreground "red" :weight bold))
+             ("ONGOING" . (:foreground "deep sky blue" :weight bold))
+             ("ON HOLD" . (:foreground "red" :weight bold))
+             ("DONE" . (:foreground "spring green" :weight bold))
+             ("CANCELLED" . (:foreground "dim gray" :weight bold))))
+   #+END_SRC
 ** Code blocks
-   Show syntax highlighting in code blocks
+   Show syntax highlighting in code blocks.
    #+BEGIN_SRC emacs-lisp
      (setq org-src-fontify-natively t)
    #+END_SRC
-   Make tab indent work in code blocks
+
+   Make tab indent work in code blocks.
    #+BEGIN_SRC emacs-lisp
      (setq org-src-tab-acts-natively t)
    #+END_SRC
-   Always allow running lisp blocks
+
+   Always allow running lisp blocks.
    #+BEGIN_SRC emacs-lisp
      (org-babel-do-load-languages
       'org-babel-load-languages
-       '((emacs-lisp . t)))
-   #+END_SRC
-** Agenda files
-   #+BEGIN_SRC emacs-lisp
-     (setq org-agenda-files '("~/org"))
+      '((emacs-lisp . t)))
    #+END_SRC
 ** Keybindings
-   Bind org-agenda globally, so the agenda can be pulled up from
+   Bind  =C-c a= to =org-agenda= globally, so the agenda can be pulled up from
    anywhere.
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c a") 'org-agenda)
    #+END_SRC
-   Bind org-capture globally, since we are probably not doing org
+
+   Bind =C-c c= to =org-capture= globally, since we are probably not doing org
    related things when thinking up new stuff...
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c c") 'org-capture)
    #+END_SRC
-   Make C-a and C-e ignore leading stars and trailing tags. Hitting
-   the key again will get the old behavior.
+
+   Make =C-a= and =C-e= ignore leading stars and trailing
+   tags. Hitting the key again will get the old behavior.
    #+BEGIN_SRC emacs-lisp
      (setq org-special-ctrl-a/e 'first)
    #+END_SRC
-** Tags
-*** Define global list of tags
-    #+BEGIN_SRC emacs-lisp
-      (setq org-tag-persistent-alist
-            '(("cleanup" . ?c)
-              ("bug" . ?b)
-              ("idea" . ?i)
-              ("improvement" . ?m)
-              ("feature" . ?f)
-              ("project" . ?p)))
-    #+END_SRC
-*** Align tags to 90 characters to allow longer headings
-    #+BEGIN_SRC emacs-lisp
-      (setq org-tags-column 90)
-    #+END_SRC
-** TODOs
-*** Customize TODO states
-    Set up custom list of states
-    #+BEGIN_SRC emacs-lisp
-      (setq org-todo-keywords
-            '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
-    #+END_SRC
-
-    Customize state colors
-    #+BEGIN_SRC emacs-lisp
-      (setq org-todo-keyword-faces
-            '(("TODO" . (:foreground "light coral" :weight bold))
-              ("WAITING" . (:foreground "red" :weight bold))
-              ("ONGOING" . (:foreground "deep sky blue" :weight bold))
-              ("ON HOLD" . (:foreground "red" :weight bold))
-              ("DONE" . (:foreground "spring green" :weight bold))
-              ("CANCELLED" . (:foreground "dim gray" :weight bold))))
-    #+END_SRC
-*** Ask for note when closing TODO's
-    #+BEGIN_SRC emacs-lisp
-      (setq org-log-done 'note)
-    #+END_SRC
 ** Notes
-*** Logging
-    Log notes in a drawer
-    #+BEGIN_SRC emacs-lisp
-      (setq org-log-into-drawer "NOTES")
-    #+END_SRC
-    Log rescheduled tasks in the drawer too. Moving a deadline
-    requires a note, moving a scheduled task only logs the time.
-    #+BEGIN_SRC emacs-lisp
-      (setq org-log-reschedule "time")
-      (setq org-log-redeadline "note")
-    #+END_SRC
-** Capture templates
+   Log notes in the =NOTES= drawer.
    #+BEGIN_SRC emacs-lisp
-     (setq org-capture-templates
-           '(("l" "life")
-             ("lt" "Todo" entry (file "~/org/life.org")
-              (file "~/.emacs.d/capture-templates/todo"))
-             ("lc" "Todo with checklist" entry (file "~/org/life.org")
-              (file "~/.emacs.d/capture-templates/todo-checklist"))
-             ("lo" "Org-mode Todo" entry (file+headline "~/org/life.org" "Org-mode things")
-              (file "~/.emacs.d/capture-templates/life/todo-org"))
-             ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
-              (file "~/.emacs.d/capture-templates/life/books"))
-             ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
-              (file "~/.emacs.d/capture-templates/life/wishlist-item"))
-             ("w" "work")
-             ("wt" "Todo" entry (file "~/org/work.org")
-              (file "~/.emacs.d/capture-templates/todo"))
-             ("wc" "Todo with checklist" entry (file "~/org/work.org")
-              (file "~/.emacs.d/capture-templates/todo-checklist"))))
+     (setq org-log-into-drawer "NOTES")
+   #+END_SRC
+
+   Log rescheduled tasks in the drawer too. Moving a deadline
+   requires a note, moving a scheduled task only logs the time.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-log-reschedule "time")
+     (setq org-log-redeadline "note")
+   #+END_SRC
+
+   Ask for note when closing TODO's.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-log-done 'note)
    #+END_SRC
 ** Export
-*** Add more export engines
-    Twitter bootstrap
-    #+BEGIN_SRC emacs-lisp
-      (use-package ox-twbs
-        :ensure t)
-    #+END_SRC
-    MediaWiki
-    #+BEGIN_SRC emacs-lisp
-      (use-package ox-mediawiki
-        :ensure t)
-    #+END_SRC
-    IOslide
-    #+BEGIN_SRC emacs-lisp
-      (use-package ox-ioslide
-        :ensure t)
-    #+END_SRC
+   Add more export engines:
+   - Twitter bootstrap
+     #+BEGIN_SRC emacs-lisp
+       (use-package ox-twbs
+         :ensure t)
+     #+END_SRC
+   - MediaWiki
+     #+BEGIN_SRC emacs-lisp
+       (use-package ox-mediawiki
+         :ensure t)
+     #+END_SRC
+   - IOslide
+     #+BEGIN_SRC emacs-lisp
+       (use-package ox-ioslide
+         :ensure t)
+     #+END_SRC
