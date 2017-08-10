@@ -52,18 +52,14 @@
       (column-number-mode 1)
     #+END_SRC
 
-    Show line numbers, and separate from the buffer with a space.
+    Toggle showing line numbers with =C-c l=, and separate the line
+    numbers from the buffer with a space.
     #+BEGIN_SRC emacs-lisp
       (use-package nlinum
         :ensure t
         :config
-        (global-nlinum-mode)
-        (setq nlinum-format "%d "))
-    #+END_SRC
-
-    Toggle line numbers with =C-c l=.
-    #+BEGIN_SRC emacs-lisp
-      (global-set-key (kbd "C-c l") 'nlinum-mode)
+        (setq nlinum-format "%d ")
+        (global-set-key (kbd "C-c l") 'nlinum-mode))
     #+END_SRC
 
     Show possible next key combinations.
