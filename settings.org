@@ -446,11 +446,7 @@
   Define global list of tags.
   #+BEGIN_SRC emacs-lisp
     (setq org-tag-persistent-alist
-          '(("cleanup" . ?c)
-            ("bug" . ?b)
-            ("idea" . ?i)
-            ("improvement" . ?m)
-            ("feature" . ?f)
+          '(("bug" . ?b)
             ("project" . ?p)))
   #+END_SRC
 
