@@ -437,7 +437,16 @@
     (setq org-agenda-files '("~/org"))
   #+END_SRC
 
-  Define custom list of default TODO states.
+  Define custom list of default TODO states:
+  - =TODO= Task that is not yet started.
+  - =ONGOING= Task that is currently being worked on.
+  - =WAITING= Task that cannot be worked on since it is waiting for
+    someone else to do something.
+  - =ON HOLD= Task that has been started but is not being actively
+    worked on.
+  - =DONE=
+    Completed task.
+  - =CANCELLED= Task that will not be worked on.
   #+BEGIN_SRC emacs-lisp
     (setq org-todo-keywords
       '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
