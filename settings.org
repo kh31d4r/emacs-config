@@ -136,7 +136,7 @@
      (put 'upcase-region 'disabled nil)
    #+END_SRC
 
-   Bind =C-c i= tospellcheck.
+   Bind =C-c i= to spellcheck.
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c i") 'ispell-word)
    #+END_SRC
