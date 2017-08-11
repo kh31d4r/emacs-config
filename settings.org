@@ -116,6 +116,13 @@
        :bind ("M-a" . company-complete))
    #+END_SRC
 
+   Enable snippets for all modes.
+   #+BEGIN_SRC emacs-lisp
+     (use-package yasnippet
+       :ensure t
+       :config (yas-global-mode 1))
+   #+END_SRC
+
    Enable =expand-region=.
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
@@ -285,17 +292,6 @@
      (global-git-commit-mode 1)
    #+END_SRC
 
-   Magit uses =text-mode= as major mode for writing commit messages by
-   default, so enable snippets for it.
-   #+BEGIN_SRC emacs-lisp
-     (use-package yasnippet
-       :ensure t
-       :init
-       (add-hook 'text-mode-hook (lambda ()
-                                   (yas-minor-mode)
-                                   (yas-reload-all))))
-   #+END_SRC
-
    Use =git-messenger= for fast inline blame.
    #+BEGIN_SRC emacs-lisp
      (use-package git-messenger
@@ -334,16 +330,6 @@
                                     (semantic-mode 1)
                                     (setq flycheck-checker 'python-pylint
                                           flycheck-checker-error-threshold 900))))
-  #+END_SRC
-
-  Enable snippets for python.
-  #+BEGIN_SRC emacs-lisp
-    (use-package yasnippet
-      :ensure t
-      :init
-      (add-hook 'python-mode-hook (lambda ()
-                                    (yas-minor-mode)
-                                    (yas-reload-all))))
   #+END_SRC
 * C
   Don't use GNU style indendataion.
