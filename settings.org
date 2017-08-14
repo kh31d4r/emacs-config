@@ -273,6 +273,12 @@
      (setq delete-old-versions t)
    #+END_SRC
 
+   Don't save autosaves in current working directory.
+   #+BEGIN_SRC emacs-lisp
+     (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
+     (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
+   #+END_SRC
+
    Weeks start on monday.
    #+BEGIN_SRC emacs-lisp
      (setq calendar-week-start-day 1)
