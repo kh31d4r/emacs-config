@@ -423,6 +423,12 @@
              ("\\.markdown\\'" . markdown-mode))
       :config (setq markdown-command "markdown"))
   #+END_SRC
+* Yaml
+  Use =yaml-mode= for editing yaml files.
+  #+BEGIN_SRC emacs-lisp
+    (use-package yaml-mode
+      :ensure t)
+  #+END_SRC
 * Docker
   Enable syntax highlighting when writing Dockerfiles.
   #+BEGIN_SRC emacs-lisp
