@@ -429,6 +429,16 @@
     (use-package yaml-mode
       :ensure t)
   #+END_SRC
+
+  Use =flycheck= for syntax and style checking.
+  #+BEGIN_SRC emacs-lisp
+    (use-package flycheck-yamllint
+      :ensure t
+      :config (add-hook 'yaml-mode-hook (lambda ()
+                                          (flycheck-yamllint-setup)
+                                          (flycheck-mode))))
+
+  #+END_SRC
 * Docker
   Enable syntax highlighting when writing Dockerfiles.
   #+BEGIN_SRC emacs-lisp
