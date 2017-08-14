@@ -107,6 +107,11 @@
      (setq default-tab-width 4)
    #+END_SRC
 
+   Don't move point when pasting with middle mouse button.
+   #+BEGIN_SRC emacs-lisp
+     (setq mouse-yank-at-point t)
+   #+END_SRC
+
    Enable auto completion with =company=.
    #+BEGIN_SRC emacs-lisp
      (use-package company
