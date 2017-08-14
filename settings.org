@@ -268,6 +268,11 @@
      (setq version-control t)
    #+END_SRC
 
+   Don't ask when removing old backups.
+   #+BEGIN_SRC emacs-lisp
+     (setq delete-old-versions t)
+   #+END_SRC
+
    Weeks start on monday.
    #+BEGIN_SRC emacs-lisp
      (setq calendar-week-start-day 1)
