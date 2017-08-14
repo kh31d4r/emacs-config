@@ -391,6 +391,17 @@
   #+BEGIN_SRC emacs-lisp
     (setq nxml-child-indent 4)
   #+END_SRC
+* Markdown
+  Use =markdown-mode= for editing markdown files.
+  #+BEGIN_SRC emacs-lisp
+    (use-package markdown-mode
+      :ensure t
+      :commands (markdown-mode gfm-mode)
+      :mode (("README\\.md\\'" . gfm-mode)
+             ("\\.md\\'" . markdown-mode)
+             ("\\.markdown\\'" . markdown-mode))
+      :config (setq markdown-command "markdown"))
+  #+END_SRC
 * Docker
   Enable syntax highlighting when writing Dockerfiles.
   #+BEGIN_SRC emacs-lisp
