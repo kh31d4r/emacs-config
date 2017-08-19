@@ -245,7 +245,8 @@
    #+BEGIN_SRC emacs-lisp
      (use-package helm
        :ensure t
-       :bind (("M-x" . helm-M-x)
+       :bind (("C-x f" . helm-find-files)
+              ("M-x" . helm-M-x)
               ("M-y" . helm-show-kill-ring)
               ("C-x r b" . helm-bookmarks))
        :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
