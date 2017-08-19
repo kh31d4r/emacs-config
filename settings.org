@@ -245,12 +245,32 @@
    #+BEGIN_SRC emacs-lisp
      (use-package helm
        :ensure t
-       :bind (("C-x b" . helm-buffers-list)
-              ("C-x C-f" . helm-find-files)
-              ("M-x" . helm-M-x)
+       :bind (("M-x" . helm-M-x)
               ("M-y" . helm-show-kill-ring)
               ("C-x r b" . helm-bookmarks))
        :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
+   #+END_SRC
+
+   Use =projectile= to manage projects, with =projectile-helm= as
+   interface. When in a project, find files only from that
+   project. When not in a file, use =helm-find-files= as usual.
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :ensure t)
+
+     (use-package helm-projectile
+       :ensure t
+       :config
+       (global-set-key (kbd "C-x C-f") (lambda ()
+                                         (interactive)
+                                         (if (projectile-project-p)
+                                             (helm-projectile-find-file)
+                                           (helm-for-files))))
+       (global-set-key (kbd "C-x b") (lambda ()
+                                       (interactive)
+                                       (if (projectile-project-p)
+                                           (helm-projectile-switch-to-buffer)
+                                         (helm-buffers-list)))))
    #+END_SRC
 
    Change "yes or no" to "y or n".
