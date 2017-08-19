@@ -241,7 +241,8 @@
    #+END_SRC
 ** System
    Use =helm= for emacs commands that involves filtering and selecting
-   from a list.
+   from a list. Also enable tab completion when filtering, to make
+   traversing through directories easier.
    #+BEGIN_SRC emacs-lisp
      (use-package helm
        :ensure t
