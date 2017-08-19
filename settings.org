@@ -254,8 +254,8 @@
    #+END_SRC
 
    Use =projectile= to manage projects, with =projectile-helm= as
-   interface. When in a project, find files only from that
-   project. When not in a file, use =helm-find-files= as usual.
+   interface. When using helm in a project, use the projectile
+   versions of the helm commands.
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :ensure t)
