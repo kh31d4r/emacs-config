@@ -280,6 +280,11 @@
      (fset 'yes-or-no-p 'y-or-n-p)
    #+END_SRC
 
+   Don't ask for command when running compile.
+   #+BEGIN_SRC emacs-lisp
+     (setq compilation-read-command nil)
+   #+END_SRC
+
    Don't ask before opening large files.
    #+BEGIN_SRC emacs-lisp
      (setq large-file-warning-threshold 200000000)
