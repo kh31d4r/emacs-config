@@ -386,6 +386,15 @@
     (setq c-default-style "bsd"
           c-basic-offset 4)
   #+END_SRC
+* Java
+  Define maven commands for projectile.
+  #+BEGIN_SRC emacs-lisp
+    (projectile-register-project-type 'maven '("pom.xml")
+                                      :compile "mvn install"
+                                      :test "mvn clean test"
+                                      :test-suffix "Test.java")
+
+  #+END_SRC
 * Web
   Use web mode for =html= and =css=, and make closing tags feel more
   like =nxml-mode=.
