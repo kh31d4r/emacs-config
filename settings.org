@@ -247,6 +247,7 @@
      (use-package helm
        :ensure t
        :bind (("C-x f" . helm-find-files)
+              ("C-x b" . helm-buffers-list)
               ("M-x" . helm-M-x)
               ("M-y" . helm-show-kill-ring)
               ("C-x r b" . helm-bookmarks))
@@ -268,7 +269,7 @@
                                          (if (projectile-project-p)
                                              (helm-projectile-find-file)
                                            (helm-for-files))))
-       (global-set-key (kbd "C-x b") (lambda ()
+       (global-set-key (kbd "C-x C-b") (lambda ()
                                        (interactive)
                                        (if (projectile-project-p)
                                            (helm-projectile-switch-to-buffer)
