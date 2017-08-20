@@ -162,7 +162,7 @@
    whitespace and change tabs to spaces.
    #+BEGIN_SRC emacs-lisp
      (defun cleanup-tabs-whitespace ()
-          (interactive)
+       (interactive)
        (whitespace-cleanup)
        (untabify (point-min) (point-max))
        (indent-region (point-min) (point-max) nil))
@@ -270,10 +270,10 @@
                                              (helm-projectile-find-file)
                                            (helm-for-files))))
        (global-set-key (kbd "C-x C-b") (lambda ()
-                                       (interactive)
-                                       (if (projectile-project-p)
-                                           (helm-projectile-switch-to-buffer)
-                                         (helm-buffers-list)))))
+                                         (interactive)
+                                         (if (projectile-project-p)
+                                             (helm-projectile-switch-to-buffer)
+                                           (helm-buffers-list)))))
    #+END_SRC
 
    Change "yes or no" to "y or n".
