@@ -246,7 +246,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package helm
        :ensure t
-       :bind (("C-x f" . helm-find-files)
+       :bind (("C-x C-f" . helm-find-files)
               ("C-x b" . helm-buffers-list)
               ("M-x" . helm-M-x)
               ("M-y" . helm-show-kill-ring)
@@ -255,8 +255,7 @@
    #+END_SRC
 
    Use =projectile= to manage projects, with =projectile-helm= as
-   interface. When using helm in a project, use the projectile
-   versions of the helm commands.
+   interface.
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :ensure t)
@@ -264,7 +263,7 @@
      (use-package helm-projectile
        :ensure t
        :config
-       (global-set-key (kbd "C-x C-f") (lambda ()
+       (global-set-key (kbd "C-x f") (lambda ()
                                          (interactive)
                                          (if (projectile-project-p)
                                              (helm-projectile-find-file)
