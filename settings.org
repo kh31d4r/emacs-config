@@ -390,7 +390,7 @@
   Define maven commands for projectile.
   #+BEGIN_SRC emacs-lisp
     (projectile-register-project-type 'maven '("pom.xml")
-                                      :compile "mvn install"
+                                      :compile "mvn clean install"
                                       :test "mvn clean test"
                                       :test-suffix "Test.java")
 
