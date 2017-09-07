@@ -347,135 +347,160 @@
        :ensure t
        :bind ("C-c b" . git-messenger:popup-message))
    #+END_SRC
-* Python
-  Use =jedi= as autocompletion engine for company, and bind hotkeys
-  for goto definition and show documentation.
+* Programming modes
+** C
+   Don't use GNU style indendataion.
+   #+BEGIN_SRC emacs-lisp
+     (setq c-default-style "bsd"
+           c-basic-offset 4)
+   #+END_SRC
+** Java
+   Define maven commands for projectile.
+   #+BEGIN_SRC emacs-lisp
+     (projectile-register-project-type 'maven '("pom.xml")
+                                       :compile "mvn clean install"
+                                       :test "mvn clean test"
+                                       :test-suffix "Test.java")
 
-  Needs virtenv installed on the system to work.
-  #+BEGIN_SRC emacs-lisp
-    (use-package jedi
-      :ensure t
-      :config (add-hook 'python-mode-hook 'jedi:setup)
-      :bind
-      ("C-c j d" . jedi:goto-definition)
-      ("C-c j p" . jedi:goto-definition-pop-marker)
-      ("C-c j h" . jedi:show-doc))
-
-    (use-package company-jedi
-      :ensure t
-      :config
-      (add-hook 'python-mode-hook (lambda ()
-                                    (add-to-list 'company-backends 'company-jedi))))
-  #+END_SRC
-
-  Use =flycheck= for syntax and style checking. Needs pylint
-  installed on the system to work.
-  #+BEGIN_SRC emacs-lisp
-    (use-package flycheck
-      :ensure t
-      :config
-      (add-hook 'python-mode-hook (lambda ()
-                                    (flycheck-mode 1)
-                                    (semantic-mode 1)
-                                    (setq flycheck-checker 'python-pylint
-                                          flycheck-checker-error-threshold 900))))
-  #+END_SRC
-* C
-  Don't use GNU style indendataion.
-  #+BEGIN_SRC emacs-lisp
-    (setq c-default-style "bsd"
-          c-basic-offset 4)
-  #+END_SRC
-* Java
-  Define maven commands for projectile.
-  #+BEGIN_SRC emacs-lisp
-    (projectile-register-project-type 'maven '("pom.xml")
-                                      :compile "mvn clean install"
-                                      :test "mvn clean test"
-                                      :test-suffix "Test.java")
-
-  #+END_SRC
-* Web
-  Use web mode for =html= and =css=, and make closing tags feel more
-  like =nxml-mode=.
-  #+BEGIN_SRC emacs-lisp
-    (use-package web-mode
-      :ensure t
-      :mode
-      (("\\.html\\'" . web-mode)
-       ("\\.css\\'" . web-mode))
-      :config
-      (add-hook 'web-mode-hook
-                (lambda ()
-                  (local-set-key
-                   (kbd "C-c C-f")
-                   (lambda ()
-                     (interactive)
-                     (web-mode-element-close)
-                     (indent-for-tab-command)))))
-      (setq web-mode-enable-auto-quoting t)
-      (setq web-mode-enable-auto-pairing t)
-      (setq web-mode-enable-auto-closing t))
+   #+END_SRC
+** Lisp
+   Use paredit for editing elisp.
+   #+BEGIN_SRC emacs-lisp
+     (use-package paredit
+       :ensure t
+       :diminish "par"
+       :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
    #+END_SRC
 
-  Enable emmet mode when in =web-mode= to quickly create elements.
-  #+BEGIN_SRC emacs-lisp
-    (use-package emmet-mode
-      :ensure t
-      :config (add-hook 'web-mode-hook 'emmet-mode))
-  #+END_SRC
+   Turn on =eldoc= to get fast access to function signatures.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+   #+END_SRC
 
-  Start =httpd= when in =web-mode= on port 8085, and enable
-  =impatient-mode=. Point browser to =http://localhost:8085/imp= to
-  see the preview.
-  #+BEGIN_SRC emacs-lisp
-    (use-package impatient-mode
-      :ensure t
-      :config
-      (add-hook 'impatient-mode-hook (lambda ()
-                                       (setq httpd-port 8085)
-                                       (httpd-start)))
-      (add-hook 'web-mode-hook 'impatient-mode))
-  #+END_SRC
+   Show parentheses in different colors to easier pair them together.
+   #+BEGIN_SRC emacs-lisp
+     (use-package rainbow-delimiters
+       :ensure t
+       :config
+       (add-hook 'emacs-lisp-mode-hook (lambda ()
+                                         (rainbow-delimiters-mode))))
+   #+END_SRC
+** Python
+   Use =jedi= as autocompletion engine for company, and bind hotkeys
+   for goto definition and show documentation.
 
-  Enable utility functions for quickly looking things up in the HTTP
-  protocol.
-  #+BEGIN_SRC emacs-lisp
-    (use-package know-your-http-well
-      :ensure t)
-  #+END_SRC
-* XML
-  Set indentation size to 4.
-  #+BEGIN_SRC emacs-lisp
-    (setq nxml-child-indent 4)
-  #+END_SRC
-* Markdown
-  Use =markdown-mode= for editing markdown files.
-  #+BEGIN_SRC emacs-lisp
-    (use-package markdown-mode
-      :ensure t
-      :commands (markdown-mode gfm-mode)
-      :mode (("README\\.md\\'" . gfm-mode)
-             ("\\.md\\'" . markdown-mode)
-             ("\\.markdown\\'" . markdown-mode))
-      :config (setq markdown-command "markdown"))
-  #+END_SRC
-* Yaml
-  Use =yaml-mode= for editing yaml files.
-  #+BEGIN_SRC emacs-lisp
-    (use-package yaml-mode
-      :ensure t)
-  #+END_SRC
+   Needs virtenv installed on the system to work.
+   #+BEGIN_SRC emacs-lisp
+     (use-package jedi
+       :ensure t
+       :config (add-hook 'python-mode-hook 'jedi:setup)
+       :bind
+       ("C-c j d" . jedi:goto-definition)
+       ("C-c j p" . jedi:goto-definition-pop-marker)
+       ("C-c j h" . jedi:show-doc))
 
-  Use =flycheck= for syntax and style checking.
-  #+BEGIN_SRC emacs-lisp
-    (use-package flycheck-yamllint
-      :ensure t
-      :config (add-hook 'yaml-mode-hook (lambda ()
-                                          (flycheck-yamllint-setup)
-                                          (flycheck-mode))))
+     (use-package company-jedi
+       :ensure t
+       :config
+       (add-hook 'python-mode-hook (lambda ()
+                                     (add-to-list 'company-backends 'company-jedi))))
+   #+END_SRC
 
-  #+END_SRC
+   Use =flycheck= for syntax and style checking. Needs pylint
+   installed on the system to work.
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :ensure t
+       :config
+       (add-hook 'python-mode-hook (lambda ()
+                                     (flycheck-mode 1)
+                                     (semantic-mode 1)
+                                     (setq flycheck-checker 'python-pylint
+                                           flycheck-checker-error-threshold 900))))
+   #+END_SRC
+** Web
+   Use web mode for =html= and =css=, and make closing tags feel more
+   like =nxml-mode=.
+   #+BEGIN_SRC emacs-lisp
+     (use-package web-mode
+       :ensure t
+       :mode
+       (("\\.html\\'" . web-mode)
+        ("\\.css\\'" . web-mode))
+       :config
+       (add-hook 'web-mode-hook
+                 (lambda ()
+                   (local-set-key
+                    (kbd "C-c C-f")
+                    (lambda ()
+                      (interactive)
+                      (web-mode-element-close)
+                      (indent-for-tab-command)))))
+       (setq web-mode-enable-auto-quoting t)
+       (setq web-mode-enable-auto-pairing t)
+       (setq web-mode-enable-auto-closing t))
+    #+END_SRC
+
+   Enable emmet mode when in =web-mode= to quickly create elements.
+   #+BEGIN_SRC emacs-lisp
+     (use-package emmet-mode
+       :ensure t
+       :config (add-hook 'web-mode-hook 'emmet-mode))
+   #+END_SRC
+
+   Start =httpd= when in =web-mode= on port 8085, and enable
+   =impatient-mode=. Point browser to =http://localhost:8085/imp= to
+   see the preview.
+   #+BEGIN_SRC emacs-lisp
+     (use-package impatient-mode
+       :ensure t
+       :config
+       (add-hook 'impatient-mode-hook (lambda ()
+                                        (setq httpd-port 8085)
+                                        (httpd-start)))
+       (add-hook 'web-mode-hook 'impatient-mode))
+   #+END_SRC
+
+   Enable utility functions for quickly looking things up in the HTTP
+   protocol.
+   #+BEGIN_SRC emacs-lisp
+     (use-package know-your-http-well
+       :ensure t)
+   #+END_SRC
+* Markup modes
+** Markdown
+   Use =markdown-mode= for editing markdown files.
+   #+BEGIN_SRC emacs-lisp
+     (use-package markdown-mode
+       :ensure t
+       :commands (markdown-mode gfm-mode)
+       :mode (("README\\.md\\'" . gfm-mode)
+              ("\\.md\\'" . markdown-mode)
+              ("\\.markdown\\'" . markdown-mode))
+       :config (setq markdown-command "markdown"))
+   #+END_SRC
+** XML
+   Set indentation size to 4.
+   #+BEGIN_SRC emacs-lisp
+     (setq nxml-child-indent 4)
+   #+END_SRC
+** Yaml
+   Use =yaml-mode= for editing yaml files.
+   #+BEGIN_SRC emacs-lisp
+     (use-package yaml-mode
+       :ensure t)
+   #+END_SRC
+
+   Use =flycheck= for syntax and style checking.
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck-yamllint
+       :ensure t
+       :config (add-hook 'yaml-mode-hook (lambda ()
+                                           (flycheck-yamllint-setup)
+                                           (flycheck-mode))))
+
+   #+END_SRC
 * Docker
   Enable syntax highlighting when writing Dockerfiles.
   #+BEGIN_SRC emacs-lisp
@@ -492,29 +517,6 @@
       :config
       (add-hook 'prog-mode-hook (lambda ()
                                   (docker-global-mode))))
-  #+END_SRC
-* Lisp
-  Use paredit for editing elisp.
-  #+BEGIN_SRC emacs-lisp
-    (use-package paredit
-      :ensure t
-      :diminish "par"
-      :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
-  #+END_SRC
-
-  Turn on =eldoc= to get fast access to function signatures.
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-    (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-  #+END_SRC
-
-  Show parentheses in different colors to easier pair them together.
-  #+BEGIN_SRC emacs-lisp
-    (use-package rainbow-delimiters
-      :ensure t
-      :config
-      (add-hook 'emacs-lisp-mode-hook (lambda ()
-                                        (rainbow-delimiters-mode))))
   #+END_SRC
 * Org mode
   Keep agenda files in =~/org/=.
