@@ -286,6 +286,11 @@
      (setq compilation-read-command nil)
    #+END_SRC
 
+   Follow the compilation buffer until the first error.
+   #+BEGIN_SRC emacs-lisp
+     (setq compilation-scroll-output 'first-error)
+   #+END_SRC
+
    Don't ask before opening large files.
    #+BEGIN_SRC emacs-lisp
      (setq large-file-warning-threshold 200000000)
