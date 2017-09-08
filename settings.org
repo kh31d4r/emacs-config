@@ -7,7 +7,7 @@
 ** Display
    Don't show the startup screen.
    #+BEGIN_SRC emacs-lisp
-     (custom-set-variables '(inhibit-startup-screen t))
+     (setq inhibit-startup-screen t)
    #+END_SRC
 
    Use =dracula-theme= which looks very nice in graphical mode, and
