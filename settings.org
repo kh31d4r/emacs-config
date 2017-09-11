@@ -158,7 +158,7 @@
      (global-set-key (kbd "C-c i") 'ispell-word)
    #+END_SRC
 
-   Bind =C-c C-c= to =cleanup-tabs-whitespace=, that removes trailing
+   Bind =C-c TAB= to =cleanup-tabs-whitespace=, that removes trailing
    whitespace and change tabs to spaces.
    #+BEGIN_SRC emacs-lisp
      (defun cleanup-tabs-whitespace ()
@@ -167,7 +167,7 @@
        (untabify (point-min) (point-max))
        (indent-region (point-min) (point-max) nil))
 
-     (global-set-key (kbd "C-c C-c") 'cleanup-tabs-whitespace)
+     (global-set-key (kbd "C-c TAB") 'cleanup-tabs-whitespace)
    #+END_SRC
 
    Reload the current buffer from disk with =C-v=. Only prompt for
