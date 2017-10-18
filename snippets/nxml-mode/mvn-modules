@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: mvn modules
+# key: <modules
+# --
+<modules>
+    <module>$1</module>
+</modules>

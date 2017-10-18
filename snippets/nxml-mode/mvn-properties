@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: mvn properties
+# key: <props
+# --
+
+<properties>
+    <$1>$2</$1>
+</properties>
+$0

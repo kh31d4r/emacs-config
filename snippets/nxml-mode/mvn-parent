@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: mvn parent
+# key: <parent
+# --
+<parent>
+    <groupId>$1</groupId>
+    <artifactId>$2</artifactId>
+    <version>${3:0.1.0-SNAPSHOT}</version>
+    <relativePath>..</relativePath>
+</parent>

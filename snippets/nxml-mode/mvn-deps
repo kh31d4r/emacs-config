@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: mvn dependencies
+# key: <deps
+# --
+<dependencies>
+    <dependency>
+        <groupId>$1</groupId>
+        <artifactId>$2</artifactId>
+        <version>$3</version>
+        <type>$4</type>
+    </dependency>
+</dependencies>
+$0
