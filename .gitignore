@@ -6,6 +6,7 @@ auto-save-list
 autosave
 backups
 bookmarks
+custom.el
 elpa
 eshell
 recentf

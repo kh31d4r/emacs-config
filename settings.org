@@ -322,6 +322,16 @@
      (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
    #+END_SRC
 
+   Write customizations to =custom.el= instead of =init.el= to avoid
+   accidentally committing them. Also create the file if it doesn't
+   exist, to avoid having to commit an empty file (and this making it
+   useless to add it to =.gitignore=).
+   #+BEGIN_SRC emacs-lisp
+     (setq custom-file "~/.emacs.d/custom.el")
+     (write-region "" nil custom-file)
+     (load custom-file)
+   #+END_SRC
+
    Weeks start on monday.
    #+BEGIN_SRC emacs-lisp
      (setq calendar-week-start-day 1)
