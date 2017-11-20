@@ -570,7 +570,7 @@
   #+BEGIN_SRC emacs-lisp
     (setq org-capture-templates
           '(("l" "life")
-            ("lt" "Todo" entry (file "~/org/life.org")
+            ("ll" "Todo" entry (file "~/org/life.org")
              (file "~/.emacs.d/capture-templates/todo"))
             ("lc" "Todo with checklist" entry (file "~/org/life.org")
              (file "~/.emacs.d/capture-templates/todo-checklist"))
@@ -581,7 +581,7 @@
             ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
              (file "~/.emacs.d/capture-templates/life/wishlist-item"))
             ("w" "work")
-            ("wt" "Todo" entry (file "~/org/work.org")
+            ("ww" "Todo" entry (file "~/org/work.org")
              (file "~/.emacs.d/capture-templates/todo"))
             ("wc" "Todo with checklist" entry (file "~/org/work.org")
              (file "~/.emacs.d/capture-templates/todo-checklist"))))
