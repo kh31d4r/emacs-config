@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: asm fileset
+# key: <fs
+# --
+<fileSet>
+    <directory>$1</directory>
+    <outputDirectory>$2</outputDirectory>
+    <includes>
+        <include>${3:**}</include>
+    </includes>
+    <fileMode>${4:0644}</fileMode>
+    <directoryMode>${5:0755}</directoryMode>
+</fileSet>

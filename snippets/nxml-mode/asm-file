@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: asm-file
+# key: <f
+# --
+<file>
+    <source>$1</source>
+    <destName>$2</destName>
+    <outputDirectory>$3</outputDirectory>
+    <fileMode>${4:0644}</fileMode>
+    <dirMode>${5:755}
+    <filtered>${6:false}</filtered>
+</file>
+$0
