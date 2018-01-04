@@ -294,7 +294,7 @@
 
    Don't save backups in current working directory.
    #+BEGIN_SRC emacs-lisp
-     (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+     (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))
    #+END_SRC
 
    Use version numbers for the backups.
@@ -309,8 +309,9 @@
 
    Don't save autosaves in current working directory.
    #+BEGIN_SRC emacs-lisp
-     (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
-     (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
+     (let ((autosave (expand-file-name "autosave" user-emacs-directory)))
+       (setq auto-save-list-file-name autosave)
+       (setq auto-save-file-name-transforms `((".*" ,autosave))))
    #+END_SRC
 
    Write customizations to =custom.el= instead of =init.el= to avoid
@@ -318,7 +319,7 @@
    exist, to avoid having to commit an empty file (and this making it
    useless to add it to =.gitignore=).
    #+BEGIN_SRC emacs-lisp
-     (setq custom-file "~/.emacs.d/custom.el")
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
      (write-region "" nil custom-file)
      (load custom-file)
    #+END_SRC
@@ -598,25 +599,32 @@
 
   Define custom capture templates.
   #+BEGIN_SRC emacs-lisp
+    (defun capture-template-path (template-name &optional category)
+      (let ((template-dir (expand-file-name "capture-templates" user-emacs-directory)))
+        (if category
+            (let ((category-dir (expand-file-name category template-dir)))
+              (expand-file-name template-name category-dir))
+          (expand-file-name template-name template-dir))))
+
     (setq org-capture-templates
-          '(("l" "life")
+          `(("l" "life")
             ("ll" "Todo" entry (file "~/org/life.org")
-             (file "~/.emacs.d/capture-templates/todo"))
+             (file ,(capture-template-path "todo")))
             ("lc" "Todo with checklist" entry (file "~/org/life.org")
-             (file "~/.emacs.d/capture-templates/todo-checklist"))
+             (file ,(capture-template-path "todo-checklist")))
             ("lo" "Org-mode Todo" entry (file+headline "~/org/life.org" "Org-mode things")
-             (file "~/.emacs.d/capture-templates/life/todo-org"))
+             (file ,(capture-template-path "todo-org" "life")))
             ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
-             (file "~/.emacs.d/capture-templates/life/books"))
+             (file ,(capture-template-path "books" "life")))
             ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
-             (file "~/.emacs.d/capture-templates/life/wishlist-item"))
+             (file ,(capture-template-path "wishlist-item" "life")))
             ("w" "work")
             ("ww" "Todo" entry (file "~/org/work.org")
-             (file "~/.emacs.d/capture-templates/todo"))
+             (file ,(capture-template-path "todo")))
             ("wc" "Todo with checklist" entry (file "~/org/work.org")
-             (file "~/.emacs.d/capture-templates/todo-checklist"))
+             (file ,(capture-template-path "todo-checklist")))
             ("q" "quote" entry (file "~/org/quotes.org")
-             (file "~/.emacs.d/capture-templates/quote"))))
+             (file ,(capture-template-path "quote")))))
   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
