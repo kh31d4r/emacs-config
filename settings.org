@@ -694,8 +694,3 @@
        (use-package ox-mediawiki
          :ensure t)
      #+END_SRC
-   - IOslide
-     #+BEGIN_SRC emacs-lisp
-       (use-package ox-ioslide
-         :ensure t)
-     #+END_SRC
