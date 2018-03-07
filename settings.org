@@ -90,15 +90,6 @@
     #+BEGIN_SRC emacs-lisp
       (show-paren-mode 1)
     #+END_SRC
-
-    Highlight tabs and trailing whitespace.
-    #+BEGIN_SRC emacs-lisp
-      (use-package highlight-chars
-        :ensure t
-        :config
-        (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
-        (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace))
-    #+END_SRC
 ** Editing
    Indent with 4 spaces instead of tabs.
    #+BEGIN_SRC emacs-lisp
