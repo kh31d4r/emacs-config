@@ -617,7 +617,10 @@
       (global-set-key (kbd "C-c m o") (lambda ()
                                         (interactive)
                                         (mu4e-compose-new)
-                                        (org-mu4e-compose-org-mode))))
+                                        (org-mu4e-compose-org-mode)
+                                        (save-excursion
+                                          (end-of-buffer)
+                                          (insert "#+OPTIONS: toc:nil num:nil\n")))))
   #+END_SRC
 
 * Org mode
