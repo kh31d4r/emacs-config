@@ -583,6 +583,7 @@
   mnemonic shortcuts:
   - =m= for the =mu4e= startup screen
   - =n= to compose new mail
+  - =o= to compose new =org-mode= mail
 
   #+BEGIN_SRC emacs-lisp
     (setq user-mail-address "daniel@silvertejp.org"
@@ -609,6 +610,14 @@
             message-send-mail-function 'smtpmail-send-it
             smtpmail-stream-type 'starttls)
       (load (expand-file-name "smtp_settings.el" user-emacs-directory)))
+
+    (use-package org-mu4e
+      :config
+      (setq org-mu4e-convert-to-html t)
+      (global-set-key (kbd "C-c m o") (lambda ()
+                                        (interactive)
+                                        (mu4e-compose-new)
+                                        (org-mu4e-compose-org-mode))))
   #+END_SRC
 
 * Org mode
