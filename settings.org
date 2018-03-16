@@ -550,6 +550,7 @@
                                    (docker-global-mode))))
    #+END_SRC
 ** Restclient
+   Use =restclient-mode= when in =.rest= files to send rest requests.
    #+BEGIN_SRC emacs-lisp
      (use-package restclient
        :ensure t
