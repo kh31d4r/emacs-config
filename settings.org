@@ -531,29 +531,30 @@
                                            (flycheck-mode))))
 
    #+END_SRC
-* Docker
-  Enable syntax highlighting when writing Dockerfiles.
-  #+BEGIN_SRC emacs-lisp
-    (use-package dockerfile-mode
-      :ensure t)
-  #+END_SRC
+* Tools
+** Docker
+   Enable syntax highlighting when writing Dockerfiles.
+   #+BEGIN_SRC emacs-lisp
+     (use-package dockerfile-mode
+       :ensure t)
+   #+END_SRC
 
-  When in programming modes, activate docker minor mode for
-  controlling docker containers.
-  #+BEGIN_SRC emacs-lisp
-    (use-package docker
-      :ensure t
-      :diminish docker-mode
-      :config
-      (add-hook 'prog-mode-hook (lambda ()
-                                  (docker-global-mode))))
-  #+END_SRC
-* Restclient
-  #+BEGIN_SRC emacs-lisp
-    (use-package restclient
-      :ensure t
-      :mode ("\\.rest\\'" . restclient-mode))
-  #+END_SRC
+   When in programming modes, activate docker minor mode for
+   controlling docker containers.
+   #+BEGIN_SRC emacs-lisp
+     (use-package docker
+       :ensure t
+       :diminish docker-mode
+       :config
+       (add-hook 'prog-mode-hook (lambda ()
+                                   (docker-global-mode))))
+   #+END_SRC
+** Restclient
+   #+BEGIN_SRC emacs-lisp
+     (use-package restclient
+       :ensure t
+       :mode ("\\.rest\\'" . restclient-mode))
+   #+END_SRC
 * Org mode
   Keep agenda files in =~/org/=.
   #+BEGIN_SRC emacs-lisp
