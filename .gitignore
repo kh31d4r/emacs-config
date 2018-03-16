@@ -12,4 +12,5 @@ eshell
 recentf
 semanticdb
 settings.el
+smtp_settings.el
 tramp

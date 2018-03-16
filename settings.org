@@ -569,6 +569,48 @@
                             (lambda ()
                               (add-to-list 'company-backends 'company-restclient))))
    #+END_SRC
+* Mail
+  Using =mu4e= and =mu= for email requires them to be installed from
+  [[https://github.com/djcb/mu][source]]. The =smtp_settings.el= file need to set the following
+  variables:
+  - =smtpmail-default-smtp-server=
+  - =smtpmail-local-domain=
+  - =smtpmail-smtp-user=
+  - =smtpmail-smtp-server=
+  - =smtpmail-smtp-service=
+
+  Mail commands are prefixed with =C-c m=, with the following
+  mnemonic shortcuts:
+  - =m= for the =mu4e= startup screen
+  - =n= to compose new mail
+
+  #+BEGIN_SRC emacs-lisp
+    (setq user-mail-address "daniel@silvertejp.org"
+          user-full-name "Daniel Persson")
+
+    (use-package mu4e
+      :load-path "/usr/local/share/emacs/site-lisp/mu4e"
+      :config
+      (setq mu4e-maildir "~/maildir"
+            mu4e-sent-folder "/Sent"
+            mu4e-drafts-folder "/Drafts"
+            mu4e-trash-folder "/Trash"
+            mu4e-refile-folder "/Archive"
+            mu4e-view-show-addresses t
+            mu4e-attachment-dir "~/downloads/attachments"
+            mu4e-use-fancy-chars t
+            mu4e-sent-messages-behavior 'sent)
+      (global-set-key (kbd "C-c m m") 'mu4e)
+      (global-set-key (kbd "C-c m n") 'mu4e-compose-new))
+
+    (use-package smtpmail
+      :config
+      (setq starttls-use-gnutls t
+            message-send-mail-function 'smtpmail-send-it
+            smtpmail-stream-type 'starttls)
+      (load (expand-file-name "smtp_settings.el" user-emacs-directory)))
+  #+END_SRC
+
 * Org mode
   Keep agenda files in =~/org/=.
   #+BEGIN_SRC emacs-lisp
