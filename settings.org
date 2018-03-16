@@ -548,6 +548,12 @@
       (add-hook 'prog-mode-hook (lambda ()
                                   (docker-global-mode))))
   #+END_SRC
+* Restclient
+  #+BEGIN_SRC emacs-lisp
+    (use-package restclient
+      :ensure t
+      :mode ("\\.rest\\'" . restclient-mode))
+  #+END_SRC
 * Org mode
   Keep agenda files in =~/org/=.
   #+BEGIN_SRC emacs-lisp
