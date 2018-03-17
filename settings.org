@@ -626,7 +626,8 @@
             mu4e-view-show-addresses t
             mu4e-attachment-dir "~/downloads/attachments"
             mu4e-use-fancy-chars t
-            mu4e-sent-messages-behavior 'sent)
+            mu4e-sent-messages-behavior 'sent
+            mu4e-compose-signature "\n/d")
       (global-set-key (kbd "C-c m m") 'mu4e)
       (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
 
