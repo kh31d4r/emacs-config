@@ -627,7 +627,40 @@
             mu4e-attachment-dir "~/downloads/attachments"
             mu4e-use-fancy-chars t
             mu4e-sent-messages-behavior 'sent
-            mu4e-compose-signature "\n/d")
+            mu4e-compose-signature "\n/d"
+            mu4e-bookmarks
+            `( ,(make-mu4e-bookmark
+                 :name "Unread Messages"
+                 :query "flag:unread"
+                 :key ?u)
+               ,(make-mu4e-bookmark
+                 :name "All Inbox Messages"
+                 :query "maildir:/"
+                 :key ?i)
+               ,(make-mu4e-bookmark
+                 :name "Emacs Mailinglist"
+                 :query "maildir:/Emacs"
+                 :key ?e)
+               ,(make-mu4e-bookmark
+                 :name "Git Mailinglist"
+                 :query "maildir:/Git"
+                 :key ?g)
+               ,(make-mu4e-bookmark
+                 :name "Archive"
+                 :query "maildir:/Archive"
+                 :key ?a)
+               ,(make-mu4e-bookmark
+                 :name "Pending"
+                 :query "maildir:/Pending"
+                 :key ?p)
+               ,(make-mu4e-bookmark
+                 :name "Trash"
+                 :query "maildir:/Trash"
+                 :key ?t)
+               ,(make-mu4e-bookmark
+                 :name "Sent"
+                 :query "maildir:/Sent"
+                 :key ?s)))
       (global-set-key (kbd "C-c m m") 'mu4e)
       (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
 
