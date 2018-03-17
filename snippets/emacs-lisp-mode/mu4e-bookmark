@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mu4e-bookmark
+# key: m4bm
+# --
+,(make-mu4e-bookmark
+  :name "$1"
+  :query "$2"
+  :key ?$3)
