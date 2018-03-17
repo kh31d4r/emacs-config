@@ -582,12 +582,38 @@
   Mail commands are prefixed with =C-c m=, with the following
   mnemonic shortcuts:
   - =m= for the =mu4e= startup screen
-  - =n= to compose new mail
-  - =o= to compose new =org-mode= mail
+  - =n= to compose new mail (including any active region in the body)
+  - =o= to compose new =org-mode= mail (including any active region in
+    the body)
 
   #+BEGIN_SRC emacs-lisp
     (setq user-mail-address "daniel@silvertejp.org"
           user-full-name "Daniel Persson")
+
+    (defun mu4e-compose-mail-from-region ()
+      "Create a new mu4e mail, containing the region, if active"
+      (interactive)
+      (let ((text (active-region-or-empty-string)))
+        (mu4e-compose-new)
+        (save-excursion
+          (mu4e-compose-goto-top)
+          (insert text))))
+
+    (defun mu4e-compose-org-mail-from-region ()
+      "Create an org-mu4e-org-mode mail, containing the region, if active"
+      (interactive)
+      (let ((text (active-region-or-empty-string)))
+        (mu4e-compose-new)
+        (org-mu4e-compose-org-mode)
+        (save-excursion
+          (mu4e-compose-goto-top)
+          (insert "#+OPTIONS: toc:nil num:nil\n")
+          (insert text))))
+
+    (defun active-region-or-empty-string ()
+      (if (use-region-p)
+          (buffer-substring-no-properties (mark) (point))
+        ""))
 
     (use-package mu4e
       :load-path "/usr/local/share/emacs/site-lisp/mu4e"
@@ -602,7 +628,7 @@
             mu4e-use-fancy-chars t
             mu4e-sent-messages-behavior 'sent)
       (global-set-key (kbd "C-c m m") 'mu4e)
-      (global-set-key (kbd "C-c m n") 'mu4e-compose-new))
+      (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
 
     (use-package smtpmail
       :config
@@ -614,13 +640,7 @@
     (use-package org-mu4e
       :config
       (setq org-mu4e-convert-to-html t)
-      (global-set-key (kbd "C-c m o") (lambda ()
-                                        (interactive)
-                                        (mu4e-compose-new)
-                                        (org-mu4e-compose-org-mode)
-                                        (save-excursion
-                                          (end-of-buffer)
-                                          (insert "#+OPTIONS: toc:nil num:nil\n")))))
+      (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region))
   #+END_SRC
 
 * Org mode
