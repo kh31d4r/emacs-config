@@ -590,6 +590,12 @@
     (setq user-mail-address "daniel@silvertejp.org"
           user-full-name "Daniel Persson")
 
+    (defun mu4e-fetch-mail-and-mu4e ()
+      "Fetch mail and goto the main mu4e screen"
+      (interactive)
+      (mu4e-update-mail-and-index t)
+      (mu4e))
+
     (defun mu4e-compose-mail-from-region ()
       "Create a new mu4e mail, containing the region, if active"
       (interactive)
@@ -661,7 +667,7 @@
                  :name "Sent"
                  :query "maildir:/Sent"
                  :key ?s)))
-      (global-set-key (kbd "C-c m m") 'mu4e)
+      (global-set-key (kbd "C-c m m") 'mu4e-fetch-mail-and-mu4e)
       (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
 
     (use-package smtpmail
