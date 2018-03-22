@@ -605,6 +605,12 @@
           (mu4e-compose-goto-top)
           (insert text))))
 
+    (defun mu4e-compose-org-mail-from-section ()
+      "Create an org-mu4e-org-mode mail, containing the current org section"
+      (interactive)
+      (org-mark-subtree)
+      (mu4e-compose-org-mail-from-region))
+
     (defun mu4e-compose-org-mail-from-region ()
       "Create an org-mu4e-org-mode mail, containing the region, if active"
       (interactive)
@@ -680,7 +686,8 @@
     (use-package org-mu4e
       :config
       (setq org-mu4e-convert-to-html t)
-      (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region))
+      (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region)
+      (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))
   #+END_SRC
 
 * Org mode
