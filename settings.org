@@ -601,7 +601,9 @@
             ("ww" "Todo" entry (file "~/org/work.org")
              (file "~/.emacs.d/capture-templates/todo"))
             ("wc" "Todo with checklist" entry (file "~/org/work.org")
-             (file "~/.emacs.d/capture-templates/todo-checklist"))))
+             (file "~/.emacs.d/capture-templates/todo-checklist"))
+            ("q" "quote" entry (file "~/org/quotes.org")
+             (file "~/.emacs.d/capture-templates/quote"))))
   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
