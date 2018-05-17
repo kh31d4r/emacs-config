@@ -370,6 +370,12 @@
 
    #+END_SRC
 ** Lisp
+   Eval the current buffer with =C-c C-v=.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'emacs-lisp-mode-hook
+               (lambda ()
+                 (local-set-key (kbd "C-c C-v") 'eval-buffer)))
+   #+END_SRC
    Use paredit for editing elisp.
    #+BEGIN_SRC emacs-lisp
      (use-package paredit
