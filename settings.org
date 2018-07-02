@@ -90,6 +90,110 @@
     #+BEGIN_SRC emacs-lisp
       (show-paren-mode 1)
     #+END_SRC
+** System
+   Use =helm= for emacs commands that involves filtering and selecting
+   from a list. Also enable tab completion when filtering, to make
+   traversing through directories easier.
+   #+BEGIN_SRC emacs-lisp
+     (use-package helm
+       :ensure t
+       :bind (("C-x C-f" . helm-find-files)
+              ("C-x b" . helm-buffers-list)
+              ("M-x" . helm-M-x)
+              ("M-y" . helm-show-kill-ring)
+              ("C-x r b" . helm-bookmarks))
+       :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
+   #+END_SRC
+
+   Use =projectile= to manage projects, with =projectile-helm= as
+   interface.
+   #+BEGIN_SRC emacs-lisp
+     (use-package projectile
+       :ensure t
+       :bind ("C-c C-j" . projectile-compile-project))
+
+     (use-package helm-projectile
+       :ensure t
+       :config
+       (global-set-key (kbd "C-x f") (lambda ()
+                                         (interactive)
+                                         (if (projectile-project-p)
+                                             (helm-projectile-find-file)
+                                           (helm-for-files))))
+       (global-set-key (kbd "C-x C-b") (lambda ()
+                                         (interactive)
+                                         (if (projectile-project-p)
+                                             (helm-projectile-switch-to-buffer)
+                                           (helm-buffers-list)))))
+   #+END_SRC
+
+   Change "yes or no" to "y or n".
+   #+BEGIN_SRC emacs-lisp
+     (fset 'yes-or-no-p 'y-or-n-p)
+   #+END_SRC
+
+   Don't ask for command when running compile.
+   #+BEGIN_SRC emacs-lisp
+     (setq compilation-read-command nil)
+   #+END_SRC
+
+   Follow the compilation buffer until the first error.
+   #+BEGIN_SRC emacs-lisp
+     (setq compilation-scroll-output 'first-error)
+   #+END_SRC
+
+   Don't ask before opening large files.
+   #+BEGIN_SRC emacs-lisp
+     (setq large-file-warning-threshold 200000000)
+   #+END_SRC
+
+   Add newlines at the end of files that don't have them.
+   #+BEGIN_SRC emacs-lisp
+     (setq require-final-newline t)
+   #+END_SRC
+
+   Don't save backups in current working directory.
+   #+BEGIN_SRC emacs-lisp
+     (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+   #+END_SRC
+
+   Use version numbers for the backups.
+   #+BEGIN_SRC emacs-lisp
+     (setq version-control t)
+   #+END_SRC
+
+   Don't ask when removing old backups.
+   #+BEGIN_SRC emacs-lisp
+     (setq delete-old-versions t)
+   #+END_SRC
+
+   Don't save autosaves in current working directory.
+   #+BEGIN_SRC emacs-lisp
+     (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
+     (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
+   #+END_SRC
+
+   Write customizations to =custom.el= instead of =init.el= to avoid
+   accidentally committing them. Also create the file if it doesn't
+   exist, to avoid having to commit an empty file (and this making it
+   useless to add it to =.gitignore=).
+   #+BEGIN_SRC emacs-lisp
+     (setq custom-file "~/.emacs.d/custom.el")
+     (write-region "" nil custom-file)
+     (load custom-file)
+   #+END_SRC
+
+   Weeks start on monday.
+   #+BEGIN_SRC emacs-lisp
+     (setq calendar-week-start-day 1)
+   #+END_SRC
+
+   Use =UTF-8= everywhere.
+   #+BEGIN_SRC emacs-lisp
+     (set-terminal-coding-system 'utf-8)
+     (set-keyboard-coding-system 'utf-8)
+     (prefer-coding-system 'utf-8)
+   #+END_SRC
 ** Editing
    Indent with 4 spaces instead of tabs.
    #+BEGIN_SRC emacs-lisp
@@ -229,111 +333,6 @@
      (use-package ace-jump-mode
        :ensure t
        :bind ("M-s" . ace-jump-mode))
-   #+END_SRC
-** System
-   Use =helm= for emacs commands that involves filtering and selecting
-   from a list. Also enable tab completion when filtering, to make
-   traversing through directories easier.
-   #+BEGIN_SRC emacs-lisp
-     (use-package helm
-       :ensure t
-       :bind (("C-x C-f" . helm-find-files)
-              ("C-x b" . helm-buffers-list)
-              ("M-x" . helm-M-x)
-              ("M-y" . helm-show-kill-ring)
-              ("C-x r b" . helm-bookmarks))
-       :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
-   #+END_SRC
-
-   Use =projectile= to manage projects, with =projectile-helm= as
-   interface.
-   #+BEGIN_SRC emacs-lisp
-     (use-package projectile
-       :ensure t
-       :bind ("C-c C-j" . projectile-compile-project))
-
-     (use-package helm-projectile
-       :ensure t
-       :config
-       (global-set-key (kbd "C-x f") (lambda ()
-                                         (interactive)
-                                         (if (projectile-project-p)
-                                             (helm-projectile-find-file)
-                                           (helm-for-files))))
-       (global-set-key (kbd "C-x C-b") (lambda ()
-                                         (interactive)
-                                         (if (projectile-project-p)
-                                             (helm-projectile-switch-to-buffer)
-                                           (helm-buffers-list)))))
-   #+END_SRC
-
-   Change "yes or no" to "y or n".
-   #+BEGIN_SRC emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
-
-   Don't ask for command when running compile.
-   #+BEGIN_SRC emacs-lisp
-     (setq compilation-read-command nil)
-   #+END_SRC
-
-   Follow the compilation buffer until the first error.
-   #+BEGIN_SRC emacs-lisp
-     (setq compilation-scroll-output 'first-error)
-   #+END_SRC
-
-   Don't ask before opening large files.
-   #+BEGIN_SRC emacs-lisp
-     (setq large-file-warning-threshold 200000000)
-   #+END_SRC
-
-   Add newlines at the end of files that don't have them.
-   #+BEGIN_SRC emacs-lisp
-     (setq require-final-newline t)
-   #+END_SRC
-
-   Don't save backups in current working directory.
-   #+BEGIN_SRC emacs-lisp
-     (setq backup-directory-alist `(("." . ,(expand-file-name "backups" user-emacs-directory))))
-   #+END_SRC
-
-   Use version numbers for the backups.
-   #+BEGIN_SRC emacs-lisp
-     (setq version-control t)
-   #+END_SRC
-
-   Don't ask when removing old backups.
-   #+BEGIN_SRC emacs-lisp
-     (setq delete-old-versions t)
-   #+END_SRC
-
-   Don't save autosaves in current working directory.
-   #+BEGIN_SRC emacs-lisp
-     (let ((autosave (expand-file-name "autosave" user-emacs-directory)))
-       (setq auto-save-list-file-name autosave)
-       (setq auto-save-file-name-transforms `((".*" ,autosave))))
-   #+END_SRC
-
-   Write customizations to =custom.el= instead of =init.el= to avoid
-   accidentally committing them. Also create the file if it doesn't
-   exist, to avoid having to commit an empty file (and this making it
-   useless to add it to =.gitignore=).
-   #+BEGIN_SRC emacs-lisp
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (write-region "" nil custom-file)
-     (load custom-file)
-   #+END_SRC
-
-   Weeks start on monday.
-   #+BEGIN_SRC emacs-lisp
-     (setq calendar-week-start-day 1)
-   #+END_SRC
-
-   Use =UTF-8= everywhere.
-   #+BEGIN_SRC emacs-lisp
-     (set-terminal-coding-system 'utf-8)
-     (set-keyboard-coding-system 'utf-8)
-     (prefer-coding-system 'utf-8)
    #+END_SRC
 ** Version Control
    Use =magit= as git interface.
