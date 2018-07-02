@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: asm dependencyset
+# key: <ds
+# --
+
+<dependencySet>
+    <useProjectArtifact>false</useProjectArtifact>
+    <includes>
+        <include>${1:group}:${2:artifact}:${3:type}:${4:classifier}</include>
+    </includes>
+    <unpack>true</unpack>
+    <unpackOptions>
+        <includes>
+            <include>${5:*}</include>
+        </includes>
+    </unpackOptions>
+    <outputDirectory>$6</outputDirectory>
+</dependencySet>
+$0
