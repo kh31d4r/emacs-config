@@ -336,6 +336,25 @@
        :ensure t
        :bind ("M-s" . ace-jump-mode))
    #+END_SRC
+
+   Enable fast searching with =ag=, with its =helm= frontend and
+   =projectile= integration. Requires the =silversearcher-ag= OS
+   package to be installed to work.
+   #+BEGIN_SRC emacs-lisp
+     (use-package ag
+       :ensure t)
+
+     (defun helm-projectile-ag-dwim ()
+       "When in a project, use the projectile version of helm-ag"
+       (interactive)
+       (if (projectile-project-p)
+           (helm-projectile-ag)
+         (helm-ag)))
+
+     (use-package helm-ag
+       :ensure t
+       :bind ("C-c s" . helm-projectile-ag-dwim))
+   #+END_SRC
 ** Version Control
    Use =magit= as git interface.
    #+BEGIN_SRC emacs-lisp
