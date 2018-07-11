@@ -571,8 +571,10 @@
    #+END_SRC
 * Mail
   Using =mu4e= and =mu= for email requires them to be installed from
-  [[https://github.com/djcb/mu][source]]. The =smtp_settings.el= file need to set the following
-  variables:
+  [[https://github.com/djcb/mu][source]]. If they are not installed, the emacs packages will not be
+  loaded.
+
+  The =smtp_settings.el= file need to set the following variables:
   - =smtpmail-default-smtp-server=
   - =smtpmail-local-domain=
   - =smtpmail-smtp-user=
@@ -627,67 +629,69 @@
           (buffer-substring-no-properties (mark) (point))
         ""))
 
-    (use-package mu4e
-      :load-path "/usr/local/share/emacs/site-lisp/mu4e"
-      :config
-      (setq mu4e-maildir "~/maildir"
-            mu4e-sent-folder "/Sent"
-            mu4e-drafts-folder "/Drafts"
-            mu4e-trash-folder "/Trash"
-            mu4e-refile-folder "/Archive"
-            mu4e-view-show-addresses t
-            mu4e-attachment-dir "~/downloads/attachments"
-            mu4e-use-fancy-chars t
-            mu4e-sent-messages-behavior 'sent
-            mu4e-compose-signature "\n/d"
-            mu4e-bookmarks
-            `( ,(make-mu4e-bookmark
-                 :name "Unread Messages"
-                 :query "flag:unread"
-                 :key ?u)
-               ,(make-mu4e-bookmark
-                 :name "All Inbox Messages"
-                 :query "maildir:/"
-                 :key ?i)
-               ,(make-mu4e-bookmark
-                 :name "Emacs Mailinglist"
-                 :query "maildir:/Emacs"
-                 :key ?e)
-               ,(make-mu4e-bookmark
-                 :name "Git Mailinglist"
-                 :query "maildir:/Git"
-                 :key ?g)
-               ,(make-mu4e-bookmark
-                 :name "Archive"
-                 :query "maildir:/Archive"
-                 :key ?a)
-               ,(make-mu4e-bookmark
-                 :name "Pending"
-                 :query "maildir:/Pending"
-                 :key ?p)
-               ,(make-mu4e-bookmark
-                 :name "Trash"
-                 :query "maildir:/Trash"
-                 :key ?t)
-               ,(make-mu4e-bookmark
-                 :name "Sent"
-                 :query "maildir:/Sent"
-                 :key ?s)))
-      (global-set-key (kbd "C-c m m") 'mu4e-fetch-mail-and-mu4e)
-      (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
+    (if (file-directory-p "/usr/local/share/emacs/site-lisp/mu4e")
+        (progn
+          (use-package mu4e
+            :load-path "/usr/local/share/emacs/site-lisp/mu4e"
+            :config
+            (setq mu4e-maildir "~/maildir"
+                  mu4e-sent-folder "/Sent"
+                  mu4e-drafts-folder "/Drafts"
+                  mu4e-trash-folder "/Trash"
+                  mu4e-refile-folder "/Archive"
+                  mu4e-view-show-addresses t
+                  mu4e-attachment-dir "~/downloads/attachments"
+                  mu4e-use-fancy-chars t
+                  mu4e-sent-messages-behavior 'sent
+                  mu4e-compose-signature "\n/d"
+                  mu4e-bookmarks
+                  `( ,(make-mu4e-bookmark
+                       :name "Unread Messages"
+                       :query "flag:unread"
+                       :key ?u)
+                     ,(make-mu4e-bookmark
+                       :name "All Inbox Messages"
+                       :query "maildir:/"
+                       :key ?i)
+                     ,(make-mu4e-bookmark
+                       :name "Emacs Mailinglist"
+                       :query "maildir:/Emacs"
+                       :key ?e)
+                     ,(make-mu4e-bookmark
+                       :name "Git Mailinglist"
+                       :query "maildir:/Git"
+                       :key ?g)
+                     ,(make-mu4e-bookmark
+                       :name "Archive"
+                       :query "maildir:/Archive"
+                       :key ?a)
+                     ,(make-mu4e-bookmark
+                       :name "Pending"
+                       :query "maildir:/Pending"
+                       :key ?p)
+                     ,(make-mu4e-bookmark
+                       :name "Trash"
+                       :query "maildir:/Trash"
+                       :key ?t)
+                     ,(make-mu4e-bookmark
+                       :name "Sent"
+                       :query "maildir:/Sent"
+                       :key ?s)))
+            (global-set-key (kbd "C-c m m") 'mu4e-fetch-mail-and-mu4e)
+            (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
 
-    (use-package smtpmail
-      :config
-      (setq starttls-use-gnutls t
-            message-send-mail-function 'smtpmail-send-it
-            smtpmail-stream-type 'starttls)
-      (load (expand-file-name "smtp_settings.el" user-emacs-directory)))
+          (use-package smtpmail
+            :config
+            (setq starttls-use-gnutls t
+                  message-send-mail-function 'smtpmail-send-it
+                  smtpmail-stream-type 'starttls)
+            (load (expand-file-name "smtp_settings.el" user-emacs-directory)))
 
-    (use-package org-mu4e
-      :config
-      (setq org-mu4e-convert-to-html t)
-      (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region)
-      (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))
+          (use-package org-mu4e
+            :config
+            (setq org-mu4e-convert-to-html t)
+            (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region)
+            (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))))
   #+END_SRC
 
 * Org mode
