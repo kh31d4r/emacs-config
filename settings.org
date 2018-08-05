@@ -110,7 +110,9 @@
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
        :ensure t
-       :bind ("C-c C-j" . projectile-compile-project))
+       :bind
+       ("C-c RET" . projectile-compile-project)
+       ("C-c SPC" . projectile-test-project))
 
      (use-package helm-projectile
        :ensure t
