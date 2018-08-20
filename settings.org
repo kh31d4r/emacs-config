@@ -419,6 +419,12 @@
        (add-hook 'emacs-lisp-mode-hook (lambda ()
                                          (rainbow-delimiters-mode))))
    #+END_SRC
+
+   Use =cask-mode= to edit =Cask= files.
+   #+BEGIN_SRC emacs-lisp
+     (use-package cask-mode
+       :ensure t)
+   #+END_SRC
 ** Python
    Use =jedi= as autocompletion engine for company, and bind hotkeys
    for goto definition and show documentation.
