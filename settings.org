@@ -426,7 +426,7 @@
                                          (rainbow-delimiters-mode))))
    #+END_SRC
 
-   Use =cask-mode= to edit =Cask= files.
+   Use =cask-mode= to edit [[https://github.com/cask/cask][=Cask=]] files.
    #+BEGIN_SRC emacs-lisp
      (use-package cask-mode
        :ensure t)
