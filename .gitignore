@@ -1,4 +1,5 @@
 *~
+.cask
 .mc-lists.el
 .python-environments
 ac-comphist.dat
