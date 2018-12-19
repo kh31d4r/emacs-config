@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: org-beamer
+# key: pres
+# --
+#+TITLE: $1
+#+AUTHOR: $2
+#+OPTIONS: toc:nil num:nil
+#+BEAMER_THEME: $3
+
+$0
