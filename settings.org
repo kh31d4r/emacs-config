@@ -873,6 +873,14 @@
      (setq org-log-done 'note)
    #+END_SRC
 ** Export
+   Use =xelatex= instead of =pdflatex= to build =.pdf= files from
+   =.tex=:
+   #+BEGIN_SRC emacs-lisp
+     (setq org-latex-pdf-process
+           '("xelatex -interaction nonstopmode -output-directory %o %f"
+             "xelatex -interaction nonstopmode -output-directory %o %f"
+             "xelatex -interaction nonstopmode -output-directory %o %f"))
+   #+END_SRC
    Add more export engines:
    - Twitter bootstrap
      #+BEGIN_SRC emacs-lisp
