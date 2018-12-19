@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: os-get-param
+# key: getpar
+# --
+{ get_param: $1 }$0

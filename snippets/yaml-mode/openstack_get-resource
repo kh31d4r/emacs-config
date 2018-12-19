@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: os-get-resource
+# key: getres
+# --
+{ get_resource: $1 }$0
