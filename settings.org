@@ -785,6 +785,8 @@
              (file ,(capture-template-path "books" "life")))
             ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
              (file ,(capture-template-path "wishlist-item" "life")))
+            ("lj" "Journal Entry" entry (file+datetree "~/org/journal.org")
+             (file ,(capture-template-path "journal" "life")))
             ("w" "work")
             ("ww" "Todo" entry (file "~/org/work.org")
              (file ,(capture-template-path "todo")))
