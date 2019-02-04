@@ -802,7 +802,8 @@
     (add-hook 'org-capture-mode-hook
               (lambda ()
                 (when (equal "CAPTURE-journal.org" (buffer-name))
-                  (flyspell-mode))))
+                  (flyspell-mode)
+                  (auto-fill-mode))))
   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
