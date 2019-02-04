@@ -617,6 +617,14 @@
                             (lambda ()
                               (add-to-list 'company-backends 'company-restclient))))
    #+END_SRC
+** Shell
+   Use =bash= as the default shell and bind launching a shell to =C-x t=.
+   #+BEGIN_SRC emacs-lisp
+     (defadvice ansi-term (before force-bash)
+       (interactive (list "/bin/bash")))
+     (ad-activate 'ansi-term)
+     (global-set-key (kbd "C-x t") 'ansi-term)
+   #+END_SRC
 * Mail
   Using =mu4e= and =mu= for email requires them to be installed from
   [[https://github.com/djcb/mu][source]]. If they are not installed, the emacs packages will not be
