@@ -59,6 +59,8 @@
         :ensure t
         :config
         (setq nlinum-format "%d ")
+        (custom-set-faces
+         '(linum ((t (:background "brightblack" :foreground "brightwhite" :slant normal)))))
         (global-set-key (kbd "C-c l") 'nlinum-mode))
     #+END_SRC
 
