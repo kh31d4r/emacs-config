@@ -410,6 +410,11 @@
      (setq c-default-style "bsd"
            c-basic-offset 4)
    #+END_SRC
+*** Arduino
+    Use =c++-mode= for arduino scetch files.
+    #+BEGIN_SRC emacs-lisp
+      (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+    #+END_SRC
 ** Cucumber
    Use =feature-mode= to edit =cucumber= files.
    #+BEGIN_SRC emacs-lisp
