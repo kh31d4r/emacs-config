@@ -415,6 +415,14 @@
     #+BEGIN_SRC emacs-lisp
       (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
     #+END_SRC
+
+    Define compile and upload commands for projectile. Requires
+    =[[https://docs.platformio.org/en/latest/core.html][PlatformIO]]= to be installed and configured.
+    #+BEGIN_SRC emacs-lisp
+      (projectile-register-project-type 'platformio '("platformio.ini")
+                                             :compile "platformio run -t upload"
+                                             :test "platformio run")
+    #+END_SRC
 ** Cucumber
    Use =feature-mode= to edit =cucumber= files.
    #+BEGIN_SRC emacs-lisp
