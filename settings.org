@@ -146,6 +146,16 @@
      (setq compilation-scroll-output 'first-error)
    #+END_SRC
 
+   Colorize compilation buffers.
+   #+BEGIN_SRC emacs-lisp
+     (ansi-color-for-comint-mode-on)
+     (add-hook 'compilation-filter-hook
+               (lambda ()
+                 (when (eq major-mode 'compilation-mode)
+                   (save-excursion
+                     (ansi-color-apply-on-region compilation-filter-start (point))))))
+   #+END_SRC
+
    Don't ask before opening large files.
    #+BEGIN_SRC emacs-lisp
      (setq large-file-warning-threshold 200000000)
