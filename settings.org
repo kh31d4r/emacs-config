@@ -601,6 +601,25 @@
               ("\\.markdown\\'" . markdown-mode))
        :config (setq markdown-command "markdown"))
    #+END_SRC
+** PlantUML
+   Use =plantuml-mode= for editing =[[http://plantuml.com/][plantuml]]= files, and bind =C-c
+   C-p= to show a preview in other window.
+   #+BEGIN_SRC emacs-lisp
+     (defun plantuml-preview-other-window ()
+       (interactive)
+       (save-window-excursion
+         (let ((current-prefix-arg '(4)))
+           (call-interactively 'plantuml-preview-buffer))))
+
+     (use-package plantuml-mode
+       :ensure t
+       :mode "\\.plantuml\\'"
+       :config
+       (setq plantuml-jar-path
+             (expand-file-name "plantuml.jar" (expand-file-name "bin" user-emacs-directory)))
+       (add-hook 'plantuml-mode-hook (lambda ()
+                                       (local-set-key (kbd "C-c C-p") 'plantuml-preview-other-window))))
+   #+END_SRC
 ** XML
    Set indentation size to 4.
    #+BEGIN_SRC emacs-lisp
