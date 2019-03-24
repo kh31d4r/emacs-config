@@ -620,6 +620,16 @@
        (add-hook 'plantuml-mode-hook (lambda ()
                                        (local-set-key (kbd "C-c C-p") 'plantuml-preview-other-window))))
    #+END_SRC
+
+   Use =flycheck-plantuml= to syntax check =plantuml= files.
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck-plantuml
+       :ensure t
+       :config (add-hook 'plantuml-mode
+                         (lambda ()
+                           (flycheck-plantuml-setup)
+                           (flycheck-mode))))
+   #+END_SRC
 ** XML
    Set indentation size to 4.
    #+BEGIN_SRC emacs-lisp
