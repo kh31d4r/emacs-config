@@ -951,7 +951,6 @@
    Log notes in the =NOTES= drawer, and add it as a drawer.
    #+BEGIN_SRC emacs-lisp
      (setq org-log-into-drawer "NOTES")
-     (add-to-list 'org-drawers org-log-into-drawer)
    #+END_SRC
 
    Log rescheduled tasks in the drawer too. Moving a deadline
