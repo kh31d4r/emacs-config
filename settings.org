@@ -664,10 +664,7 @@
    #+BEGIN_SRC emacs-lisp
      (use-package docker
        :ensure t
-       :diminish docker-mode
-       :config
-       (add-hook 'prog-mode-hook (lambda ()
-                                   (docker-global-mode))))
+       :bind ("C-c d" . docker))
    #+END_SRC
 ** Restclient
    Use =restclient-mode= when in =.rest= files to send rest requests.
