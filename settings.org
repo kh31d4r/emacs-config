@@ -203,6 +203,12 @@
      (load custom-file)
    #+END_SRC
 
+   Use 24hr clock, and display time and date in a sane way.
+   #+BEGIN_SRC emacs-lisp
+     (setq display-time-24hr-format t)
+     (display-time-mode t)
+   #+END_SRC
+
    Weeks start on monday.
    #+BEGIN_SRC emacs-lisp
      (setq calendar-week-start-day 1)
