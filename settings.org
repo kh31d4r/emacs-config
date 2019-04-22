@@ -413,8 +413,8 @@
        :bind ("C-c b" . git-messenger:popup-message))
    #+END_SRC
 * Programming modes
-** C
-   Don't use GNU style indendataion.
+** C/C++
+   Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
    #+BEGIN_SRC emacs-lisp
      (setq c-default-style "bsd"
            c-basic-offset 4)
