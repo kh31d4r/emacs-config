@@ -29,6 +29,13 @@
      (scroll-bar-mode 0)
      (tool-bar-mode 0)
    #+END_SRC
+
+   Flash a beacon when the cursor move around.
+   #+BEGIN_SRC emacs-lisp
+     (use-package beacon
+       :ensure t
+       :config (beacon-mode t))
+   #+END_SRC
 *** Interface
     Use =powerline= and =smart-mode-line= to make the modeline look nicer.
     #+BEGIN_SRC emacs-lisp
