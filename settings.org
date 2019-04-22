@@ -416,9 +416,14 @@
 ** C/C++
    Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
    #+BEGIN_SRC emacs-lisp
-     (setq c-default-style "bsd"
-           c-basic-offset 4)
+     (setq c-default-style "bsd")
    #+END_SRC
+
+   Set indentation level to 4.
+   #+BEGIN_SRC emacs-lisp
+     (setq c-basic-offset 4)
+   #+END_SRC
+
 *** Arduino
     Use =c++-mode= for arduino scetch files.
     #+BEGIN_SRC emacs-lisp
