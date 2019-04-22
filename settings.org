@@ -206,6 +206,7 @@
    Use 24hr clock, and display time and date in a sane way.
    #+BEGIN_SRC emacs-lisp
      (setq display-time-24hr-format t)
+     (setq display-time-format "%H:%M - %d %B %Y")
      (display-time-mode t)
    #+END_SRC
 
