@@ -459,6 +459,11 @@
        :config (add-to-list 'company-backends 'company-c-headers))
    #+END_SRC
 
+  Use =flycheck= for syntax and style checking.
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'c-mode-hook 'flycheck-mode)
+    (add-hook 'c++-mode-hook 'flycheck-mode)
+  #+END_SRC
 *** Arduino
     Use =c++-mode= for arduino scetch files.
     #+BEGIN_SRC emacs-lisp
