@@ -37,26 +37,16 @@
        :config (beacon-mode t))
    #+END_SRC
 *** Interface
-    Use =powerline= and =smart-mode-line= to make the modeline look nicer.
+    Use =spaceline= to make the modeline look nicer.
     #+BEGIN_SRC emacs-lisp
-      (use-package powerline
-        :ensure t
-        :config (powerline-default-theme))
-      (use-package smart-mode-line
+      (use-package spaceline
         :ensure t
         :config
-        (setq sml/no-confirm-load-theme t)
-        (sml/setup))
-    #+END_SRC
-
-    Display current time in the modeline.
-    #+BEGIN_SRC emacs-lisp
-      (display-time-mode 1)
-    #+END_SRC
-
-    Display current column in the modeline.
-    #+BEGIN_SRC emacs-lisp
-      (column-number-mode 1)
+        (setq spaceline-buffer-encoding-abbrev-p nil)
+        (setq spaceline-line-column-p t)
+        (setq spaceline-line-p t)
+        (setq powerline-default-separator 'arrow)
+        (spaceline-spacemacs-theme))
     #+END_SRC
 
     Toggle showing line numbers with =C-c l=, and separate the line
