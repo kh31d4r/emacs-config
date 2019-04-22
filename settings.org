@@ -94,6 +94,13 @@
     #+BEGIN_SRC emacs-lisp
       (show-paren-mode 1)
     #+END_SRC
+
+    Color things that look like color codes.
+    #+BEGIN_SRC emacs-lisp
+      (use-package rainbow-mode
+        :ensure t
+        :config (add-hook 'prog-mode-hook 'rainbow-mode))
+    #+END_SRC
 ** System
    Use =helm= for emacs commands that involves filtering and selecting
    from a list. Also enable tab completion when filtering, to make
