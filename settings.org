@@ -247,7 +247,10 @@
      (use-package company
        :ensure t
        :diminish "com"
-       :config (global-company-mode)
+       :config
+       (global-company-mode)
+       (setq company-idle-delay 0)
+       (setq company-minimum-prefix-length 3)
        :bind ("M-a" . company-complete))
    #+END_SRC
 
