@@ -254,6 +254,10 @@
        (define-key company-active-map (kbd "C-n") 'company-select-next)
        (define-key company-active-map (kbd "C-p") 'company-select-previous)
        :bind ("M-a" . company-complete))
+
+     (use-package company-box
+       :ensure t
+       :hook (company-mode . company-box-mode))
    #+END_SRC
 
    Enable snippets for all modes.
