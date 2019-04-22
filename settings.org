@@ -77,9 +77,11 @@
       (set-face-attribute 'default nil :height 150)
     #+END_SRC
 
-    Replace lambdas with fancy symbols.
+    Replace special characters and words with unicode symbols.
     #+BEGIN_SRC emacs-lisp
-      (global-prettify-symbols-mode t)
+      (use-package pretty-mode
+        :ensure t
+        :config (global-pretty-mode t))
     #+END_SRC
 
     Ensure syntax highlighting is always enabled and turned up to max.
