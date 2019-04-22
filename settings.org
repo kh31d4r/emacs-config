@@ -424,6 +424,32 @@
      (setq c-basic-offset 4)
    #+END_SRC
 
+   Use =irony-mode= and =company-irony= to provide smart code
+   completion. As =irony-mode= will install the =irony-server= on
+   first start after installation, the following OS packages must be
+   installed:
+   | Package   | Version  |
+   |-----------+----------|
+   | =CMake=   | >= 2.8.3 |
+   | =liblang= |          |
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-irony
+       :ensure t
+       :config (add-to-list 'company-backends 'company-irony))
+
+     (use-package irony
+       :ensure t
+       :config
+       (add-hook 'c-mode-hook 'irony-mode)
+       (add-hook 'c++-mode-hook 'irony-mode)
+       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+     (use-package company-c-headers
+       :ensure t
+       :config (add-to-list 'company-backends 'company-c-headers))
+   #+END_SRC
+
 *** Arduino
     Use =c++-mode= for arduino scetch files.
     #+BEGIN_SRC emacs-lisp
