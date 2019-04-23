@@ -16,3 +16,4 @@ semanticdb
 settings.el
 smtp_settings.el
 tramp
+transient
