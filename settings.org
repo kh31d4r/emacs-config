@@ -36,8 +36,31 @@
        :ensure t
        :config (beacon-mode t))
    #+END_SRC
+
+   Install =all-the-icons= for use by other packages. Use it to
+   download icons, then create a =.fonts-updated= in the users
+   =.emacs.d= directory to prevent it from running on every startup.
+   #+BEGIN_SRC emacs-lisp
+     (defun font-indicator ()
+       (expand-file-name ".fonts-updated" user-emacs-directory))
+
+     (defun fonts-need-refreshing ()
+       (not (file-exists-p
+           (font-indicator))))
+
+     (defun fonts-are-updated ()
+       (write-region "" nil (font-indicator)))
+
+     (use-package all-the-icons
+       :ensure t
+       :config
+       (when (fonts-need-refreshing)
+         (all-the-icons-install-fonts t)
+         (fonts-are-updated)))
+   #+END_SRC
 *** Interface
-    Use =spaceline= to make the modeline look nicer.
+    Use =spaceline= with the spacemacs theme and =all-the-icons= to
+    make the modeline look nicer.
     #+BEGIN_SRC emacs-lisp
       (use-package spaceline
         :ensure t
@@ -45,8 +68,11 @@
         (setq spaceline-buffer-encoding-abbrev-p nil)
         (setq spaceline-line-column-p t)
         (setq spaceline-line-p t)
-        (setq powerline-default-separator 'arrow)
-        (spaceline-spacemacs-theme))
+        (setq spaceline-all-the-icons-separator-type 'arrow))
+
+      (use-package spaceline-all-the-icons
+        :ensure t
+        :config (spaceline-all-the-icons-theme))
     #+END_SRC
 
     Show line numbers in programming modes, and toggle showing line

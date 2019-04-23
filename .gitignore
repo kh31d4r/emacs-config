@@ -1,5 +1,6 @@
 *~
 .cask
+.fonts-updated
 .mc-lists.el
 .python-environments
 ac-comphist.dat
