@@ -443,6 +443,13 @@
      (global-git-commit-mode 1)
    #+END_SRC
 
+   Enable =flyspell-mode= when writing git commit messages.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'git-commit-mode-hook
+               (lambda ()
+                 (flyspell-mode)))
+   #+END_SRC
+
    Use =git-messenger= for fast inline blame.
    #+BEGIN_SRC emacs-lisp
      (use-package git-messenger
