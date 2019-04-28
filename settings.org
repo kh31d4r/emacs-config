@@ -607,6 +607,15 @@
                                      (setq flycheck-checker 'python-pylint
                                            flycheck-checker-error-threshold 900))))
    #+END_SRC
+** Shellscript
+   Use =company-shell= for autocompletion when writing shellscripts.
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-shell
+       :ensure t
+       :config (add-hook 'sh-mode-hook (lambda ()
+                                         (add-to-list 'company-backends 'company-shell)
+                                         (add-to-list 'company-backends 'company-shell-env))))
+   #+END_SRC
 ** Web
    Use web mode for =html= and =css=, and make closing tags feel more
    like =nxml-mode=.
