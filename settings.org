@@ -616,6 +616,12 @@
                                          (add-to-list 'company-backends 'company-shell)
                                          (add-to-list 'company-backends 'company-shell-env))))
    #+END_SRC
+
+   Turn on =flycheck= for syntax and style checking. Requires
+   =shellchecker= to be installed on the system to work.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'sh-mode-hook 'flycheck-mode)
+   #+END_SRC
 ** Web
    Use web mode for =html= and =css=, and make closing tags feel more
    like =nxml-mode=.
