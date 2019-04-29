@@ -49,16 +49,11 @@
         (spaceline-spacemacs-theme))
     #+END_SRC
 
-    Toggle showing line numbers with =C-c l=, and separate the line
-    numbers from the buffer with a space.
+    Show line numbers in programming modes, and toggle showing line
+    numbers with =C-c l=.
     #+BEGIN_SRC emacs-lisp
-      (use-package nlinum
-        :ensure t
-        :config
-        (setq nlinum-format "%d ")
-        (custom-set-faces
-         '(linum ((t (:background "brightblack" :foreground "brightwhite" :slant normal)))))
-        (global-set-key (kbd "C-c l") 'nlinum-mode))
+      (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+      (global-set-key (kbd "C-c l") 'display-line-numbers-mode)
     #+END_SRC
 
     Show possible next key combinations.
