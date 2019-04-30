@@ -86,7 +86,6 @@
     #+BEGIN_SRC emacs-lisp
       (use-package which-key
         :ensure t
-        :diminish which-key-mode
         :config (which-key-mode))
     #+END_SRC
 *** Text
@@ -271,7 +270,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package company
        :ensure t
-       :diminish "com"
        :config
        (global-company-mode)
        (setq company-idle-delay 0)
@@ -561,7 +559,6 @@
    #+BEGIN_SRC emacs-lisp
      (use-package paredit
        :ensure t
-       :diminish "par"
        :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
    #+END_SRC
 
