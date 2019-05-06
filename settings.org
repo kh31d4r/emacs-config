@@ -773,6 +773,37 @@
                                            (flycheck-mode))))
 
    #+END_SRC
+*** Ansible
+    When editing files that could be ansible files, enable some extra
+    utilities. As there is no suitable ansible minor mode to connect
+    things to right now, and creating a mode here is a bit overkill,
+    just use a condition in the =yaml-mode= hook.
+    #+BEGIN_SRC emacs-lisp
+      (defun current-buffer-looks-like-ansible-p ()
+        (if (or
+             (string-prefix-p "main.yaml" (buffer-name))
+             (string-prefix-p "main.yml" (buffer-name)))
+            t
+          nil))
+    #+END_SRC
+
+    For easy access to documentation, use =ansible-doc=.
+    #+BEGIN_SRC emacs-lisp
+      (use-package ansible-doc
+        :ensure t
+        :config (add-hook 'yaml-mode-hook (lambda ()
+                                            (when (current-buffer-looks-like-ansible-p)
+                                              (ansible-doc-mode 1)))))
+    #+END_SRC
+
+    Enable =company= backend specific to =ansible=.
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-ansible
+        :ensure t
+        :config (add-hook 'yaml-mode-hook (lambda ()
+                                            (when (current-buffer-looks-like-ansible-p)
+                                              (add-to-list 'company-backends 'company-ansible)))))
+    #+END_SRC
 * Tools
 ** Docker
    Enable syntax highlighting when writing Dockerfiles.
