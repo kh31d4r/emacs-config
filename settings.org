@@ -757,6 +757,15 @@
    #+BEGIN_SRC emacs-lisp
      (setq nxml-child-indent 4)
    #+END_SRC
+
+   Turn off the built in xml validation and use =flycheck=
+   instead. Requires =xmllint= or similar to be installed on the
+   system.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'nxml-mode-hook (lambda ()
+                                 (rng-validate-mode -1)
+                                 (flycheck-mode 1)))
+   #+END_SRC
 ** Yaml
    Use =yaml-mode= for editing yaml files.
    #+BEGIN_SRC emacs-lisp
