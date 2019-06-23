@@ -518,6 +518,22 @@
     (add-hook 'c-mode-hook 'flycheck-mode)
     (add-hook 'c++-mode-hook 'flycheck-mode)
   #+END_SRC
+*** CMake
+    Use =cmake-mode= for providing indentation and syntax highlighting
+    when writing cmake files.
+    #+BEGIN_SRC emacs-lisp
+      (use-package cmake-mode
+        :ensure t)
+    #+END_SRC
+
+    Use =eldoc-cmake= for quick and discreet access to =cmake=
+    documentation.
+    #+BEGIN_SRC emacs-lisp
+      (use-package eldoc-cmake
+        :ensure t
+        :config (add-hook 'cmake-mode-hook (lambda ()
+                                             (eldoc-cmake-enable))))
+    #+END_SRC
 *** Arduino
     Use =c++-mode= for arduino scetch files.
     #+BEGIN_SRC emacs-lisp
