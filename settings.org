@@ -844,12 +844,36 @@
                               (add-to-list 'company-backends 'company-restclient))))
    #+END_SRC
 ** Shell
-   Use =bash= as the default shell and bind launching a shell to =C-x t=.
+   Use =bash= as the default shell and bind launching a shell to =C-x
+   t=. If the shell already exists, its buffer will be switched to
+   instead of launching a new shell. To launch a shell named something
+   other than "default-shell", use =C-c C-t= instead.
    #+BEGIN_SRC emacs-lisp
-     (defadvice ansi-term (before force-bash)
-       (interactive (list "/bin/bash")))
-     (ad-activate 'ansi-term)
-     (global-set-key (kbd "C-x t") 'ansi-term)
+     (defconst default-shell "/bin/bash")
+
+     (defun launch-shell (&optional shell-buffer-name)
+       "Run ansi-term with DEFAULT-SHELL and SHELL-BUFFER-NAME as
+     arguments. If the resulting buffer already exists, switch to it
+     instead of creating a new buffer."
+       (interactive)
+       (let* ((final-shell-name
+               (concat (or shell-buffer-name (read-string "Shell name: ")) "-shell"))
+              (final-shell-buffer-name (concat "*" final-shell-name "*")))
+         (if (get-buffer final-shell-buffer-name)
+             (switch-to-buffer final-shell-buffer-name)
+           (ansi-term
+            default-shell
+            final-shell-name))))
+
+     (defun launch-default-shell ()
+       "Run DEFAULT-SHELL in ansi-term in a buffer named
+       \"default-shell\". If the buffer already exists, switch to it
+       instead of creating it."
+       (interactive)
+       (launch-shell "default"))
+
+     (global-set-key (kbd "C-x t") 'launch-default-shell)
+     (global-set-key (kbd "C-x C-t") 'launch-shell)
    #+END_SRC
 * Mail
   Using =mu4e= and =mu= for email requires them to be installed from
