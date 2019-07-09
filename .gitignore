@@ -12,6 +12,7 @@ custom.el
 elpa
 eshell
 irony
+network-security.data
 recentf
 semanticdb
 settings.el
