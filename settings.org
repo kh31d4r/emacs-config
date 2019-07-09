@@ -408,6 +408,8 @@
    | Main Vertical   | =C-c rmv= | Show one big window and spread the rest vertically along the right.        |
    | Tiled           | =C-c rt=  | Spread out as evenly as possible over the window in both rows and columns. |
 
+   Also bind =C-c r r= to actually rotate the windows.
+
    #+BEGIN_SRC emacs-lisp
      (defun set-rotate-key (mnemonic layout)
        (global-set-key (kbd (concat "C-c r" mnemonic)) layout))
@@ -419,7 +421,8 @@
        (set-rotate-key "ev" 'rotate:even-vertical)
        (set-rotate-key "mh" 'rotate:main-horizontal)
        (set-rotate-key "mv" 'rotate:main-vertical)
-       (set-rotate-key "t"  'rotate:tiled))
+       (set-rotate-key "t"  'rotate:tiled)
+       (set-rotate-key "r"  'rotate-window))
    #+END_SRC
 
    Enable fast searching with =ag=, with its =helm= frontend and
