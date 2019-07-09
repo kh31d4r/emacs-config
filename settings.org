@@ -399,7 +399,9 @@
    #+END_SRC
 
    Use =rotate= to change between window layouts using =C-c r= and a
-   mnemonic shortcut:
+   mnemonic shortcut. Note that the names are a bit backwards; they
+   describe how the windows are laid out, not what way the split goes.
+
    | Layout          | Shortcut  | Description                                                                |
    |-----------------+-----------+----------------------------------------------------------------------------|
    | Even Horizontal | =C-c reh= | Spread evenly from left to right.                                          |
