@@ -306,10 +306,13 @@
        :bind ("M-n" . mc/mark-next-like-this-word))
    #+END_SRC
 
-   Don't disable upper and lowercase region.
+   Don't disable upper and lowercase region, and use the =-dwim=
+   versions of those commands.
    #+BEGIN_SRC emacs-lisp
      (put 'downcase-region 'disabled nil)
      (put 'upcase-region 'disabled nil)
+     (global-set-key (kbd "M-u") 'upcase-dwim)
+     (global-set-key (kbd "M-l") 'downcase-dwim)
    #+END_SRC
 
    Bind =C-c i= to spellcheck.
