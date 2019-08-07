@@ -266,6 +266,11 @@
      (setq save-interprogram-paste-before-kill t)
    #+END_SRC
 
+   Delete active region when typing.
+   #+BEGIN_SRC emacs-lisp
+     (delete-selection-mode 1)
+   #+END_SRC
+
    Enable auto completion with =company=.
    #+BEGIN_SRC emacs-lisp
      (use-package company
