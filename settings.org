@@ -331,8 +331,7 @@
      (defun cleanup-tabs-whitespace ()
        (interactive)
        (whitespace-cleanup)
-       (untabify (point-min) (point-max))
-       (indent-region (point-min) (point-max) nil))
+       (untabify (point-min) (point-max)))
 
      (global-set-key (kbd "C-c TAB") 'cleanup-tabs-whitespace)
    #+END_SRC
