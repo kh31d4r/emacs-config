@@ -549,7 +549,7 @@
                                              (eldoc-cmake-enable))))
     #+END_SRC
 *** Arduino
-    Use =c++-mode= for arduino scetch files.
+    Use =c++-mode= for arduino sketch files.
     #+BEGIN_SRC emacs-lisp
       (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
     #+END_SRC
