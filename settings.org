@@ -376,6 +376,14 @@
                                     (manipulate-number-at-point #'1-)))
     #+END_SRC
 ** Navigation
+   Disable moving point by clicking with the mouse to prevent
+   accidentally moving point when trying to select a frame.
+   #+BEGIN_SRC emacs-lisp
+     (use-package disable-mouse
+       :ensure t
+       :config (global-disable-mouse-mode))
+   #+END_SRC
+
    Treat CamelCase as different words by enabling =subword-mode=
    everywhere, and silence the comma on the modeline.
    #+begin_SRC emacs-lisp
