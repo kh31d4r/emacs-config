@@ -489,6 +489,16 @@
        :ensure t
        :bind ("C-c b" . git-messenger:popup-message))
    #+END_SRC
+
+   Highlight changed lines in the fringe with =diff-hl-mode= and
+   refresh the highlight on magit actions.
+   #+BEGIN_SRC emacs-lisp
+     (use-package diff-hl
+       :ensure t
+       :config
+       (global-diff-hl-mode)
+       (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+   #+END_SRC
 * Programming modes
 ** C/C++
    Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
