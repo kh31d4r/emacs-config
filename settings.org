@@ -469,13 +469,7 @@
        :ensure t
        :bind (("C-c g" . magit-status-fullscreen))
        :config
-       (setq magit-diff-refine-hunk 'all)
-       (custom-set-faces
-        '(magit-diff-added ((t (:background "green" :foreground "brightwhite"))))
-        '(magit-diff-added-highlight ((t (:background "brightgreen" :foreground "brightwhite"))))
-        '(magit-diff-removed ((t (:background "red" :foreground "brightwhite"))))
-        '(magit-diff-removed-highlight ((t (:background "brightred" :foreground "brightwhite"))))
-        '(magit-diff-context-highlight ((t (:background "color-141" :foreground "brightwhite"))))))
+       (setq magit-diff-refine-hunk 'all))
    #+END_SRC
 
    Use =git-commit-mode= for writing commit messages in git.
