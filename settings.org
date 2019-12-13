@@ -1068,12 +1068,12 @@
     someone else to do something.
   - =ON HOLD= Task that has been started but is not being actively
     worked on.
-  - =DONE=
-    Completed task.
+  - =DONE= Completed task.
   - =CANCELLED= Task that will not be worked on.
+  - =DELEGATED= Task that is delegated or reassigned.
   #+BEGIN_SRC emacs-lisp
     (setq org-todo-keywords
-      '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)" "DELEGATED(r)")))
   #+END_SRC
 
   Define global list of tags.
