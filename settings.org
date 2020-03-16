@@ -1079,8 +1079,7 @@
   Define global list of tags.
   #+BEGIN_SRC emacs-lisp
     (setq org-tag-persistent-alist
-          '(("bug" . ?b)
-            ("project" . ?p)))
+          '(("project" . ?p)))
   #+END_SRC
 
   Define custom capture templates.
