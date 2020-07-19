@@ -1114,14 +1114,12 @@
              (file ,(capture-template-path "quote")))))
   #+END_SRC
 
-  Enable =flyspell-mode= and =auto-fill-mode= when writing journal
-  entries.
+  Enable =flyspell-mode= and =auto-fill-mode= when capturing entries.
   #+BEGIN_SRC emacs-lisp
     (add-hook 'org-capture-mode-hook
               (lambda ()
-                (when (equal "CAPTURE-journal.org" (buffer-name))
-                  (flyspell-mode)
-                  (auto-fill-mode))))
+                (flyspell-mode)
+                (auto-fill-mode)))
   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
