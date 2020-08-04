@@ -595,7 +595,6 @@
                                        :compile "mvn clean install"
                                        :test "mvn clean test"
                                        :test-suffix "Test.java")
-
    #+END_SRC
 ** Lisp
    Eval the current buffer with =C-c C-v=.
@@ -1054,7 +1053,6 @@
             (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region)
             (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))))
   #+END_SRC
-
 * Org mode
   Keep agenda files in =~/org/=.
   #+BEGIN_SRC emacs-lisp
