@@ -640,6 +640,32 @@
      (use-package espuds
        :ensure t)
    #+END_SRC
+** Lua
+   Use =lua-mode= to edit lua files and use 4 spaces for indentation.
+   #+BEGIN_SRC emacs-lisp
+     (use-package lua-mode
+       :ensure t
+       :config (setq lua-indent-level 4))
+   #+END_SRC
+
+   Use =company-lua= for autocompletion.
+   #+BEGIN_SRC emacs-lisp
+     (use-package company-lua
+       :ensure t
+       :config (add-hook 'lua-mode-hook (lambda ()
+                                          (add-to-list 'company-backends 'company-lua))))
+   #+END_SRC
+
+   Use =flycheck= for linting. Requires =lua-check= installed on the
+   system to work.
+   #+BEGIN_SRC emacs-lisp
+     (use-package flycheck
+       :ensure t
+       :config
+       (add-hook 'lua-mode-hook (lambda ()
+                                  (flycheck-mode)
+                                  (setq flycheck-checker 'lua-luacheck))))
+   #+END_SRC
 ** Python
    Use =jedi= as autocompletion engine for company, and bind hotkeys
    for goto definition and show documentation.
