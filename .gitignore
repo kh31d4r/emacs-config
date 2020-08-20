@@ -1,3 +1,6 @@
+*.html
+*.pdf
+*.tex
 *~
 .cask
 .fonts-updated
