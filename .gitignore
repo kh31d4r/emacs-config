@@ -18,6 +18,7 @@ irony
 network-security.data
 recentf
 semanticdb
+session.*
 settings.el
 smtp_settings.el
 tramp
