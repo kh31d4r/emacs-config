@@ -1204,8 +1204,8 @@
      (global-set-key (kbd "C-c a") 'org-agenda)
    #+END_SRC
 
-   Bind =C-c c= to =org-capture= globally, since we are probably not doing org
-   related things when thinking up new stuff...
+   Bind =C-c c= to =org-capture= globally, to be able to capture from
+   any mode.
    #+BEGIN_SRC emacs-lisp
      (global-set-key (kbd "C-c c") 'org-capture)
    #+END_SRC
