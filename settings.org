@@ -1088,71 +1088,72 @@
             (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))))
   #+END_SRC
 * Org mode
-  Keep agenda files in =~/org/=.
-  #+BEGIN_SRC emacs-lisp
-    (setq org-agenda-files '("~/org"))
-  #+END_SRC
+** GTD
+   Keep agenda files in =~/org/=.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-agenda-files '("~/org"))
+   #+END_SRC
 
-  Define custom list of default TODO states:
-  - =TODO= Task that is not yet started.
-  - =ONGOING= Task that is currently being worked on.
-  - =WAITING= Task that cannot be worked on since it is waiting for
-    someone else to do something.
-  - =ON HOLD= Task that has been started but is not being actively
-    worked on.
-  - =DONE= Completed task.
-  - =CANCELLED= Task that will not be worked on.
-  - =DELEGATED= Task that is delegated or reassigned.
-  #+BEGIN_SRC emacs-lisp
-    (setq org-todo-keywords
-      '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)" "DELEGATED(r)")))
-  #+END_SRC
+   Define custom list of default TODO states:
+   - =TODO= Task that is not yet started.
+   - =ONGOING= Task that is currently being worked on.
+   - =WAITING= Task that cannot be worked on since it is waiting for
+     someone else to do something.
+   - =ON HOLD= Task that has been started but is not being actively
+     worked on.
+   - =DONE= Completed task.
+   - =CANCELLED= Task that will not be worked on.
+   - =DELEGATED= Task that is delegated or reassigned.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-todo-keywords
+       '((sequence "TODO(t)" "ONGOING(o)" "WAITING(w)" "ON HOLD(h)" "|" "DONE(d)" "CANCELLED(c)" "DELEGATED(r)")))
+   #+END_SRC
 
-  Define global list of tags.
-  #+BEGIN_SRC emacs-lisp
-    (setq org-tag-persistent-alist
-          '(("project" . ?p)))
-  #+END_SRC
+   Define global list of tags.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-tag-persistent-alist
+           '(("project" . ?p)))
+   #+END_SRC
 
-  Define custom capture templates.
-  #+BEGIN_SRC emacs-lisp
-    (defun capture-template-path (template-name &optional category)
-      (let ((template-dir (expand-file-name "capture-templates" user-emacs-directory)))
-        (if category
-            (let ((category-dir (expand-file-name category template-dir)))
-              (expand-file-name template-name category-dir))
-          (expand-file-name template-name template-dir))))
+   Define custom capture templates.
+   #+BEGIN_SRC emacs-lisp
+     (defun capture-template-path (template-name &optional category)
+       (let ((template-dir (expand-file-name "capture-templates" user-emacs-directory)))
+         (if category
+             (let ((category-dir (expand-file-name category template-dir)))
+               (expand-file-name template-name category-dir))
+           (expand-file-name template-name template-dir))))
 
-    (setq org-capture-templates
-          `(("l" "life")
-            ("ll" "Todo" entry (file "~/org/life.org")
-             (file ,(capture-template-path "todo")))
-            ("lc" "Todo with checklist" entry (file "~/org/life.org")
-             (file ,(capture-template-path "todo-checklist")))
-            ("lo" "Org-mode Todo" entry (file+headline "~/org/life.org" "Org-mode things")
-             (file ,(capture-template-path "todo-org" "life")))
-            ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
-             (file ,(capture-template-path "books" "life")))
-            ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
-             (file ,(capture-template-path "wishlist-item" "life")))
-            ("lj" "Journal Entry" entry (file+datetree "~/org/journal.org")
-             (file ,(capture-template-path "journal" "life")))
-            ("w" "work")
-            ("ww" "Todo" entry (file "~/org/work.org")
-             (file ,(capture-template-path "todo")))
-            ("wc" "Todo with checklist" entry (file "~/org/work.org")
-             (file ,(capture-template-path "todo-checklist")))
-            ("q" "quote" entry (file "~/org/quotes.org")
-             (file ,(capture-template-path "quote")))))
-  #+END_SRC
+     (setq org-capture-templates
+           `(("l" "life")
+             ("ll" "Todo" entry (file "~/org/life.org")
+              (file ,(capture-template-path "todo")))
+             ("lc" "Todo with checklist" entry (file "~/org/life.org")
+              (file ,(capture-template-path "todo-checklist")))
+             ("lo" "Org-mode Todo" entry (file+headline "~/org/life.org" "Org-mode things")
+              (file ,(capture-template-path "todo-org" "life")))
+             ("lb" "Book" entry (file+headline "~/org/life.org" "Books")
+              (file ,(capture-template-path "books" "life")))
+             ("lw" "Wishlist Item" entry (file+headline "~/org/life.org" "Wishlist")
+              (file ,(capture-template-path "wishlist-item" "life")))
+             ("lj" "Journal Entry" entry (file+datetree "~/org/journal.org")
+              (file ,(capture-template-path "journal" "life")))
+             ("w" "work")
+             ("ww" "Todo" entry (file "~/org/work.org")
+              (file ,(capture-template-path "todo")))
+             ("wc" "Todo with checklist" entry (file "~/org/work.org")
+              (file ,(capture-template-path "todo-checklist")))
+             ("q" "quote" entry (file "~/org/quotes.org")
+              (file ,(capture-template-path "quote")))))
+   #+END_SRC
 
-  Enable =flyspell-mode= and =auto-fill-mode= when capturing entries.
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'org-capture-mode-hook
-              (lambda ()
-                (flyspell-mode)
-                (auto-fill-mode)))
-  #+END_SRC
+   Enable =flyspell-mode= and =auto-fill-mode= when capturing entries.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'org-capture-mode-hook
+               (lambda ()
+                 (flyspell-mode)
+                 (auto-fill-mode)))
+   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
    #+BEGIN_SRC emacs-lisp
