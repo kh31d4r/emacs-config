@@ -1237,7 +1237,7 @@
    =.tex=:
    #+BEGIN_SRC emacs-lisp
      (setq org-latex-pdf-process
-           '("latexmk -pdflatex='xelatex -shell-escape -interaction nonstopmode' -pdf -f  %f"))
+           '("latexmk -pdflatex=xelatex -shell-escape -interaction=nonstopmode -pdf -f %f"))
    #+END_SRC
    Add more export engines:
    - Twitter bootstrap
