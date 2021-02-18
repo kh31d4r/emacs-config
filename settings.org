@@ -1154,6 +1154,15 @@
                  (flyspell-mode)
                  (auto-fill-mode)))
    #+END_SRC
+** Academics
+   Use =org-ref= to easier handle references when writing papers.
+   #+BEGIN_SRC emacs-lisp
+     (use-package org-ref
+       :ensure t
+       :config
+       (setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
+       (setq org-ref-default-bibliography '("~/org/references/references.bib")))
+   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
    #+BEGIN_SRC emacs-lisp
