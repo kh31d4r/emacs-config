@@ -1163,6 +1163,19 @@
        (setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
        (setq org-ref-default-bibliography '("~/org/references/references.bib")))
    #+END_SRC
+
+   Allow use of =IEEEtran= document type when exporting. The document
+   is part of the =texlive-publishers= package in debian.
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'org-latex-classes
+                  '("IEEEtran"
+                    "\\documentclass{IEEEtran}"
+                    ("\\section{%s}" . "\\section*{%s}")
+                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
    #+BEGIN_SRC emacs-lisp

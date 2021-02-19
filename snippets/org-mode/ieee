@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: ieee-headers
+# key: \ieee
+# --
+#+TITLE: ${1:Title}
+#+AUTHOR: ${2:`(user-full-name)`}
+
+#+OPTIONS: H:3 creator:nil timestamp:nil skip:nil toc:nil num:t ^:nil ~:~
+#+OPTIONS: author:nil title:nil date:nil
+
+#+LATEX_CLASS: IEEEtran
+#+LATEX_CLASS_OPTIONS: [conference,letter,10pt,final]
+#+LATEX_HEADER: \usepackage[utf8]{inputenc}
+#+LATEX_HEADER: \usepackage[T1]{fontenc}
+
+#+BEGIN_EXPORT latex
+\makeatletter
+\let\orgtitle\@title
+\makeatother
+
+\title{\orgtitle}
+
+\author {
+    \IEEEauthorblockN {
+        $2
+    }
+
+    \IEEEauthorblockA {
+        $3
+    }
+}
+#+END_EXPORT
+
+#+LaTeX: \maketitle
+
+$0
