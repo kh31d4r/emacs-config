@@ -661,14 +661,6 @@
                                   (flycheck-mode)
                                   (setq flycheck-checker 'lua-luacheck))))
    #+END_SRC
-*** Löve
-    Use =love-minor-mode= for writing games with the =löve2d=
-    framework. It should automatically activate when it detects
-    keywords in lua buffers.
-    #+BEGIN_SRC emacs-lisp
-      (use-package love-minor-mode
-        :ensure t)
-    #+END_SRC
 ** Python
    Use =jedi= as autocompletion engine for company, and bind hotkeys
    for goto definition and show documentation.
