@@ -480,11 +480,6 @@
        (setq magit-diff-refine-hunk 'all))
    #+END_SRC
 
-   Use =git-commit-mode= for writing commit messages in git.
-   #+BEGIN_SRC emacs-lisp
-     (global-git-commit-mode 1)
-   #+END_SRC
-
    Enable =flyspell-mode= when writing git commit messages.
    #+BEGIN_SRC emacs-lisp
      (add-hook 'git-commit-mode-hook
