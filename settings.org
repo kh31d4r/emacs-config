@@ -772,14 +772,11 @@
      (add-hook 'json-mode-hook (lambda ()
                                  (setq js-indent-level 2)))
    #+END_SRC
-   Use =flycheck= to validate JSON files. Requires =demjson= to be
-   installed with pip to work.
+   Use =flycheck= to validate JSON files.
    #+BEGIN_SRC emacs-lisp
-     (use-package flycheck-demjsonlint
-       :ensure t
-       :config (add-hook 'json-mode-hook (lambda ()
-                                           (flycheck-mode 1)
-                                           (setq flycheck-checker 'json-demjsonlint))))
+     (add-hook 'json-mode-hook (lambda ()
+                                 (flycheck-mode 1)
+                                 (setq flycheck-checker 'json-python-json)))
    #+END_SRC
 ** Markdown
    Use =markdown-mode= for editing markdown files.
