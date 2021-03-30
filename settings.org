@@ -1209,11 +1209,12 @@
      (setq org-src-tab-acts-natively t)
    #+END_SRC
 
-   Always allow running lisp blocks.
+   Always allow running code blocks.
    #+BEGIN_SRC emacs-lisp
      (org-babel-do-load-languages
       'org-babel-load-languages
-      '((emacs-lisp . t)))
+      '((emacs-lisp . t)
+        (dot . t)))
    #+END_SRC
 ** Keybindings
    Bind  =C-c a= to =org-agenda= globally, so the agenda can be pulled up from
