@@ -1,0 +1,6 @@
+# name: digraph
+# key: <g
+# --
+#+BEGIN_SRC dot :file ${1:graph}.${2:png} :cmdline -K${3:dot} -T$2
+$0
+#+END_SRC
