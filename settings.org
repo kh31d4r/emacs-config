@@ -759,6 +759,18 @@
        :ensure t)
    #+END_SRC
 * Markup modes
+** Graphviz
+   Use =graphviz-dot-mode= to edit =graphviz= graphs and
+   =company-graphviz-dot= for autocompletion.
+   #+BEGIN_SRC emacs-lisp
+     (use-package graphviz-dot-mode
+       :ensure t
+       :config
+       (setq graphviz-dot-indent-width 4)
+       (add-hook 'graphviz-dot-mode-hook (lambda ()
+                                           (add-to-list 'company-backends 'company-graphviz-dot-backend))))
+
+   #+END_SRC
 ** Jinja2
    Use =jinja2-mode= to edit jinja templates.
    #+BEGIN_SRC emacs-lisp
