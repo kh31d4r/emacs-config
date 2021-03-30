@@ -1209,8 +1209,9 @@
      (setq org-src-tab-acts-natively t)
    #+END_SRC
 
-   Always allow running code blocks.
+   Always allow running code blocks without confimation.
    #+BEGIN_SRC emacs-lisp
+     (setq org-confirm-babel-evaluate nil)
      (org-babel-do-load-languages
       'org-babel-load-languages
       '((emacs-lisp . t)
