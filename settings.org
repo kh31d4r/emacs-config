@@ -285,9 +285,10 @@
        (define-key company-active-map (kbd "TAB") 'company-abort)
        :bind ("M-a" . company-complete))
 
-     (use-package company-box
+     (use-package company-posframe
        :ensure t
-       :hook (company-mode . company-box-mode))
+       :hook (company-mode . company-posframe-mode))
+
    #+END_SRC
 
    Enable snippets for all modes.
