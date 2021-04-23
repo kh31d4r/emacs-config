@@ -192,6 +192,14 @@
      (setq require-final-newline t)
    #+END_SRC
 
+   Enable =auto-revert-mode= when viewing documents, to automatically
+   refresh them in case they change externally or get re-generated.
+
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'doc-view-mode-hook (lambda ()
+                                     (auto-revert-mode 1)))
+   #+END_SRC
+
    Don't save backups in current working directory.
    #+BEGIN_SRC emacs-lisp
      (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
