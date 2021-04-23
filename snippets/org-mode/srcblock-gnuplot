@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: gnuplot src block
+# key: <p
+# --
+#+BEGIN_SRC gnuplot :file ${1:plot}.png
+$0
+#+END_SRC
