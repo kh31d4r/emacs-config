@@ -1207,6 +1207,13 @@
      (setq org-src-fontify-natively t)
    #+END_SRC
 
+   Syntax highlight code blocks when exporting LaTeX also. Requires
+   the python package =pygments= to be installed in the system.
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'org-latex-packages-alist '("cache=false" "minted"))
+     (setq org-latex-listings 'minted)
+   #+END_SRC
+
    Make tab indent work in code blocks.
    #+BEGIN_SRC emacs-lisp
      (setq org-src-tab-acts-natively t)
