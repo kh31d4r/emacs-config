@@ -1188,15 +1188,6 @@
                     ("\\paragraph{%s}" . "\\paragraph*{%s}")
                     ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
    #+END_SRC
-
-   Bind =C-c w= to show word counts in org documents.
-   #+BEGIN_SRC emacs-lisp
-     (use-package org-wc
-       :ensure t
-       :config
-       (add-hook 'org-mode-hook (lambda ()
-                                  (local-set-key (kbd "C-c w") org-wc-display))))
-   #+END_SRC
 ** Display
    Show nice bullets when not using terminal emacs.
    #+BEGIN_SRC emacs-lisp
