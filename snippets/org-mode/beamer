@@ -4,6 +4,7 @@
 # --
 #+TITLE: $1
 #+AUTHOR: $2
+#+STARTUP: beamer
 #+OPTIONS: toc:nil num:nil
 #+BEAMER_THEME: $3
 
