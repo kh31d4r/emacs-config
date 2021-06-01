@@ -1100,6 +1100,11 @@
             (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))))
   #+END_SRC
 * Org mode
+  Use =auto-fill-mode= for org documents, so they will not grow too
+  much horizontally.
+  #+BEGIN_SRC emacs-lisp
+    (add-hook 'org-mode-hook (lambda () 'auto-fill-mode))
+  #+END_SRC
 ** GTD
    Keep agenda files in =~/org/=.
    #+BEGIN_SRC emacs-lisp
