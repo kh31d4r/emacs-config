@@ -227,7 +227,8 @@
    useless to add it to =.gitignore=).
    #+BEGIN_SRC emacs-lisp
      (setq custom-file "~/.emacs.d/custom.el")
-     (write-region "" nil custom-file)
+     (unless (file-exists-p custom-file)
+       (write-region "" nil custom-file))
      (load custom-file)
    #+END_SRC
 
