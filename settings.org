@@ -1099,6 +1099,13 @@
   #+BEGIN_SRC emacs-lisp
     (add-hook 'org-mode-hook (lambda () 'auto-fill-mode))
   #+END_SRC
+
+  Use =flyspell= to do automatic spellcheck.
+  #+BEGIN_SRC emacs-lisp
+    (add-to-list 'org-mode-hook (lambda ()
+                                  (flyspell-mode 1)))
+  #+END_SRC
+
 ** GTD
    Keep agenda files in =~/org/=.
    #+BEGIN_SRC emacs-lisp
