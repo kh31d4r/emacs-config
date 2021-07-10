@@ -1151,6 +1151,21 @@
                  (flyspell-mode)
                  (auto-fill-mode)))
    #+END_SRC
+** Blog
+   The blog entries will end up in =~/blog/posts= and the template
+   assumes that the org file with the common headers is in
+   =~/blog/template/post.org=.
+   #+BEGIN_SRC emacs-lisp
+     (defun blog-file ()
+       (let ((name (read-string "Filename: ")))
+         (expand-file-name
+          (concat (downcase name) ".org") "~/blog/posts")))
+
+
+     (add-to-list 'org-capture-templates
+                  `("lp" "Blog Post" plain (file blog-file)
+                    (file ,(capture-template-path "blogpost" "life"))))
+   #+END_SRC
 ** Academics
    Use =org-ref= to easier handle references when writing papers.
    #+BEGIN_SRC emacs-lisp
