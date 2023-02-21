@@ -12,6 +12,7 @@ autosave
 backups
 bookmarks
 custom.el
+eln-cache
 elpa
 eshell
 irony
