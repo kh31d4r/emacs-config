@@ -522,10 +522,10 @@
    completion. As =irony-mode= will install the =irony-server= on
    first start after installation, the following OS packages must be
    installed:
-   | Package   | Version  |
-   |-----------+----------|
-   | =CMake=   | >= 2.8.3 |
-   | =liblang= |          |
+   | Package        | Version  |
+   |----------------+----------|
+   | =cmake=        | >= 2.8.3 |
+   | =libclang-dev= |          |
 
    #+BEGIN_SRC emacs-lisp
      (use-package irony
