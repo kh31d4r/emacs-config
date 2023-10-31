@@ -233,13 +233,6 @@
      (set-keyboard-coding-system 'utf-8)
      (prefer-coding-system 'utf-8)
    #+END_SRC
-
-   Rebind quit key in graphical mode.
-   #+BEGIN_SRC emacs-lisp
-     (when window-system
-       (global-unset-key (kbd "C-x C-c"))
-       (global-set-key (kbd "s-q") 'save-buffers-kill-terminal))
-   #+END_SRC
 ** Editing
    Indent with 4 spaces instead of tabs.
    #+BEGIN_SRC emacs-lisp
