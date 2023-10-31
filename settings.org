@@ -14,7 +14,6 @@
    looks okay in most terminals.
    #+BEGIN_SRC emacs-lisp
      (use-package dracula-theme
-       :ensure t
        :config (enable-theme 'dracula))
    #+END_SRC
 
@@ -33,7 +32,6 @@
    Flash a beacon when the cursor move around.
    #+BEGIN_SRC emacs-lisp
      (use-package beacon
-       :ensure t
        :config (beacon-mode t))
    #+END_SRC
 
@@ -52,7 +50,6 @@
        (write-region "" nil (font-indicator)))
 
      (use-package all-the-icons
-       :ensure t
        :config
        (when (fonts-need-refreshing)
          (all-the-icons-install-fonts t)
@@ -63,7 +60,6 @@
     make the modeline look nicer.
     #+BEGIN_SRC emacs-lisp
       (use-package spaceline
-        :ensure t
         :config
         (setq spaceline-buffer-encoding-abbrev-p nil)
         (setq spaceline-line-column-p t)
@@ -71,7 +67,6 @@
         (setq spaceline-all-the-icons-separator-type 'arrow))
 
       (use-package spaceline-all-the-icons
-        :ensure t
         :config (spaceline-all-the-icons-theme))
     #+END_SRC
 
@@ -85,7 +80,6 @@
     Show possible next key combinations.
     #+BEGIN_SRC emacs-lisp
       (use-package which-key
-        :ensure t
         :config (which-key-mode))
     #+END_SRC
 *** Text
@@ -108,7 +102,6 @@
     Color things that look like color codes.
     #+BEGIN_SRC emacs-lisp
       (use-package rainbow-mode
-        :ensure t
         :config (add-hook 'prog-mode-hook 'rainbow-mode))
     #+END_SRC
 ** System
@@ -117,7 +110,6 @@
    traversing through directories easier.
    #+BEGIN_SRC emacs-lisp
      (use-package helm
-       :ensure t
        :bind (("C-x C-f" . helm-find-files)
               ("C-x b" . helm-buffers-list)
               ("M-x" . helm-M-x)
@@ -130,13 +122,11 @@
    interface.
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
-       :ensure t
        :bind
        ("C-c RET" . projectile-compile-project)
        ("C-c SPC" . projectile-test-project))
 
      (use-package helm-projectile
-       :ensure t
        :config
        (global-set-key (kbd "C-x f") (lambda ()
                                          (interactive)
@@ -276,7 +266,6 @@
    Enable auto completion with =company=.
    #+BEGIN_SRC emacs-lisp
      (use-package company
-       :ensure t
        :config
        (global-company-mode)
        (setq company-idle-delay 0)
@@ -288,29 +277,24 @@
        :bind ("M-a" . company-complete))
 
      (use-package company-posframe
-       :ensure t
        :hook (company-mode . company-posframe-mode))
-
    #+END_SRC
 
    Enable snippets for all modes.
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
-       :ensure t
        :config (yas-global-mode 1))
    #+END_SRC
 
    Enable =expand-region=.
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
-       :ensure t
        :bind ("M-e" . er/expand-region))
    #+END_SRC
 
    Enable =multiple-cursors=.
    #+BEGIN_SRC emacs-lisp
      (use-package multiple-cursors
-       :ensure t
        :bind ("M-n" . mc/mark-next-like-this-word))
    #+END_SRC
 
@@ -383,7 +367,6 @@
    accidentally moving point when trying to select a frame.
    #+BEGIN_SRC emacs-lisp
      (use-package disable-mouse
-       :ensure t
        :config (global-disable-mouse-mode))
    #+END_SRC
 
@@ -399,21 +382,18 @@
    to the window layout.
    #+BEGIN_SRC emacs-lisp
      (use-package winner
-       :ensure t
        :config (winner-mode 1))
    #+END_SRC
 
    Enable fast jumping between windows when using more than 2 windows.
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
-       :ensure t
        :bind ("C-x o" . ace-window))
    #+END_SRC
 
    Enable fast and exact jumping across the screen by binding =M-s= to =ace-jump-mode=.
    #+BEGIN_SRC emacs-lisp
      (use-package ace-jump-mode
-       :ensure t
        :bind ("M-s" . ace-jump-mode))
    #+END_SRC
 
@@ -436,7 +416,6 @@
        (global-set-key (kbd (concat "C-c r" mnemonic)) layout))
 
      (use-package rotate
-       :ensure t
        :config
        (set-rotate-key "eh" 'rotate:even-horizontal)
        (set-rotate-key "ev" 'rotate:even-vertical)
@@ -450,8 +429,7 @@
    =projectile= integration. Requires the =silversearcher-ag= OS
    package to be installed to work.
    #+BEGIN_SRC emacs-lisp
-     (use-package ag
-       :ensure t)
+     (use-package ag)
 
      (defun helm-projectile-ag-dwim ()
        "When in a project, use the projectile version of helm-ag"
@@ -461,7 +439,6 @@
          (helm-ag)))
 
      (use-package helm-ag
-       :ensure t
        :bind ("C-c s" . helm-projectile-ag-dwim))
    #+END_SRC
 ** Version Control
@@ -477,7 +454,6 @@
          (delete-other-windows)))
 
      (use-package magit
-       :ensure t
        :bind (("C-c g" . magit-status-fullscreen))
        :config
        (setq magit-diff-refine-hunk 'all))
@@ -493,7 +469,6 @@
    Use =git-messenger= for fast inline blame.
    #+BEGIN_SRC emacs-lisp
      (use-package git-messenger
-       :ensure t
        :bind ("C-c b" . git-messenger:popup-message))
    #+END_SRC
 
@@ -501,7 +476,6 @@
    refresh the highlight on magit actions.
    #+BEGIN_SRC emacs-lisp
      (use-package diff-hl
-       :ensure t
        :config
        (global-diff-hl-mode)
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
@@ -529,19 +503,16 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package irony
-       :ensure t
        :config
        (add-hook 'c-mode-hook 'irony-mode)
        (add-hook 'c++-mode-hook 'irony-mode)
        (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
      (use-package company-irony
-       :ensure t
        :config (add-hook 'irony-mode-hook (lambda ()
                                             (add-to-list 'company-backends 'company-irony))))
 
      (use-package company-c-headers
-       :ensure t
        :config (add-hook 'irony-mode-hook (lambda ()
                                             (add-to-list 'company-backends 'company-c-headers))))
    #+END_SRC
@@ -555,15 +526,13 @@
     Use =cmake-mode= for providing indentation and syntax highlighting
     when writing cmake files.
     #+BEGIN_SRC emacs-lisp
-      (use-package cmake-mode
-        :ensure t)
+      (use-package cmake-mode)
     #+END_SRC
 
     Use =eldoc-cmake= for quick and discreet access to =cmake=
     documentation.
     #+BEGIN_SRC emacs-lisp
       (use-package eldoc-cmake
-        :ensure t
         :config (add-hook 'cmake-mode-hook (lambda ()
                                              (eldoc-cmake-enable))))
     #+END_SRC
@@ -585,8 +554,7 @@
 ** Cucumber
    Use =feature-mode= to edit =cucumber= files.
    #+BEGIN_SRC emacs-lisp
-     (use-package feature-mode
-       :ensure t)
+     (use-package feature-mode)
    #+END_SRC
 ** Java
    Define maven commands for projectile.
@@ -606,7 +574,6 @@
    Use paredit for editing elisp.
    #+BEGIN_SRC emacs-lisp
      (use-package paredit
-       :ensure t
        :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
    #+END_SRC
 
@@ -619,7 +586,6 @@
    Show parentheses in different colors to easier pair them together.
    #+BEGIN_SRC emacs-lisp
      (use-package rainbow-delimiters
-       :ensure t
        :config
        (add-hook 'emacs-lisp-mode-hook (lambda ()
                                          (rainbow-delimiters-mode))))
@@ -627,31 +593,26 @@
 
    Use =cask-mode= to edit =[[https://github.com/cask/cask][Cask]]= files.
    #+BEGIN_SRC emacs-lisp
-     (use-package cask-mode
-       :ensure t)
+     (use-package cask-mode)
    #+END_SRC
 
    Enable =ecukes= for writing =cucumber=-like test for emacs lisp,
    with =espuds= for step definitions aimed at emacs plugin
    development.
    #+BEGIN_SRC emacs-lisp
-     (use-package ecukes
-       :ensure t)
-     (use-package espuds
-       :ensure t)
+     (use-package ecukes)
+     (use-package espuds)
    #+END_SRC
 ** Lua
    Use =lua-mode= to edit lua files and use 4 spaces for indentation.
    #+BEGIN_SRC emacs-lisp
      (use-package lua-mode
-       :ensure t
        :config (setq lua-indent-level 4))
    #+END_SRC
 
    Use =company-lua= for autocompletion.
    #+BEGIN_SRC emacs-lisp
      (use-package company-lua
-       :ensure t
        :config (add-hook 'lua-mode-hook (lambda ()
                                           (add-to-list 'company-backends 'company-lua))))
    #+END_SRC
@@ -660,7 +621,6 @@
    system to work.
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
-       :ensure t
        :config
        (add-hook 'lua-mode-hook (lambda ()
                                   (flycheck-mode)
@@ -673,7 +633,6 @@
    Needs virtenv installed on the system to work.
    #+BEGIN_SRC emacs-lisp
      (use-package jedi
-       :ensure t
        :config (add-hook 'python-mode-hook 'jedi:setup)
        :bind
        ("C-c j d" . jedi:goto-definition)
@@ -681,7 +640,6 @@
        ("C-c j h" . jedi:show-doc))
 
      (use-package company-jedi
-       :ensure t
        :config
        (add-hook 'python-mode-hook (lambda ()
                                      (add-to-list 'company-backends 'company-jedi))))
@@ -691,7 +649,6 @@
    installed on the system to work.
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck
-       :ensure t
        :config
        (add-hook 'python-mode-hook (lambda ()
                                      (flycheck-mode 1)
@@ -708,10 +665,8 @@
 
    #+BEGIN_SRC emacs-lisp
      (use-package pyvenv
-       :ensure t
        :bind ("C-c v" . pyvenv-activate))
      (use-package pyvenv-auto
-       :ensure t
        :config
        (add-hook 'python-mode-hook (lambda ()
                                      (pyvenv-auto-run))))
@@ -720,7 +675,6 @@
    Use =company-shell= for autocompletion when writing shellscripts.
    #+BEGIN_SRC emacs-lisp
      (use-package company-shell
-       :ensure t
        :config (add-hook 'sh-mode-hook (lambda ()
                                          (add-to-list 'company-backends 'company-shell)
                                          (add-to-list 'company-backends 'company-shell-env))))
@@ -736,7 +690,6 @@
    like =nxml-mode=.
    #+BEGIN_SRC emacs-lisp
      (use-package web-mode
-       :ensure t
        :mode
        (("\\.html\\'" . web-mode)
         ("\\.css\\'" . web-mode))
@@ -757,7 +710,6 @@
    Enable emmet mode when in =web-mode= to quickly create elements.
    #+BEGIN_SRC emacs-lisp
      (use-package emmet-mode
-       :ensure t
        :config (add-hook 'web-mode-hook 'emmet-mode))
    #+END_SRC
 
@@ -766,7 +718,6 @@
    see the preview.
    #+BEGIN_SRC emacs-lisp
      (use-package impatient-mode
-       :ensure t
        :config
        (add-hook 'impatient-mode-hook (lambda ()
                                         (setq httpd-port 8085)
@@ -777,21 +728,18 @@
    Enable utility functions for quickly looking things up in the HTTP
    protocol.
    #+BEGIN_SRC emacs-lisp
-     (use-package know-your-http-well
-       :ensure t)
+     (use-package know-your-http-well)
    #+END_SRC
 * Markup modes
 ** GnuPlot
    #+BEGIN_SRC emacs-lisp
-     (use-package gnuplot
-       :ensure t)
+     (use-package gnuplot)
    #+END_SRC
 ** Graphviz
    Use =graphviz-dot-mode= to edit =graphviz= graphs and
    =company-graphviz-dot= for autocompletion.
    #+BEGIN_SRC emacs-lisp
      (use-package graphviz-dot-mode
-       :ensure t
        :config
        (setq graphviz-dot-indent-width 4)
        (add-hook 'graphviz-dot-mode-hook (lambda ()
@@ -802,7 +750,6 @@
    Use =jinja2-mode= to edit jinja templates.
    #+BEGIN_SRC emacs-lisp
      (use-package jinja2-mode
-       :ensure t
        :mode ("\\.j2\\'"))
    #+END_SRC
 ** JSON
@@ -821,7 +768,6 @@
    Use =markdown-mode= for editing markdown files.
    #+BEGIN_SRC emacs-lisp
      (use-package markdown-mode
-       :ensure t
        :commands (markdown-mode gfm-mode)
        :mode (("README\\.md\\'" . gfm-mode)
               ("\\.md\\'" . markdown-mode)
@@ -839,7 +785,6 @@
            (call-interactively 'plantuml-preview-buffer))))
 
      (use-package plantuml-mode
-       :ensure t
        :mode "\\.plantuml\\'"
        :config
        (setq plantuml-jar-path
@@ -851,7 +796,6 @@
    Use =flycheck-plantuml= to syntax check =plantuml= files.
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck-plantuml
-       :ensure t
        :config (add-hook 'plantuml-mode
                          (lambda ()
                            (flycheck-plantuml-setup)
@@ -874,14 +818,12 @@
 ** Yaml
    Use =yaml-mode= for editing yaml files.
    #+BEGIN_SRC emacs-lisp
-     (use-package yaml-mode
-       :ensure t)
+     (use-package yaml-mode)
    #+END_SRC
 
    Use =flycheck= for syntax and style checking.
    #+BEGIN_SRC emacs-lisp
      (use-package flycheck-yamllint
-       :ensure t
        :config (add-hook 'yaml-mode-hook (lambda ()
                                            (flycheck-yamllint-setup)
                                            (flycheck-mode))))
@@ -904,7 +846,6 @@
     For easy access to documentation, use =ansible-doc=.
     #+BEGIN_SRC emacs-lisp
       (use-package ansible-doc
-        :ensure t
         :config (add-hook 'yaml-mode-hook (lambda ()
                                             (when (current-buffer-looks-like-ansible-p)
                                               (ansible-doc-mode 1)))))
@@ -913,7 +854,6 @@
     Enable =company= backend specific to =ansible=.
     #+BEGIN_SRC emacs-lisp
       (use-package company-ansible
-        :ensure t
         :config (add-hook 'yaml-mode-hook (lambda ()
                                             (when (current-buffer-looks-like-ansible-p)
                                               (add-to-list 'company-backends 'company-ansible)))))
@@ -922,28 +862,24 @@
 ** Docker
    Enable syntax highlighting when writing Dockerfiles.
    #+BEGIN_SRC emacs-lisp
-     (use-package dockerfile-mode
-       :ensure t)
+     (use-package dockerfile-mode)
    #+END_SRC
 
    When in programming modes, activate docker minor mode for
    controlling docker containers.
    #+BEGIN_SRC emacs-lisp
      (use-package docker
-       :ensure t
        :bind ("C-c d" . docker))
    #+END_SRC
 ** Restclient
    Use =restclient-mode= when in =.rest= files to send rest requests.
    #+BEGIN_SRC emacs-lisp
      (use-package restclient
-       :ensure t
        :mode ("\\.rest\\'" . restclient-mode))
    #+END_SRC
    Add =company-mode= completions for =restclient-mode=.
    #+BEGIN_SRC emacs-lisp
      (use-package company-restclient
-       :ensure t
        :config (add-to-list 'restclient-mode-hook
                             (lambda ()
                               (add-to-list 'company-backends 'company-restclient))))
@@ -1193,7 +1129,6 @@
    Use =org-ref= to easier handle references when writing papers.
    #+BEGIN_SRC emacs-lisp
      (use-package org-ref
-       :ensure t
        :config
        (setq org-ref-get-pdf-filename-function 'org-ref-get-pdf-filename-helm-bibtex)
        (setq org-ref-default-bibliography '("~/org/references/references.bib")))
@@ -1216,7 +1151,6 @@
    #+BEGIN_SRC emacs-lisp
      (when window-system
        (use-package org-bullets
-         :ensure t
          :config
          (add-hook 'org-mode-hook (lambda ()
                                     (org-bullets-mode)))))
@@ -1309,11 +1243,9 @@
    Add more export engines:
    - Twitter bootstrap
      #+BEGIN_SRC emacs-lisp
-       (use-package ox-twbs
-         :ensure t)
+       (use-package ox-twbs)
      #+END_SRC
    - MediaWiki
      #+BEGIN_SRC emacs-lisp
-       (use-package ox-mediawiki
-         :ensure t)
+       (use-package ox-mediawiki)
      #+END_SRC

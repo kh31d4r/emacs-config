@@ -11,6 +11,7 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
+(setq use-package-always-ensure t)
 
 ;; load custom settings from settings.org
 (org-babel-load-file (expand-file-name "settings.org" user-emacs-directory))
