@@ -1209,6 +1209,11 @@
    #+BEGIN_SRC emacs-lisp
      (setq org-special-ctrl-a/e 'first)
    #+END_SRC
+
+   Make =TAB= align text to headers.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-adapt-indentation t)
+   #+END_SRC
 ** Notes
    Log notes in the =NOTES= drawer, and add it as a drawer.
    #+BEGIN_SRC emacs-lisp
