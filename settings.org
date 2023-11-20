@@ -564,6 +564,7 @@
                (lambda ()
                  (local-set-key (kbd "C-c C-v") 'eval-buffer)))
    #+END_SRC
+
    Use paredit for editing elisp.
    #+BEGIN_SRC emacs-lisp
      (use-package paredit
