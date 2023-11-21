@@ -4,6 +4,7 @@
 *~
 .cask
 .fonts-updated
+.lsp*
 .mc-lists.el
 .python-environments
 ac-comphist.dat
