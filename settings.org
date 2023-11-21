@@ -690,13 +690,12 @@
      (add-hook 'sh-mode-hook 'flycheck-mode)
    #+END_SRC
 ** Web
-   Use web mode for =html= and =css=, and make closing tags feel more
-   like =nxml-mode=.
+   Use web mode for =html=, and make closing tags feel more like
+   =nxml-mode=.
    #+BEGIN_SRC emacs-lisp
      (use-package web-mode
        :mode
-       (("\\.html\\'" . web-mode)
-        ("\\.css\\'" . web-mode))
+       (("\\.html\\'" . web-mode))
        :config
        (add-hook 'web-mode-hook
                  (lambda ()
