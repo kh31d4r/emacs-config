@@ -588,7 +588,8 @@
      (use-package typescript-mode
        :mode (("\\.ts\\'" . typescript-mode)
               ("\\.js\\'" . typescript-mode))
-       :hook (typescript-mode . lsp-deferred))
+       :hook (typescript-mode . lsp-deferred)
+       :config (setq typescript-indent-level 2))
    #+END_SRC
 ** Lisp
    Eval the current buffer with =C-c C-v=.
