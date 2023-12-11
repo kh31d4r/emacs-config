@@ -792,14 +792,14 @@
 ** JSON
    Indent JSON files with two spaces.
    #+BEGIN_SRC emacs-lisp
-     (add-hook 'json-mode-hook (lambda ()
-                                 (setq js-indent-level 2)))
+     (add-hook 'js-json-mode-hook (lambda ()
+                                    (setq js-indent-level 2)))
    #+END_SRC
    Use =flycheck= to validate JSON files.
    #+BEGIN_SRC emacs-lisp
-     (add-hook 'json-mode-hook (lambda ()
-                                 (flycheck-mode 1)
-                                 (setq flycheck-checker 'json-python-json)))
+     (add-hook 'js-json-mode-hook (lambda ()
+                                    (flycheck-mode 1)
+                                    (setq flycheck-checker 'json-python-json)))
    #+END_SRC
 ** Markdown
    Use =markdown-mode= for editing markdown files.
