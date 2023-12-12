@@ -1326,6 +1326,11 @@
      (setq org-latex-prefer-user-labels t)
    #+END_SRC
 
+   Remove the ugly red borders around links.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-export-latex-hyperref-format "\\ref{%s}")
+   #+END_SRC
+
    Add more export engines:
    - Twitter bootstrap
      #+BEGIN_SRC emacs-lisp
