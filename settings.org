@@ -140,99 +140,104 @@
                                            (helm-buffers-list)))))
    #+END_SRC
 
-   Change "yes or no" to "y or n".
-   #+BEGIN_SRC emacs-lisp
-     (fset 'yes-or-no-p 'y-or-n-p)
-   #+END_SRC
 
-   Don't ask for command when running compile.
-   #+BEGIN_SRC emacs-lisp
-     (setq compilation-read-command nil)
-   #+END_SRC
+*** Compilation
+    Don't ask for command when running compile.
+    #+BEGIN_SRC emacs-lisp
+      (setq compilation-read-command nil)
+    #+END_SRC
 
-   Follow the compilation buffer until the first error.
-   #+BEGIN_SRC emacs-lisp
-     (setq compilation-scroll-output 'first-error)
-   #+END_SRC
+    Follow the compilation buffer until the first error.
+    #+BEGIN_SRC emacs-lisp
+      (setq compilation-scroll-output 'first-error)
+    #+END_SRC
 
-   Colorize compilation buffers.
-   #+BEGIN_SRC emacs-lisp
-     (ansi-color-for-comint-mode-on)
-     (add-hook 'compilation-filter-hook
-               (lambda ()
-                 (when (eq major-mode 'compilation-mode)
-                   (save-excursion
-                     (ansi-color-apply-on-region compilation-filter-start (point))))))
-   #+END_SRC
+    Colorize compilation buffers.
+    #+BEGIN_SRC emacs-lisp
+      (ansi-color-for-comint-mode-on)
+      (add-hook 'compilation-filter-hook
+                (lambda ()
+                  (when (eq major-mode 'compilation-mode)
+                    (save-excursion
+                      (ansi-color-apply-on-region compilation-filter-start (point))))))
+    #+END_SRC
+*** Quality of Life
+    Change "yes or no" to "y or n".
+    #+BEGIN_SRC emacs-lisp
+      (fset 'yes-or-no-p 'y-or-n-p)
+    #+END_SRC
 
-   Don't ask before opening large files.
-   #+BEGIN_SRC emacs-lisp
-     (setq large-file-warning-threshold 200000000)
-   #+END_SRC
+    Don't ask before opening large files.
+    #+BEGIN_SRC emacs-lisp
+      (setq large-file-warning-threshold 200000000)
+    #+END_SRC
 
-   Add newlines at the end of files that don't have them.
-   #+BEGIN_SRC emacs-lisp
-     (setq require-final-newline t)
-   #+END_SRC
+    Add newlines at the end of files that don't have them.
+    #+BEGIN_SRC emacs-lisp
+      (setq require-final-newline t)
+    #+END_SRC
 
-   Enable =auto-revert-mode= when viewing documents, to automatically
-   refresh them in case they change externally or get re-generated.
+    Enable =auto-revert-mode= when viewing documents, to automatically
+    refresh them in case they change externally or get re-generated.
 
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'doc-view-mode-hook (lambda ()
-                                     (auto-revert-mode 1)))
-   #+END_SRC
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'doc-view-mode-hook (lambda ()
+                                      (auto-revert-mode 1)))
+    #+END_SRC
 
-   Don't save backups in current working directory.
-   #+BEGIN_SRC emacs-lisp
-     (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
-   #+END_SRC
+*** Local Customization Handling
+    Write customizations to =custom.el= instead of =init.el= to avoid
+    accidentally committing them. Also create the file if it doesn't
+    exist, to avoid having to commit an empty file (and thus making it
+    useless to add it to =.gitignore=).
+    #+BEGIN_SRC emacs-lisp
+      (setq custom-file "~/.emacs.d/custom.el")
+      (unless (file-exists-p custom-file)
+        (write-region "" nil custom-file))
+      (load custom-file)
+    #+END_SRC
 
-   Use version numbers for the backups.
-   #+BEGIN_SRC emacs-lisp
-     (setq version-control t)
-   #+END_SRC
+*** Backups and Autosaves
+    Don't save backups in current working directory.
+    #+BEGIN_SRC emacs-lisp
+      (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+    #+END_SRC
 
-   Don't ask when removing old backups.
-   #+BEGIN_SRC emacs-lisp
-     (setq delete-old-versions t)
-   #+END_SRC
+    Use version numbers for the backups.
+    #+BEGIN_SRC emacs-lisp
+      (setq version-control t)
+    #+END_SRC
 
-   Don't save autosaves in current working directory.
-   #+BEGIN_SRC emacs-lisp
-     (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
-     (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
-   #+END_SRC
+    Don't ask when removing old backups.
+    #+BEGIN_SRC emacs-lisp
+      (setq delete-old-versions t)
+    #+END_SRC
 
-   Write customizations to =custom.el= instead of =init.el= to avoid
-   accidentally committing them. Also create the file if it doesn't
-   exist, to avoid having to commit an empty file (and thus making it
-   useless to add it to =.gitignore=).
-   #+BEGIN_SRC emacs-lisp
-     (setq custom-file "~/.emacs.d/custom.el")
-     (unless (file-exists-p custom-file)
-       (write-region "" nil custom-file))
-     (load custom-file)
-   #+END_SRC
+    Don't save autosaves in current working directory.
+    #+BEGIN_SRC emacs-lisp
+      (setq auto-save-list-file-prefix "~/.emacs.d/autosave/")
+      (setq auto-save-file-name-transforms '((".*" "~/.emacs.d/autosave/" t)))
+    #+END_SRC
 
-   Use 24hr clock, and display time and date in a sane way.
-   #+BEGIN_SRC emacs-lisp
-     (setq display-time-24hr-format t)
-     (setq display-time-format "%H:%M - %d %B %Y")
-     (display-time-mode t)
-   #+END_SRC
+*** Localization
+    Use 24hr clock, and display time and date in a sane way.
+    #+BEGIN_SRC emacs-lisp
+      (setq display-time-24hr-format t)
+      (setq display-time-format "%H:%M - %d %B %Y")
+      (display-time-mode t)
+    #+END_SRC
 
-   Weeks start on monday.
-   #+BEGIN_SRC emacs-lisp
-     (setq calendar-week-start-day 1)
-   #+END_SRC
+    Weeks start on monday.
+    #+BEGIN_SRC emacs-lisp
+      (setq calendar-week-start-day 1)
+    #+END_SRC
 
-   Use =UTF-8= everywhere.
-   #+BEGIN_SRC emacs-lisp
-     (set-terminal-coding-system 'utf-8)
-     (set-keyboard-coding-system 'utf-8)
-     (prefer-coding-system 'utf-8)
-   #+END_SRC
+    Use =UTF-8= everywhere.
+    #+BEGIN_SRC emacs-lisp
+      (set-terminal-coding-system 'utf-8)
+      (set-keyboard-coding-system 'utf-8)
+      (prefer-coding-system 'utf-8)
+    #+END_SRC
 ** Editing
    Indent with 4 spaces instead of tabs.
    #+BEGIN_SRC emacs-lisp
