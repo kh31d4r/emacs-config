@@ -1320,6 +1320,12 @@
      (setq org-latex-pdf-process
            '("latexmk -pdflatex=xelatex -shell-escape -interaction=nonstopmode -pdf -f %f"))
    #+END_SRC
+
+   Enable using custom ids as labels for references within a document.
+   #+BEGIN_SRC emacs-lisp
+     (setq org-latex-prefer-user-labels t)
+   #+END_SRC
+
    Add more export engines:
    - Twitter bootstrap
      #+BEGIN_SRC emacs-lisp
