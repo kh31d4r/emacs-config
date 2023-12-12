@@ -1329,3 +1329,17 @@
      #+BEGIN_SRC emacs-lisp
        (use-package ox-mediawiki)
      #+END_SRC
+** Work
+   Add the ericsson2 document class to enable writing ericsson
+   documents. Requires the document class to be installed in the
+   system.
+   #+BEGIN_SRC emacs-lisp
+     (add-to-list 'org-latex-classes
+                  '("ericsson2"
+                    "\\documentclass{ericsson2}"
+                    ("\\section{%s}" . "\\section*{%s}")
+                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+   #+END_SRC
