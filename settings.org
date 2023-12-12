@@ -140,6 +140,23 @@
                                            (helm-buffers-list)))))
    #+END_SRC
 
+   Load the following environment variables from the shell into the
+   emacs process environment:
+   - =SSH_AUTH_SOCK= and =SSH_AGENT_PID= to make SSH Agents work
+   - =GPG_AGENT_INFO= to make the GNU Privacy Guard work
+   - =LAND= and =LC_CTYPE= for localization
+   - =TEXINPUTS= and =BSTINPUTS= to make LaTeX work
+
+   Additionally, =exec-path-from-shell= will load some more variables,
+   like =PATH= and a few others.
+
+   #+BEGIN_SRC emacs-lisp
+     (use-package exec-path-from-shell
+       :config
+       (dolist (envvar '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "TEXINPUTS" "BSTINPUTS"))
+         (add-to-list 'exec-path-from-shell-variables envvar))
+       (exec-path-from-shell-initialize))
+   #+END_SRC
 
 *** Compilation
     Don't ask for command when running compile.
