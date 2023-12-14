@@ -484,11 +484,14 @@
        (setq magit-diff-refine-hunk 'all))
    #+END_SRC
 
-   Enable =flyspell-mode= when writing git commit messages.
+   Enable =flyspell-mode= and =auto-fill-mode= when writing git commit
+   messages, to do spellchecking and limit the width of commit
+   messages.
    #+BEGIN_SRC emacs-lisp
      (add-hook 'git-commit-mode-hook
                (lambda ()
-                 (flyspell-mode)))
+                 (flyspell-mode)
+                 (auto-fill-mode 1)))
    #+END_SRC
 
    Use =git-messenger= for fast inline blame.
