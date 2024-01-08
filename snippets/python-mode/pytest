@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pytest
+# key: pt
+# --
+def test_$1():
+    """$2"""
+    $0
