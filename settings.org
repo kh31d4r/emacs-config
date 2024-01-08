@@ -653,6 +653,17 @@
                                   (flycheck-mode)
                                   (setq flycheck-checker 'lua-luacheck))))
    #+END_SRC
+** Nginx Config
+   Not a programming mode, but uses =lsp-mode=. Requires the python
+   package =nginx-language-server= to be installed.
+   #+BEGIN_SRC emacs-lisp
+          (use-package nginx-mode
+            :ensure t)
+          (use-package company-nginx
+            :ensure t
+            :config (add-hook 'nginx-mode-hook (lambda ()
+                                                 (add-to-list 'company-backends #'company-nginx))))
+   #+END_SRC
 ** Python
    Use =jedi= as autocompletion engine for company, and bind hotkeys
    for goto definition and show documentation.
