@@ -1019,23 +1019,6 @@
           (mu4e-compose-goto-top)
           (insert text))))
 
-    (defun mu4e-compose-org-mail-from-section ()
-      "Create an org-mu4e-org-mode mail, containing the current org section"
-      (interactive)
-      (org-mark-subtree)
-      (mu4e-compose-org-mail-from-region))
-
-    (defun mu4e-compose-org-mail-from-region ()
-      "Create an org-mu4e-org-mode mail, containing the region, if active"
-      (interactive)
-      (let ((text (active-region-or-empty-string)))
-        (mu4e-compose-new)
-        (org-mu4e-compose-org-mode)
-        (save-excursion
-          (mu4e-compose-goto-top)
-          (insert "#+OPTIONS: toc:nil num:nil\n")
-          (insert text))))
-
     (defun active-region-or-empty-string ()
       (if (use-region-p)
           (buffer-substring-no-properties (mark) (point))
@@ -1089,14 +1072,7 @@
             (setq starttls-use-gnutls t
                   message-send-mail-function 'smtpmail-send-it
                   smtpmail-stream-type 'starttls)
-            (load (expand-file-name "smtp_settings.el" user-emacs-directory)))
-
-          (use-package org-mu4e
-            :bind
-            ("C-c m o" . 'mu4e-compose-org-mail-from-region)
-            ("C-c m s" . 'mu4e-compose-org-mail-from-section)
-            :config
-            (setq org-mu4e-convert-to-html t))))
+            (load (expand-file-name "smtp_settings.el" user-emacs-directory)))))
   #+END_SRC
 * Org mode
   Use =auto-fill-mode= for org documents, so they will not grow too
