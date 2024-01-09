@@ -1059,39 +1059,30 @@
                   mu4e-use-fancy-chars t
                   mu4e-sent-messages-behavior 'sent
                   mu4e-compose-signature "\n/d"
-                  mu4e-bookmarks
-                  `( ,(make-mu4e-bookmark
-                       :name "Unread Messages"
-                       :query "flag:unread"
-                       :key ?u)
-                     ,(make-mu4e-bookmark
-                       :name "All Inbox Messages"
-                       :query "maildir:/"
-                       :key ?i)
-                     ,(make-mu4e-bookmark
-                       :name "Emacs Mailinglist"
-                       :query "maildir:/Emacs"
-                       :key ?e)
-                     ,(make-mu4e-bookmark
-                       :name "Git Mailinglist"
-                       :query "maildir:/Git"
-                       :key ?g)
-                     ,(make-mu4e-bookmark
-                       :name "Archive"
-                       :query "maildir:/Archive"
-                       :key ?a)
-                     ,(make-mu4e-bookmark
-                       :name "Pending"
-                       :query "maildir:/Pending"
-                       :key ?p)
-                     ,(make-mu4e-bookmark
-                       :name "Trash"
-                       :query "maildir:/Trash"
-                       :key ?t)
-                     ,(make-mu4e-bookmark
-                       :name "Sent"
-                       :query "maildir:/Sent"
-                       :key ?s))))
+                  mu4e-bookmarks '((:name "Unread Messages"
+                                    :query "flag:unread"
+                                    :key ?u)
+                                   (:name "All Inbox Messages"
+                                    :query "maildir:/"
+                                    :key ?i)
+                                   (:name "Emacs Mailinglist"
+                                    :query "maildir:/Emacs"
+                                    :key ?e)
+                                   (:name "Git Mailinglist"
+                                    :query "maildir:/Git"
+                                    :key ?g)
+                                   (:name "Archive"
+                                    :query "maildir:/Archive"
+                                    :key ?a)
+                                   (:name "Pending"
+                                    :query "maildir:/Pending"
+                                    :key ?p)
+                                   (:name "Trash"
+                                    :query "maildir:/Trash"
+                                    :key ?t)
+                                   (:name "Sent"
+                                    :query "maildir:/Sent"
+                                    :key ?s))))
 
           (use-package smtpmail
             :config
