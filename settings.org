@@ -127,17 +127,17 @@
        ("C-c SPC" . projectile-test-project))
 
      (use-package helm-projectile
-       :config
-       (global-set-key (kbd "C-x f") (lambda ()
-                                         (interactive)
-                                         (if (projectile-project-p)
-                                             (helm-projectile-find-file)
-                                           (helm-for-files))))
-       (global-set-key (kbd "C-x C-b") (lambda ()
-                                         (interactive)
-                                         (if (projectile-project-p)
-                                             (helm-projectile-switch-to-buffer)
-                                           (helm-buffers-list)))))
+       :bind
+       ("C-x f" . (lambda ()
+                    (interactive)
+                    (if (projectile-project-p)
+                        (helm-projectile-find-file)
+                      (helm-for-files))))
+       ("C-x C-b" . (lambda ()
+                      (interactive)
+                      (if (projectile-project-p)
+                          (helm-projectile-switch-to-buffer)
+                        (helm-buffers-list)))))
    #+END_SRC
 
    Load the following environment variables from the shell into the
@@ -1052,6 +1052,9 @@
         (progn
           (use-package mu4e
             :load-path "/usr/local/share/emacs/site-lisp/mu4e"
+            :bind
+            ("C-c m m" . 'mu4e-fetch-mail-and-mu4e)
+            ("C-c m n" . 'mu4e-compose-mail-from-region)
             :config
             (setq mu4e-maildir "~/maildir"
                   mu4e-sent-folder "/Sent"
@@ -1095,9 +1098,7 @@
                      ,(make-mu4e-bookmark
                        :name "Sent"
                        :query "maildir:/Sent"
-                       :key ?s)))
-            (global-set-key (kbd "C-c m m") 'mu4e-fetch-mail-and-mu4e)
-            (global-set-key (kbd "C-c m n") 'mu4e-compose-mail-from-region))
+                       :key ?s))))
 
           (use-package smtpmail
             :config
@@ -1107,10 +1108,11 @@
             (load (expand-file-name "smtp_settings.el" user-emacs-directory)))
 
           (use-package org-mu4e
+            :bind
+            ("C-c m o" . 'mu4e-compose-org-mail-from-region)
+            ("C-c m s" . 'mu4e-compose-org-mail-from-section)
             :config
-            (setq org-mu4e-convert-to-html t)
-            (global-set-key (kbd "C-c m o") 'mu4e-compose-org-mail-from-region)
-            (global-set-key (kbd "C-c m s") 'mu4e-compose-org-mail-from-section))))
+            (setq org-mu4e-convert-to-html t))))
   #+END_SRC
 * Org mode
   Use =auto-fill-mode= for org documents, so they will not grow too
