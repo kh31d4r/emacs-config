@@ -110,11 +110,11 @@
    traversing through directories easier.
    #+BEGIN_SRC emacs-lisp
      (use-package helm
-       :bind (("C-x C-f" . helm-find-files)
-              ("C-x b" . helm-buffers-list)
-              ("M-x" . helm-M-x)
-              ("M-y" . helm-show-kill-ring)
-              ("C-x r b" . helm-bookmarks))
+       :bind* (("C-x C-f" . helm-find-files)
+               ("C-x b" . helm-buffers-list)
+               ("M-x" . helm-M-x)
+               ("M-y" . helm-show-kill-ring)
+               ("C-x r b" . helm-bookmarks))
        :config (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action))
    #+END_SRC
 
@@ -122,12 +122,12 @@
    interface.
    #+BEGIN_SRC emacs-lisp
      (use-package projectile
-       :bind
+       :bind*
        ("C-c RET" . projectile-compile-project)
        ("C-c SPC" . projectile-test-project))
 
      (use-package helm-projectile
-       :bind
+       :bind*
        ("C-x f" . (lambda ()
                     (interactive)
                     (if (projectile-project-p)
@@ -289,7 +289,7 @@
        (define-key company-active-map (kbd "C-n") 'company-select-next)
        (define-key company-active-map (kbd "C-p") 'company-select-previous)
        (define-key company-active-map (kbd "TAB") 'company-abort)
-       :bind ("M-a" . company-complete))
+       :bind* ("M-a" . company-complete))
 
      (use-package company-posframe
        :hook (company-mode . company-posframe-mode))
@@ -307,13 +307,13 @@
    Enable =expand-region=.
    #+BEGIN_SRC emacs-lisp
      (use-package expand-region
-       :bind ("M-e" . er/expand-region))
+       :bind* ("M-e" . er/expand-region))
    #+END_SRC
 
    Enable =multiple-cursors=.
    #+BEGIN_SRC emacs-lisp
      (use-package multiple-cursors
-       :bind ("M-n" . mc/mark-next-like-this-word))
+       :bind* ("M-n" . mc/mark-next-like-this-word))
    #+END_SRC
 
    Don't disable upper and lowercase region, and use the =-dwim=
@@ -321,13 +321,13 @@
    #+BEGIN_SRC emacs-lisp
      (put 'downcase-region 'disabled nil)
      (put 'upcase-region 'disabled nil)
-     (bind-key "M-u" 'upcase-dwim)
-     (bind-key "M-l" 'downcase-dwim)
+     (bind-key* "M-u" 'upcase-dwim)
+     (bind-key* "M-l" 'downcase-dwim)
    #+END_SRC
 
    Bind =C-c i= to spellcheck.
    #+BEGIN_SRC emacs-lisp
-     (bind-key "C-c i" 'ispell-word)
+     (bind-key* "C-c i" 'ispell-word)
    #+END_SRC
 
    Bind =C-c TAB= to =cleanup-tabs-whitespace=, that removes trailing
@@ -338,13 +338,13 @@
        (whitespace-cleanup)
        (untabify (point-min) (point-max)))
 
-     (bind-key "C-c TAB" 'cleanup-tabs-whitespace)
+     (bind-key* "C-c TAB" 'cleanup-tabs-whitespace)
    #+END_SRC
 
    Reload the current buffer from disk with =C-v=. Only prompt for
    confimation if the buffer was modified.
    #+BEGIN_SRC emacs-lisp
-     (bind-key "C-v" (lambda ()
+     (bind-key* "C-v" (lambda ()
                        (interactive)
                        (revert-buffer t (not (buffer-modified-p)) t)))
    #+END_SRC
@@ -373,10 +373,10 @@
         (replace-match (number-to-string
                         (funcall manipulation-func (string-to-number (match-string 0))))))
 
-      (bind-key "M-+" (lambda ()
+      (bind-key* "M-+" (lambda ()
                         (interactive)
                         (manipulate-number-at-point #'1+)))
-      (bind-key "M--" (lambda ()
+      (bind-key* "M--" (lambda ()
                         (interactive)
                         (manipulate-number-at-point #'1-)))
     #+END_SRC
@@ -406,13 +406,13 @@
    Enable fast jumping between windows when using more than 2 windows.
    #+BEGIN_SRC emacs-lisp
      (use-package ace-window
-       :bind ("C-x o" . ace-window))
+       :bind* ("C-x o" . ace-window))
    #+END_SRC
 
    Enable fast and exact jumping across the screen by binding =M-s= to =ace-jump-mode=.
    #+BEGIN_SRC emacs-lisp
      (use-package ace-jump-mode
-       :bind ("M-s" . ace-jump-mode))
+       :bind* ("M-s" . ace-jump-mode))
    #+END_SRC
 
    Use =rotate= to change between window layouts using =C-c r= and a
@@ -431,7 +431,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (defun set-rotate-key (mnemonic layout)
-       (bind-key (concat "C-c r" mnemonic) layout))
+       (bind-key* (concat "C-c r" mnemonic) layout))
 
      (use-package rotate
        :config
@@ -465,9 +465,9 @@
          (helm-ag)))
 
      (use-package helm-ag
-       :bind ("C-c s" . helm-projectile-ag-dwim))
+       :bind* ("C-c s" . helm-projectile-ag-dwim))
      (use-package helm-rg
-       :bind ("C-c C-s" . helm-projectile-rg-dwim))
+       :bind* ("C-c C-s" . helm-projectile-rg-dwim))
    #+END_SRC
 ** Version Control
    Use =magit= as git interface:
@@ -482,7 +482,7 @@
          (delete-other-windows)))
 
      (use-package magit
-       :bind (("C-c g" . magit-status-fullscreen))
+       :bind* (("C-c g" . magit-status-fullscreen))
        :config
        (setq magit-diff-refine-hunk 'all))
    #+END_SRC
@@ -500,7 +500,7 @@
    Use =git-messenger= for fast inline blame.
    #+BEGIN_SRC emacs-lisp
      (use-package git-messenger
-       :bind ("C-c b" . git-messenger:popup-message))
+       :bind* ("C-c b" . git-messenger:popup-message))
    #+END_SRC
 
    Highlight changed lines in the fringe with =diff-hl-mode= and
@@ -935,7 +935,7 @@
    controlling docker containers.
    #+BEGIN_SRC emacs-lisp
      (use-package docker
-       :bind ("C-c d" . docker))
+       :bind* ("C-c d" . docker))
    #+END_SRC
 ** Restclient
    Use =restclient-mode= when in =.rest= files to send rest requests.
@@ -979,8 +979,8 @@
        (interactive)
        (launch-shell "default"))
 
-     (bind-key "C-x t" 'launch-default-shell)
-     (bind-key "C-x C-t" 'launch-shell)
+     (bind-key* "C-x t" 'launch-default-shell)
+     (bind-key* "C-x C-t" 'launch-shell)
    #+END_SRC
 
    Disable =beacon-mode= in shell buffers.
@@ -1285,13 +1285,13 @@
    Bind  =C-c a= to =org-agenda= globally, so the agenda can be pulled up from
    anywhere.
    #+BEGIN_SRC emacs-lisp
-     (bind-key "C-c a" 'org-agenda)
+     (bind-key* "C-c a" 'org-agenda)
    #+END_SRC
 
    Bind =C-c c= to =org-capture= globally, to be able to capture from
    any mode.
    #+BEGIN_SRC emacs-lisp
-     (bind-key "C-c c" 'org-capture)
+     (bind-key* "C-c c" 'org-capture)
    #+END_SRC
 
    Make =C-a= and =C-e= ignore leading stars and trailing
