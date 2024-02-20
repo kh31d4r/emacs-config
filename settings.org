@@ -298,7 +298,10 @@
    Enable snippets for all modes.
    #+BEGIN_SRC emacs-lisp
      (use-package yasnippet
-       :config (yas-global-mode 1))
+       :config
+       (yas-global-mode 1)
+       (add-hook 'company-mode-hook (lambda ()
+                                      (add-to-list 'company-backends 'company-yasnippet))))
    #+END_SRC
 
    Enable =expand-region=.
