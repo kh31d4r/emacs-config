@@ -74,7 +74,7 @@
     numbers with =C-c l=.
     #+BEGIN_SRC emacs-lisp
       (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-      (global-set-key (kbd "C-c l") 'display-line-numbers-mode)
+      (bind-key* "C-c l" 'display-line-numbers-mode)
     #+END_SRC
 
     Show possible next key combinations.
@@ -321,13 +321,13 @@
    #+BEGIN_SRC emacs-lisp
      (put 'downcase-region 'disabled nil)
      (put 'upcase-region 'disabled nil)
-     (global-set-key (kbd "M-u") 'upcase-dwim)
-     (global-set-key (kbd "M-l") 'downcase-dwim)
+     (bind-key "M-u" 'upcase-dwim)
+     (bind-key "M-l" 'downcase-dwim)
    #+END_SRC
 
    Bind =C-c i= to spellcheck.
    #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-c i") 'ispell-word)
+     (bind-key "C-c i" 'ispell-word)
    #+END_SRC
 
    Bind =C-c TAB= to =cleanup-tabs-whitespace=, that removes trailing
@@ -338,15 +338,15 @@
        (whitespace-cleanup)
        (untabify (point-min) (point-max)))
 
-     (global-set-key (kbd "C-c TAB") 'cleanup-tabs-whitespace)
+     (bind-key "C-c TAB" 'cleanup-tabs-whitespace)
    #+END_SRC
 
    Reload the current buffer from disk with =C-v=. Only prompt for
    confimation if the buffer was modified.
    #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-v") (lambda ()
-                                   (interactive)
-                                   (revert-buffer t (not (buffer-modified-p)) t)))
+     (bind-key "C-v" (lambda ()
+                       (interactive)
+                       (revert-buffer t (not (buffer-modified-p)) t)))
    #+END_SRC
 
    Bind =C-x e= to =eval-and-replace=, which evaluates the current
@@ -360,7 +360,7 @@
                   (current-buffer))
          (error (message "Invalid expression")
                 (insert (current-kill 0)))))
-      (global-set-key (kbd "C-x e") 'eval-and-replace)
+      (bind-key "C-x e" 'eval-and-replace)
    #+END_SRC
 *** Number manipulation
     Bind =M-+= and =M--= to incrementing or decrementing the number at point.
@@ -373,12 +373,12 @@
         (replace-match (number-to-string
                         (funcall manipulation-func (string-to-number (match-string 0))))))
 
-      (global-set-key (kbd "M-+") (lambda ()
-                                    (interactive)
-                                    (manipulate-number-at-point #'1+)))
-      (global-set-key (kbd "M--") (lambda ()
-                                    (interactive)
-                                    (manipulate-number-at-point #'1-)))
+      (bind-key "M-+" (lambda ()
+                        (interactive)
+                        (manipulate-number-at-point #'1+)))
+      (bind-key "M--" (lambda ()
+                        (interactive)
+                        (manipulate-number-at-point #'1-)))
     #+END_SRC
 ** Navigation
    Disable moving point by clicking with the mouse to prevent
@@ -431,7 +431,7 @@
 
    #+BEGIN_SRC emacs-lisp
      (defun set-rotate-key (mnemonic layout)
-       (global-set-key (kbd (concat "C-c r" mnemonic)) layout))
+       (bind-key (concat "C-c r" mnemonic) layout))
 
      (use-package rotate
        :config
@@ -979,8 +979,8 @@
        (interactive)
        (launch-shell "default"))
 
-     (global-set-key (kbd "C-x t") 'launch-default-shell)
-     (global-set-key (kbd "C-x C-t") 'launch-shell)
+     (bind-key "C-x t" 'launch-default-shell)
+     (bind-key "C-x C-t" 'launch-shell)
    #+END_SRC
 
    Disable =beacon-mode= in shell buffers.
@@ -1285,13 +1285,13 @@
    Bind  =C-c a= to =org-agenda= globally, so the agenda can be pulled up from
    anywhere.
    #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-c a") 'org-agenda)
+     (bind-key "C-c a" 'org-agenda)
    #+END_SRC
 
    Bind =C-c c= to =org-capture= globally, to be able to capture from
    any mode.
    #+BEGIN_SRC emacs-lisp
-     (global-set-key (kbd "C-c c") 'org-capture)
+     (bind-key "C-c c" 'org-capture)
    #+END_SRC
 
    Make =C-a= and =C-e= ignore leading stars and trailing
