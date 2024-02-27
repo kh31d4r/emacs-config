@@ -512,19 +512,6 @@
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
    #+END_SRC
 * Programming modes
-** Language Server
-   Enable =lsp-mode= to be used by other programming modes for code
-   completion and refactoring and other things.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package lsp-mode
-       :commands (lsp lsp-deferred)
-       :init (setq lsp-keymap-prefix "C-c C-l"))
-
-     (use-package lsp-ui
-       :hook (lsp-mode . lsp-ui-mode))
-   #+END_SRC
-
 ** C/C++
    Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
    #+BEGIN_SRC emacs-lisp
@@ -609,14 +596,14 @@
                                        :test-suffix "Test.java")
    #+END_SRC
 ** Javascript
-   Use =typescript-mode= with =lsp-mode= for editing typescript and
+   Use =typescript-mode= with =eglot= for editing typescript and
    javascript. Requires the NPM packages =typescript= and
    =typescript-language-server= to be installed on the system.
    #+BEGIN_SRC emacs-lisp
      (use-package typescript-mode
        :mode (("\\.ts\\'" . typescript-mode)
               ("\\.js\\'" . typescript-mode))
-       :hook (typescript-mode . lsp-deferred)
+       :hook (typescript-mode . eglot-ensure)
        :config (setq typescript-indent-level 2))
    #+END_SRC
 ** Lisp
