@@ -728,6 +728,18 @@
    #+BEGIN_SRC emacs-lisp
      (add-hook 'sh-mode-hook 'flycheck-mode)
    #+END_SRC
+** SQL
+   Insert a newline before query results to avoid messing with the
+   headers.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook
+      'sql-interactive-mode-hook
+      (lambda ()
+        (add-hook
+         'comint-preoutput-filter-functions
+         (lambda (output)
+           (concat "\n" output)))))
+   #+END_SRC
 ** Web
    Use web mode for =html=, and make closing tags feel more like
    =nxml-mode=.
