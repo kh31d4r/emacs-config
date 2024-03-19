@@ -918,6 +918,13 @@
                                               (add-to-list 'company-backends 'company-ansible)))))
     #+END_SRC
 * Tools
+** Archives
+   Add support for cpio and rpm archives to =archive-mode=, so that
+   their content can be listed just by opening the file, just like a
+   zip or tar archive.
+   #+BEGIN_SRC emacs-lisp
+     (use-package archive-rpm)
+   #+END_SRC
 ** Docker
    Enable syntax highlighting when writing Dockerfiles.
    #+BEGIN_SRC emacs-lisp
