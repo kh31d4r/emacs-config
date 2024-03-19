@@ -512,283 +512,284 @@
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
    #+END_SRC
 * Programming modes
-** C/C++
-   Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
-   #+BEGIN_SRC emacs-lisp
-     (setq c-default-style "bsd")
-   #+END_SRC
-
-   Set indentation level to 4.
-   #+BEGIN_SRC emacs-lisp
-     (setq c-basic-offset 4)
-   #+END_SRC
-
-   Use =irony-mode= and =company-irony= to provide smart code
-   completion. As =irony-mode= will install the =irony-server= on
-   first start after installation, the following OS packages must be
-   installed:
-   | Package        | Version  |
-   |----------------+----------|
-   | =cmake=        | >= 2.8.3 |
-   | =libclang-dev= |          |
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package irony
-       :config
-       (add-hook 'c-mode-hook 'irony-mode)
-       (add-hook 'c++-mode-hook 'irony-mode)
-       (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
-     (use-package company-irony
-       :config (add-hook 'irony-mode-hook (lambda ()
-                                            (add-to-list 'company-backends 'company-irony))))
-
-     (use-package company-c-headers
-       :config (add-hook 'irony-mode-hook (lambda ()
-                                            (add-to-list 'company-backends 'company-c-headers))))
-   #+END_SRC
-
-  Use =flycheck= for syntax and style checking.
-  #+BEGIN_SRC emacs-lisp
-    (add-hook 'c-mode-hook 'flycheck-mode)
-    (add-hook 'c++-mode-hook 'flycheck-mode)
-  #+END_SRC
-*** CMake
-    Use =cmake-mode= for providing indentation and syntax highlighting
-    when writing cmake files.
+** Languages
+*** C/C++
+    Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
     #+BEGIN_SRC emacs-lisp
-      (use-package cmake-mode)
+      (setq c-default-style "bsd")
     #+END_SRC
 
-    Use =eldoc-cmake= for quick and discreet access to =cmake=
-    documentation.
+    Set indentation level to 4.
     #+BEGIN_SRC emacs-lisp
-      (use-package eldoc-cmake
-        :config (add-hook 'cmake-mode-hook (lambda ()
-                                             (eldoc-cmake-enable))))
+      (setq c-basic-offset 4)
     #+END_SRC
-*** Arduino
-    Use =c++-mode= for arduino sketch files.
+
+    Use =irony-mode= and =company-irony= to provide smart code
+    completion. As =irony-mode= will install the =irony-server= on
+    first start after installation, the following OS packages must be
+    installed:
+    | Package        | Version  |
+    |----------------+----------|
+    | =cmake=        | >= 2.8.3 |
+    | =libclang-dev= |          |
+
     #+BEGIN_SRC emacs-lisp
-      (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+      (use-package irony
+        :config
+        (add-hook 'c-mode-hook 'irony-mode)
+        (add-hook 'c++-mode-hook 'irony-mode)
+        (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+      (use-package company-irony
+        :config (add-hook 'irony-mode-hook (lambda ()
+                                             (add-to-list 'company-backends 'company-irony))))
+
+      (use-package company-c-headers
+        :config (add-hook 'irony-mode-hook (lambda ()
+                                             (add-to-list 'company-backends 'company-c-headers))))
     #+END_SRC
 
-    Define projectile project type for platformio projects, including
-    compile and upload commands and project marker files. Requires
-    =[[https://docs.platformio.org/en/latest/core.html][PlatformIO]]= to be installed and configured.
+   Use =flycheck= for syntax and style checking.
+   #+BEGIN_SRC emacs-lisp
+     (add-hook 'c-mode-hook 'flycheck-mode)
+     (add-hook 'c++-mode-hook 'flycheck-mode)
+   #+END_SRC
+**** CMake
+     Use =cmake-mode= for providing indentation and syntax highlighting
+     when writing cmake files.
+     #+BEGIN_SRC emacs-lisp
+       (use-package cmake-mode)
+     #+END_SRC
+
+     Use =eldoc-cmake= for quick and discreet access to =cmake=
+     documentation.
+     #+BEGIN_SRC emacs-lisp
+       (use-package eldoc-cmake
+         :config (add-hook 'cmake-mode-hook (lambda ()
+                                              (eldoc-cmake-enable))))
+     #+END_SRC
+**** Arduino
+     Use =c++-mode= for arduino sketch files.
+     #+BEGIN_SRC emacs-lisp
+       (add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+     #+END_SRC
+
+     Define projectile project type for platformio projects, including
+     compile and upload commands and project marker files. Requires
+     =[[https://docs.platformio.org/en/latest/core.html][PlatformIO]]= to be installed and configured.
+     #+BEGIN_SRC emacs-lisp
+       (projectile-register-project-type 'platformio '("platformio.ini")
+                                              :compile "platformio run -t upload"
+                                              :test "platformio run")
+       (add-to-list 'projectile-project-root-files "platformio.ini")
+     #+END_SRC
+*** Cucumber
+    Use =feature-mode= to edit =cucumber= files.
     #+BEGIN_SRC emacs-lisp
-      (projectile-register-project-type 'platformio '("platformio.ini")
-                                             :compile "platformio run -t upload"
-                                             :test "platformio run")
-      (add-to-list 'projectile-project-root-files "platformio.ini")
+      (use-package feature-mode)
     #+END_SRC
-** Cucumber
-   Use =feature-mode= to edit =cucumber= files.
-   #+BEGIN_SRC emacs-lisp
-     (use-package feature-mode)
-   #+END_SRC
-** Java
-   Define maven commands for projectile.
-   #+BEGIN_SRC emacs-lisp
-     (projectile-register-project-type 'maven '("pom.xml")
-                                       :compile "mvn clean install"
-                                       :test "mvn clean test"
-                                       :test-suffix "Test.java")
-   #+END_SRC
-** Javascript
-   Use =typescript-mode= with =eglot= for editing typescript and
-   javascript. Requires the NPM packages =typescript= and
-   =typescript-language-server= to be installed on the system.
-   #+BEGIN_SRC emacs-lisp
-     (use-package typescript-mode
-       :mode (("\\.ts\\'" . typescript-mode)
-              ("\\.js\\'" . typescript-mode))
-       :hook (typescript-mode . eglot-ensure)
-       :config (setq typescript-indent-level 2))
-   #+END_SRC
-** Lisp
-   Eval the current buffer with =C-c C-v=.
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'emacs-lisp-mode-hook
-               (lambda ()
-                 (local-set-key (kbd "C-c C-v") 'eval-buffer)))
-   #+END_SRC
-
-   Use paredit for editing elisp.
-   #+BEGIN_SRC emacs-lisp
-     (use-package paredit
-       :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
-   #+END_SRC
-
-   Turn on =eldoc= to get fast access to function signatures.
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-     (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-   #+END_SRC
-
-   Show parentheses in different colors to easier pair them together.
-   #+BEGIN_SRC emacs-lisp
-     (use-package rainbow-delimiters
-       :config
-       (add-hook 'emacs-lisp-mode-hook (lambda ()
-                                         (rainbow-delimiters-mode))))
-   #+END_SRC
-
-   Use =cask-mode= to edit =[[https://github.com/cask/cask][Cask]]= files.
-   #+BEGIN_SRC emacs-lisp
-     (use-package cask-mode)
-   #+END_SRC
-
-   Enable =ecukes= for writing =cucumber=-like test for emacs lisp,
-   with =espuds= for step definitions aimed at emacs plugin
-   development.
-   #+BEGIN_SRC emacs-lisp
-     (use-package ecukes)
-     (use-package espuds)
-   #+END_SRC
-** Lua
-   Use =lua-mode= to edit lua files and use 4 spaces for indentation.
-   #+BEGIN_SRC emacs-lisp
-     (use-package lua-mode
-       :config (setq lua-indent-level 4))
-   #+END_SRC
-
-   Use =company-lua= for autocompletion.
-   #+BEGIN_SRC emacs-lisp
-     (use-package company-lua
-       :config (add-hook 'lua-mode-hook (lambda ()
-                                          (add-to-list 'company-backends 'company-lua))))
-   #+END_SRC
-
-   Use =flycheck= for linting. Requires =lua-check= installed on the
-   system to work.
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck
-       :config
-       (add-hook 'lua-mode-hook (lambda ()
-                                  (flycheck-mode)
-                                  (setq flycheck-checker 'lua-luacheck))))
-   #+END_SRC
-** Python
-   Use =jedi= as autocompletion engine for company, and bind hotkeys
-   for goto definition and show documentation.
-
-   Needs virtenv installed on the system to work.
-   #+BEGIN_SRC emacs-lisp
-     (use-package jedi
-       :config (add-hook 'python-mode-hook 'jedi:setup)
-       :bind
-       ("C-c j d" . jedi:goto-definition)
-       ("C-c j p" . jedi:goto-definition-pop-marker)
-       ("C-c j h" . jedi:show-doc))
-
-     (use-package company-jedi
-       :config
-       (add-hook 'python-mode-hook (lambda ()
-                                     (add-to-list 'company-backends 'company-jedi))))
-   #+END_SRC
-
-   Use =flycheck= for syntax and style checking. Needs pylint
-   installed on the system to work.
-   #+BEGIN_SRC emacs-lisp
-     (use-package flycheck
-       :config
-       (add-hook 'python-mode-hook (lambda ()
-                                     (flycheck-mode 1)
-                                     (semantic-mode 1)
-                                     (setq flycheck-checker 'python-pylint
-                                           flycheck-checker-error-threshold 900))))
-   #+END_SRC
-
-   Use =pyvenv= to make emacs virtualenv aware, and =pyvenv-auto= to
-   automatically activate the virtualenvs. The virtualenvs should be
-   named =.venv= or =venv= to be automatically detected.
-
-   Obviously requires virtualenv to be installed on the system.
-
-   #+BEGIN_SRC emacs-lisp
-     (use-package pyvenv
-       :bind ("C-c v" . pyvenv-activate))
-     (use-package pyvenv-auto
-       :config
-       (add-hook 'python-mode-hook (lambda ()
-                                     (pyvenv-auto-run))))
-   #+END_SRC
-** Shellscript
-   Use =company-shell= for autocompletion when writing shellscripts.
-   #+BEGIN_SRC emacs-lisp
-     (use-package company-shell
-       :config (add-hook 'sh-mode-hook (lambda ()
-                                         (add-to-list 'company-backends 'company-shell)
-                                         (add-to-list 'company-backends 'company-shell-env))))
-   #+END_SRC
-
-   Turn on =flycheck= for syntax and style checking. Requires
-   =shellcheck= to be installed on the system to work.
-   #+BEGIN_SRC emacs-lisp
-     (add-hook 'sh-mode-hook 'flycheck-mode)
-   #+END_SRC
-** SQL
-   Automatically indent SQL files, right aligned.
-   #+BEGIN_SRC emacs-lisp
-     (use-package sql-indent)
-   #+END_SRC
-
-   Insert a newline before query results to avoid messing with the
-   headers.
-   #+BEGIN_SRC emacs-lisp
-     (add-hook
-      'sql-interactive-mode-hook
-      (lambda ()
-        (add-hook
-         'comint-preoutput-filter-functions
-         (lambda (output)
-           (concat "\n" output)))))
-   #+END_SRC
-** Web
-   Use web mode for =html=, and make closing tags feel more like
-   =nxml-mode=.
-   #+BEGIN_SRC emacs-lisp
-     (use-package web-mode
-       :mode
-       (("\\.html\\'" . web-mode))
-       :config
-       (add-hook 'web-mode-hook
-                 (lambda ()
-                   (local-set-key
-                    (kbd "C-c C-f")
-                    (lambda ()
-                      (interactive)
-                      (web-mode-element-close)
-                      (indent-for-tab-command)))))
-       (setq web-mode-enable-auto-quoting t)
-       (setq web-mode-enable-auto-pairing t)
-       (setq web-mode-enable-auto-closing t))
+*** Java
+    Define maven commands for projectile.
+    #+BEGIN_SRC emacs-lisp
+      (projectile-register-project-type 'maven '("pom.xml")
+                                        :compile "mvn clean install"
+                                        :test "mvn clean test"
+                                        :test-suffix "Test.java")
+    #+END_SRC
+*** Javascript
+    Use =typescript-mode= with =eglot= for editing typescript and
+    javascript. Requires the NPM packages =typescript= and
+    =typescript-language-server= to be installed on the system.
+    #+BEGIN_SRC emacs-lisp
+      (use-package typescript-mode
+        :mode (("\\.ts\\'" . typescript-mode)
+               ("\\.js\\'" . typescript-mode))
+        :hook (typescript-mode . eglot-ensure)
+        :config (setq typescript-indent-level 2))
+    #+END_SRC
+*** Lisp
+    Eval the current buffer with =C-c C-v=.
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'emacs-lisp-mode-hook
+                (lambda ()
+                  (local-set-key (kbd "C-c C-v") 'eval-buffer)))
     #+END_SRC
 
-   Enable emmet mode when in =web-mode= to quickly create elements.
-   #+BEGIN_SRC emacs-lisp
-     (use-package emmet-mode
-       :config (add-hook 'web-mode-hook 'emmet-mode))
-   #+END_SRC
+    Use paredit for editing elisp.
+    #+BEGIN_SRC emacs-lisp
+      (use-package paredit
+        :config (add-hook 'emacs-lisp-mode-hook #'enable-paredit-mode))
+    #+END_SRC
 
-   Start =httpd= when in =web-mode= on port 8085, and enable
-   =impatient-mode=. Point browser to =http://localhost:8085/imp= to
-   see the preview.
-   #+BEGIN_SRC emacs-lisp
-     (use-package impatient-mode
-       :config
-       (add-hook 'impatient-mode-hook (lambda ()
-                                        (setq httpd-port 8085)
-                                        (httpd-start)))
-       (add-hook 'web-mode-hook 'impatient-mode))
-   #+END_SRC
+    Turn on =eldoc= to get fast access to function signatures.
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
+      (add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
+    #+END_SRC
 
-   Enable utility functions for quickly looking things up in the HTTP
-   protocol.
-   #+BEGIN_SRC emacs-lisp
-     (use-package know-your-http-well)
-   #+END_SRC
+    Show parentheses in different colors to easier pair them together.
+    #+BEGIN_SRC emacs-lisp
+      (use-package rainbow-delimiters
+        :config
+        (add-hook 'emacs-lisp-mode-hook (lambda ()
+                                          (rainbow-delimiters-mode))))
+    #+END_SRC
+
+    Use =cask-mode= to edit =[[https://github.com/cask/cask][Cask]]= files.
+    #+BEGIN_SRC emacs-lisp
+      (use-package cask-mode)
+    #+END_SRC
+
+    Enable =ecukes= for writing =cucumber=-like test for emacs lisp,
+    with =espuds= for step definitions aimed at emacs plugin
+    development.
+    #+BEGIN_SRC emacs-lisp
+      (use-package ecukes)
+      (use-package espuds)
+    #+END_SRC
+*** Lua
+    Use =lua-mode= to edit lua files and use 4 spaces for indentation.
+    #+BEGIN_SRC emacs-lisp
+      (use-package lua-mode
+        :config (setq lua-indent-level 4))
+    #+END_SRC
+
+    Use =company-lua= for autocompletion.
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-lua
+        :config (add-hook 'lua-mode-hook (lambda ()
+                                           (add-to-list 'company-backends 'company-lua))))
+    #+END_SRC
+
+    Use =flycheck= for linting. Requires =lua-check= installed on the
+    system to work.
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck
+        :config
+        (add-hook 'lua-mode-hook (lambda ()
+                                   (flycheck-mode)
+                                   (setq flycheck-checker 'lua-luacheck))))
+    #+END_SRC
+*** Python
+    Use =jedi= as autocompletion engine for company, and bind hotkeys
+    for goto definition and show documentation.
+
+    Needs virtenv installed on the system to work.
+    #+BEGIN_SRC emacs-lisp
+      (use-package jedi
+        :config (add-hook 'python-mode-hook 'jedi:setup)
+        :bind
+        ("C-c j d" . jedi:goto-definition)
+        ("C-c j p" . jedi:goto-definition-pop-marker)
+        ("C-c j h" . jedi:show-doc))
+
+      (use-package company-jedi
+        :config
+        (add-hook 'python-mode-hook (lambda ()
+                                      (add-to-list 'company-backends 'company-jedi))))
+    #+END_SRC
+
+    Use =flycheck= for syntax and style checking. Needs pylint
+    installed on the system to work.
+    #+BEGIN_SRC emacs-lisp
+      (use-package flycheck
+        :config
+        (add-hook 'python-mode-hook (lambda ()
+                                      (flycheck-mode 1)
+                                      (semantic-mode 1)
+                                      (setq flycheck-checker 'python-pylint
+                                            flycheck-checker-error-threshold 900))))
+    #+END_SRC
+
+    Use =pyvenv= to make emacs virtualenv aware, and =pyvenv-auto= to
+    automatically activate the virtualenvs. The virtualenvs should be
+    named =.venv= or =venv= to be automatically detected.
+
+    Obviously requires virtualenv to be installed on the system.
+
+    #+BEGIN_SRC emacs-lisp
+      (use-package pyvenv
+        :bind ("C-c v" . pyvenv-activate))
+      (use-package pyvenv-auto
+        :config
+        (add-hook 'python-mode-hook (lambda ()
+                                      (pyvenv-auto-run))))
+    #+END_SRC
+*** Shellscript
+    Use =company-shell= for autocompletion when writing shellscripts.
+    #+BEGIN_SRC emacs-lisp
+      (use-package company-shell
+        :config (add-hook 'sh-mode-hook (lambda ()
+                                          (add-to-list 'company-backends 'company-shell)
+                                          (add-to-list 'company-backends 'company-shell-env))))
+    #+END_SRC
+
+    Turn on =flycheck= for syntax and style checking. Requires
+    =shellcheck= to be installed on the system to work.
+    #+BEGIN_SRC emacs-lisp
+      (add-hook 'sh-mode-hook 'flycheck-mode)
+    #+END_SRC
+*** SQL
+    Automatically indent SQL files, right aligned.
+    #+BEGIN_SRC emacs-lisp
+      (use-package sql-indent)
+    #+END_SRC
+
+    Insert a newline before query results to avoid messing with the
+    headers.
+    #+BEGIN_SRC emacs-lisp
+      (add-hook
+       'sql-interactive-mode-hook
+       (lambda ()
+         (add-hook
+          'comint-preoutput-filter-functions
+          (lambda (output)
+            (concat "\n" output)))))
+    #+END_SRC
+*** Web
+    Use web mode for =html=, and make closing tags feel more like
+    =nxml-mode=.
+    #+BEGIN_SRC emacs-lisp
+      (use-package web-mode
+        :mode
+        (("\\.html\\'" . web-mode))
+        :config
+        (add-hook 'web-mode-hook
+                  (lambda ()
+                    (local-set-key
+                     (kbd "C-c C-f")
+                     (lambda ()
+                       (interactive)
+                       (web-mode-element-close)
+                       (indent-for-tab-command)))))
+        (setq web-mode-enable-auto-quoting t)
+        (setq web-mode-enable-auto-pairing t)
+        (setq web-mode-enable-auto-closing t))
+     #+END_SRC
+
+    Enable emmet mode when in =web-mode= to quickly create elements.
+    #+BEGIN_SRC emacs-lisp
+      (use-package emmet-mode
+        :config (add-hook 'web-mode-hook 'emmet-mode))
+    #+END_SRC
+
+    Start =httpd= when in =web-mode= on port 8085, and enable
+    =impatient-mode=. Point browser to =http://localhost:8085/imp= to
+    see the preview.
+    #+BEGIN_SRC emacs-lisp
+      (use-package impatient-mode
+        :config
+        (add-hook 'impatient-mode-hook (lambda ()
+                                         (setq httpd-port 8085)
+                                         (httpd-start)))
+        (add-hook 'web-mode-hook 'impatient-mode))
+    #+END_SRC
+
+    Enable utility functions for quickly looking things up in the HTTP
+    protocol.
+    #+BEGIN_SRC emacs-lisp
+      (use-package know-your-http-well)
+    #+END_SRC
 * Markup modes
 ** GnuPlot
    #+BEGIN_SRC emacs-lisp
