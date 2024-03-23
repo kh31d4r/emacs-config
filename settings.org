@@ -512,6 +512,15 @@
        (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
    #+END_SRC
 * Programming modes
+** Refactoring
+   Bind common keys for refactoring and code navigation.
+   #+BEGIN_SRC emacs-lisp
+          (bind-key "M-S-r" 'eglot-rename)
+          (bind-key "C-M-h" 'xref-find-references)
+          (bind-key "C-S-f" 'eglot-format)
+          (bind-key "C-S-o" 'eglot-code-action-organize-imports)
+          (bind-key "C-1" 'eglot-code-action-quickfix)
+   #+END_SRC
 ** Languages
 *** C/C++
     Don't use [[https://en.wikipedia.org/wiki/Indentation_style#GNU_style][GNU style]] indendataion, use [[https://en.wikipedia.org/wiki/Indentation_style#Allman_style][Allman style]] instead.
