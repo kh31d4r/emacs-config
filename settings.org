@@ -585,7 +585,7 @@
 
      Define projectile project type for platformio projects, including
      compile and upload commands and project marker files. Requires
-     =[[https://docs.platformio.org/en/latest/core.html][PlatformIO]]= to be installed and configured.
+     [[https://docs.platformio.org/en/latest/core.html][PlatformIO]] to be installed and configured.
      #+BEGIN_SRC emacs-lisp
        (projectile-register-project-type 'platformio '("platformio.ini")
                                               :compile "platformio run -t upload"
