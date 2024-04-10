@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: mvn gavc
+# key: <gavc
+# --
+<groupId>$1</groupId>
+<artifactId>$2</artifactId>
+<version>$3</version>
+<type>$4</type>
