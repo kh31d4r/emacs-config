@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: pytest
-# key: pt
+# key: test
 # --
 def test_$1():
     """$2"""
