@@ -194,12 +194,15 @@
       (setq require-final-newline t)
     #+END_SRC
 
-    Enable =auto-revert-mode= when viewing documents, to automatically
-    refresh them in case they change externally or get re-generated.
+    Enable =auto-revert-mode= when viewing documents and images, to
+    automatically refresh them in case they change externally or get
+    re-generated.
 
     #+BEGIN_SRC emacs-lisp
       (add-hook 'doc-view-mode-hook (lambda ()
                                       (auto-revert-mode 1)))
+      (add-hook 'image-mode-hook (lambda ()
+                                   (auto-revert-mode 1)))
     #+END_SRC
 
 *** Local Customization Handling
