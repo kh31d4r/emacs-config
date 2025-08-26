@@ -1077,7 +1077,8 @@
   Use =auto-fill-mode= for org documents, so they will not grow too
   much horizontally.
   #+BEGIN_SRC emacs-lisp
-    (add-hook 'org-mode-hook (lambda () 'auto-fill-mode))
+    (add-hook 'org-mode-hook (lambda ()
+                               (auto-fill-mode)))
   #+END_SRC
 
   Use =flyspell= to do automatic spellcheck.
