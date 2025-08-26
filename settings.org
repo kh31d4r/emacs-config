@@ -1243,7 +1243,9 @@
       'org-babel-load-languages
       '((emacs-lisp . t)
         (dot . t)
-        (gnuplot . t)))
+        (gnuplot . t)
+        (python . t)
+        (shell . t)))
    #+END_SRC
 ** Keybindings
    Bind  =C-c a= to =org-agenda= globally, so the agenda can be pulled up from
