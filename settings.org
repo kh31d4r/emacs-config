@@ -137,7 +137,12 @@
                       (interactive)
                       (if (projectile-project-p)
                           (helm-projectile-switch-to-buffer)
-                        (helm-buffers-list)))))
+                        (helm-buffers-list))))
+       ("C-c s" . (lambda ()
+                    (interactive)
+                    (if (projectile-project-p)
+                        (helm-projectile-ag)
+                      (helm-grep-do-ag)))))
    #+END_SRC
 
    Load the following environment variables from the shell into the
@@ -446,32 +451,6 @@
        (set-rotate-key "r"  'rotate-window))
    #+END_SRC
 
-   Enable fast searching with =ag= and =ripgrep=, with its =helm=
-   frontend and =projectile= integration. Requires the respective OS
-   packages =silversearcher-ag= and =ripgrep= installed.
-   #+BEGIN_SRC emacs-lisp
-     (use-package ag)
-     (use-package ripgrep)
-
-     (defun helm-projectile-ag-dwim ()
-       "When in a project, use the projectile version of helm-ag"
-       (interactive)
-       (if (projectile-project-p)
-           (helm-projectile-ag)
-         (helm-ag)))
-
-     (defun helm-projectile-rg-dwim ()
-       "When in a project, use the projectile version of helm-ag"
-       (interactive)
-       (if (projectile-project-p)
-           (helm-projectile-ag)
-         (helm-ag)))
-
-     (use-package helm-ag
-       :bind* ("C-c s" . helm-projectile-ag-dwim))
-     (use-package helm-rg
-       :bind* ("C-c C-s" . helm-projectile-rg-dwim))
-   #+END_SRC
 ** Version Control
    Use =magit= as git interface:
    - Make diff show inline changes
