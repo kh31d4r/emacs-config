@@ -133,11 +133,6 @@
                     (if (projectile-project-p)
                         (helm-projectile-find-file)
                       (helm-for-files))))
-       ("C-x C-b" . (lambda ()
-                      (interactive)
-                      (if (projectile-project-p)
-                          (helm-projectile-switch-to-buffer)
-                        (helm-buffers-list))))
        ("C-c s" . (lambda ()
                     (interactive)
                     (if (projectile-project-p)
@@ -451,6 +446,26 @@
        (set-rotate-key "r"  'rotate-window))
    #+END_SRC
 
+   Use =ibuffer=, bound to =C-x C-b= to organize buffers, by type or by project.
+   #+BEGIN_SRC emacs-lisp
+     (defun setup-ibuffer-filters ()
+       (setq ibuffer-filter-groups
+             (append
+              '(("Shells" (mode . term-mode))
+                ("Dired" (mode . dired-mode))
+                ("Org" (mode . org-mode))
+                ("Magit" (mode . magit-status-mode)))
+              (ibuffer-projectile-generate-filter-groups)
+              '(("System" (name . "^\\*.*\\*$"))))))
+
+     (use-package ibuffer-projectile
+       :config
+       (setq ibuffer-show-empty-filter-groups nil)
+       (add-hook 'ibuffer-mode-hook 'ibuffer-auto-mode)
+       (add-hook 'ibuffer-hook #'setup-ibuffer-filters)
+       (setup-ibuffer-filters))
+     (bind-key* "C-x C-b" 'ibuffer)
+   #+END_SRC
 ** Version Control
    Use =magit= as git interface:
    - Make diff show inline changes
