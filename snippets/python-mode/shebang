@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: py-shebang
+# key: #!
+# --
+#!/usr/bin/env python3
