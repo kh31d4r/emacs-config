@@ -519,6 +519,9 @@
      (bind-key "C-1" 'eglot-code-action-quickfix)
    #+END_SRC
 
+   Stop eglot from writing nonsense to the minibuffer.
+   #+BEGIN_SRC emacs-lisp
+     (setq eglot-report-progress nil)
    #+END_SRC
 ** Languages
 *** C/C++
