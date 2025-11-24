@@ -677,22 +677,12 @@
                                    (setq flycheck-checker 'lua-luacheck))))
     #+END_SRC
 *** Python
-    Use =jedi= as autocompletion engine for company, and bind hotkeys
-    for goto definition and show documentation.
-
-    Needs virtenv installed on the system to work.
+    Use =eglot= to provide IDE features like auto complete and
+    goto-definition. Requires a language server to be installed, like
+    [[https://github.com/python-lsp/python-lsp-server][pylsp]] or [[https://github.com/emacs-lsp/lsp-pyright][pyright]].
     #+BEGIN_SRC emacs-lisp
-      (use-package jedi
-        :config (add-hook 'python-mode-hook 'jedi:setup)
-        :bind
-        ("C-c j d" . jedi:goto-definition)
-        ("C-c j p" . jedi:goto-definition-pop-marker)
-        ("C-c j h" . jedi:show-doc))
-
-      (use-package company-jedi
-        :config
-        (add-hook 'python-mode-hook (lambda ()
-                                      (add-to-list 'company-backends 'company-jedi))))
+      (use-package eglot
+        :hook (python-mode . eglot-ensure))
     #+END_SRC
 
     Use =flycheck= for syntax and style checking. Needs pylint
